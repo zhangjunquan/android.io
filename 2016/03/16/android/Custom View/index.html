@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="View," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Creating a View Class 本处参考Android官方文档Creating Custom Views。为了能够设计出良好的自定义视图，需要遵守以下规则：  遵从Android标准。 提供自定义的styleable属性以便于在Android Xml中配置视图时使用。 Send accessibility events。 兼容多个Android平台。   Android平台提供了许多基">
+<meta name="keywords" content="View">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Custom View">
+<meta property="og:url" content="http://www.张钧泉.top/2016/03/16/android/Custom View/index.html">
+<meta property="og:site_name" content="张钧泉的博客">
+<meta property="og:description" content="Creating a View Class 本处参考Android官方文档Creating Custom Views。为了能够设计出良好的自定义视图，需要遵守以下规则：  遵从Android标准。 提供自定义的styleable属性以便于在Android Xml中配置视图时使用。 Send accessibility events。 兼容多个Android平台。   Android平台提供了许多基">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-12T05:38:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Custom View">
+<meta name="twitter:description" content="Creating a View Class 本处参考Android官方文档Creating Custom Views。为了能够设计出良好的自定义视图，需要遵守以下规则：  遵从Android标准。 提供自定义的styleable属性以便于在Android Xml中配置视图时使用。 Send accessibility events。 兼容多个Android平台。   Android平台提供了许多基">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.张钧泉.top/2016/03/16/android/Custom View/"/>
+
+
+
+
+
+  <title>Custom View | 张钧泉的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张钧泉的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">君子乐道。上善若水。水善利万物而不争，处众人之所恶，故几于道。居善地，心善渊，与善仁，言善信，正善治，事善能，动善时。夫唯不争，故无尤。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.张钧泉.top/2016/03/16/android/Custom View/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张钧泉【君子乐道】">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar-my.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张钧泉的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Custom View</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-16T16:56:56+08:00">
+                2016-03-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-12T13:38:23+08:00">
+                2017-10-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/03/16/android/Custom View/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/16/android/Custom View/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Creating-a-View-Class"><a href="#Creating-a-View-Class" class="headerlink" title="Creating a View Class"></a>Creating a View Class</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
+<ul>
+<li>遵从Android标准。</li>
+<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
+<li>Send accessibility events。</li>
+<li>兼容多个Android平台。</li>
+</ul>
+<p> Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
+<h3 id="Subclass-a-View"><a href="#Subclass-a-View" class="headerlink" title="Subclass a View"></a>Subclass a View</h3><p>  所有Android内建的视图都是继承自<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>。自己自定义的视图可以直接继承自<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>，也可以为了节省时间，继承自已经存在的子视图，如<a href="http://developer.android.com/reference/android/widget/Button.html" target="_blank" rel="external">Button</a>。</p>
+<p>  为了使Android Studio能够识别自定义View，我们必须提供至少拥有两个参数的构造器，一个参数是<a href="http://developer.android.com/reference/android/content/Context.html" target="_blank" rel="external">Context</a>，另一个是<a href="http://developer.android.com/reference/android/util/AttributeSet.html" target="_blank" rel="external">AttributeSet</a>。这个构造器能够使工具识别自定义View，在layout编辑器里布局时，便可以创建和修改。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PieChart</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">PieChart</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(context, attrs);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Define-Custom-Attributes"><a href="#Define-Custom-Attributes" class="headerlink" title="Define Custom Attributes"></a>Define Custom Attributes</h3><p>  添加一个内建的<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>作为用户交互界面，是使用XML元素对其进行声明，并且通过元素属性控制其外观样式和行为动作。写得好的自定义视图也应该是可以通过XML进行添加和样式控制。要让自定义view能拥有这些能力，我们必须：</p>
+<ul>
+<li>在<declare-styleable>中为view自定义属性</declare-styleable></li>
+<li>为XML layout中使用的属性自定义属性值</li>
+<li>在运行时获取属性值</li>
+<li>为自定义view设置上获取到的属性值</li>
+</ul>
+<p>  那么如何定义属性呢？<br>  通常是将属性值设置在项目的res/values/attrs.xml文件里。<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"PieChart"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"showText"</span> <span class="attr">format</span>=<span class="string">"boolean"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"labelPosition"</span> <span class="attr">format</span>=<span class="string">"enum"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"left"</span> <span class="attr">value</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"right"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">attr</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>  在编译的时候提示我属性名已经被定义过了<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Error:(124) Attribute &quot;showText&quot; has already been defined</div></pre></td></tr></table></figure></p>
+<p>  这里我就把两个属性都加上piechart_前缀就ok了，也就是换个没有被使用过的名字。<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"PieChart"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"piechart_showText"</span> <span class="attr">format</span>=<span class="string">"boolean"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"piechart_labelPosition"</span> <span class="attr">format</span>=<span class="string">"enum"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"left"</span> <span class="attr">value</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"right"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">attr</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>  上面的代码声明了两个自定义属性，showText和labelPosition，他们都属于styleable实例PieChart。依据惯例，styleable实例的名字与自定义的View的类名一致。尽管不一定非要按照这样的习惯来写，但是许多编辑器是根据这样的命名习惯来提供代码提示的。</p>
+<p>  这要定义后就能够在xml layout文件中使用了。唯一不同的是自定义属性所从属的命名空间(namespace)不是<code><a href="http://schemas.android.com/apk/res/android" target="_blank" rel="external">http://schemas.android.com/apk/res/android</a></code>，而是<code><a href="http://schemas.android.com/apk/res/你的包名" target="_blank" rel="external">http://schemas.android.com/apk/res/你的包名</a></code>。</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">  &lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line"><span class="tag">    <span class="attr">xmlns:custom</span>=<span class="string">"http://schemas.android.com/apk/com.zjq.exercise"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">    &gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">com.zjq.exercise.view.PieChart</span></span></div><div class="line"><span class="tag">      <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">      <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">      <span class="attr">custom:showText</span>=<span class="string">"true"</span></span></div><div class="line"><span class="tag">      <span class="attr">custom:labelPosition</span>=<span class="string">"left"</span></span></div><div class="line"><span class="tag">      /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>  为了不一直重复长长的命名空间，便使用<code>xmlns</code>为<code><a href="http://schemas.android.com/apk/com.zjq.exercise" target="_blank" rel="external">http://schemas.android.com/apk/com.zjq.exercise</a></code>指明了一个简单的别名，别名可以随便取。<code>com.zjq.exercise</code>是我自己的包名。</p>
+<p>  添加到layout xml中的自定义视图需要使用全路径名。如果是内部类，还要指明外部类。举例：<code>PieChart</code>有一个内部类<code>PieView</code>，要这样使用<code>PieView</code>：<code>包名.PieChart$PieView</code></p>
+<h3 id="Apply-Custom-Attributes"><a href="#Apply-Custom-Attributes" class="headerlink" title="Apply Custom Attributes"></a>Apply Custom Attributes</h3><p>  自定义视图被定义在xml文件里后，我们所指定的属性会从resource bundle（资源包）中读入，并且以<code><a href="http://developer.android.com/reference/android/util/AttributeSet.html" target="_blank" rel="external">AttributeSet</a></code>传递给该view的构造器。可以直接从<code><a href="http://developer.android.com/reference/android/util/AttributeSet.html" target="_blank" rel="external">AttributeSet</a></code>中读取属性值，但是有许多不利因素：</p>
+<ul>
+<li>Resource references within attribute values are not resolved</li>
+<li>Styles are not applied</li>
+</ul>
+<p>  作为替代的，传递<code><a href="http://developer.android.com/reference/android/util/AttributeSet.html" target="_blank" rel="external">AttributeSet</a></code>到<code><a href="http://developer.android.com/reference/android/content/res/Resources.Theme.html#obtainStyledAttributes(android.util.AttributeSet,int[],int,int)" target="_blank" rel="external">obtainStyledAttributes()</a></code>方法，该方法返回一个包含所使用的属性的<code><a href="http://developer.android.com/reference/android/content/res/TypedArray.html" target="_blank" rel="external">TypedArray</a></code>。</p>
+<p>  Android资源编译器做了许多工作，让我们调用<code><a href="http://developer.android.com/reference/android/content/res/Resources.Theme.html#obtainStyledAttributes(android.util.AttributeSet,int[],int,int)" target="_blank" rel="external">obtainStyledAttributes()</a></code>方法更简单。编译器会在R.java文件中为每一组资源文件中的<code><declare-styleable></declare-styleable></code>中的属性生成id，也会为其中的属性定义常量。我们使用这些预先定义好的常量从<code><a href="http://developer.android.com/reference/android/content/res/TypedArray.html" target="_blank" rel="external">TypedArray</a></code>中获取属性。</p>
+<p>  这里是我获取属性的代码。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> mShowText;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> mTextPos;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">PieChart</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>(context, attrs);</div><div class="line">  TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PieChart, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line"></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    mShowText = array.getBoolean(R.styleable.PieChart_piechart_showText, <span class="keyword">false</span>);</div><div class="line">    mTextPos = array.getInteger(R.styleable.PieChart_piechart_labelPosition, <span class="number">0</span>);</div><div class="line">  &#125; <span class="keyword">finally</span> &#123;</div><div class="line">    array.recycle();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  <em><code><a href="http://developer.android.com/reference/android/content/res/TypedArray.html" target="_blank" rel="external">TypedArray</a></code>是共享资源，用了之后必须要回收。</em></p>
+<h3 id="Add-Properties-and-Events"><a href="#Add-Properties-and-Events" class="headerlink" title="Add Properties and Events"></a>Add Properties and Events</h3><p>   属性是控制行为和外观的非常强大的一种方式，但是它们只能在view被初始化时才能读取。为了能够提供动态的控制，可以暴露属性的getter和setter方法。<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isShowText</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> mShowText;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setShowText</span><span class="params">(<span class="keyword">boolean</span> showText)</span> </span>&#123;</div><div class="line">  mShowText = showText;</div><div class="line">  invalidate();</div><div class="line">  requestLayout();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>   setShowText方法调用了<a href="http://developer.android.com/reference/android/view/View.html#invalidate()" target="_blank" rel="external">invalidate()</a>和<a href="http://developer.android.com/reference/android/view/View.html#requestLayout()" target="_blank" rel="external">requestLayout()</a>方法。这是保证view行为正常的重要步骤。必须在改变了可能引起view外观改变的属性后使view无效，以便于系统知道该view需要重绘了。同样地，在改变了可能引起view尺寸或者形状改变的时候，也需要请求一个新的布局。忘记了调用这些方法，可能会出现很难查找的bugs。</p>
+<p>   自定义view也需要提供事件监听来传达重要的事件。</p>
+<h3 id="Design-For-Accessibility"><a href="#Design-For-Accessibility" class="headerlink" title="Design For Accessibility"></a>Design For Accessibility</h3><h2 id="Implementing-Custom-Drawing"><a href="#Implementing-Custom-Drawing" class="headerlink" title="Implementing Custom Drawing"></a>Implementing Custom Drawing</h2><h3 id="Override-onDraw"><a href="#Override-onDraw" class="headerlink" title="Override onDraw()"></a>Override onDraw()</h3><p>   最为重要的便是实现<code><a href="http://developer.android.com/intl/zh-cn/reference/android/view/View.html#onDraw(android.graphics.Canvas)" target="_blank" rel="external">onDraw()</a></code>方法。该方法有一个<code><a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a></code>参数，用于自定义视图绘制自己。<code><a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a></code>类也定义了诸如文字、线、图片等等基本图形的绘制。在绘制图形前，需要先创建<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>对象。</p>
+<h3 id="Create-Drawing-Objects"><a href="#Create-Drawing-Objects" class="headerlink" title="Create Drawing Objects"></a>Create Drawing Objects</h3><p>   <a href="http://developer.android.com/reference/android/graphics/package-summary.html" target="_blank" rel="external">android.graphics</a>将绘制分为了两个部分：</p>
+<ul>
+<li>要绘制什么，由<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a>决定</li>
+<li>怎么绘制，由<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>决定</li>
+</ul>
+<p>   举个例子，<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a>提供了绘制线的方法，而<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>提供了方法来设置线的颜色。<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a>提供了绘制矩形的方法，而<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>提供了方法来设置是否使用某种颜色对其填充。简而言之，<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a>定义了能够在屏幕上绘制什么样的图像，<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>定义了所绘制图像的颜色、风格、字体。</p>
+<p>   在绘制任何东西之前，都需要先创建一个或者多个<code><a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a></code>，<code>PieChart<code>在<code>init</code>方法中做了这些事情，该方法由构造器调用。<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">mTextPaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</div><div class="line">mTextPaint.setColor(mTextColor);</div><div class="line"><span class="keyword">if</span> (mTextHeight == <span class="number">0</span>) &#123;</div><div class="line">    mTextHeight = mTextPaint.getTextSize();</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    mTextPaint.setTextSize(mTextHeight);</div><div class="line">&#125;</div><div class="line"></div><div class="line">mPiePaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</div><div class="line">mPiePaint.setStyle(Paint.Style.FILL);</div><div class="line">mPiePaint.setTextSize(mTextHeight);</div><div class="line"></div><div class="line">mShadowPaint = <span class="keyword">new</span> Paint(<span class="number">0</span>);</div><div class="line">mShadowPaint.setColor(<span class="number">0xff101010</span>);</div><div class="line">mShadowPaint.setMaskFilter(<span class="keyword">new</span> BlurMaskFilter(<span class="number">8</span>, BlurMaskFilter.Blur.NORMAL));</div><div class="line"></div><div class="line">...</div></pre></td></tr></table></figure></code></code></p>
+<p>   提前创建好对象是非常重要的一种优化方式。视图绘制非常频繁，许多绘制对象的创建需要耗费很多资源。在<code><a href="http://developer.android.com/intl/zh-cn/reference/android/view/View.html#onDraw(android.graphics.Canvas)" target="_blank" rel="external">onDraw()</a></code>方法里创建这些对象会大大降低性能，甚至界面绘制不流畅。</p>
+<h3 id="Handle-Layout-Events"><a href="#Handle-Layout-Events" class="headerlink" title="Handle Layout Events"></a>Handle Layout Events</h3><p>   要知道view的大小，以便于更好的绘制。复杂的自定义视图会根据自己在屏幕中的形状和大小执行多次布局计算。我们不能够假定视图在屏幕上的大小。即便只有一个应用使用我们的自定义试图，但是也要适配不同屏幕尺寸，多种屏幕密度，以及竖屏和横屏之间的切换。<br>   不过，<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>有许多方法来进行测量，并且大多数都是不用重写的。若不需要特别的控制其大小，直接继承<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>就可以了。当视图被赋予大小之后便会调用<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>方法，当然，后来因为其他原因改变了大小，也会重新调用<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>方法。计算出来的位置、尺寸以及与其大小相关的值都在<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>方法里，便不用在绘制的时候每次都去重新计算了。在<code>PieChart</code>例子中，<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>方法会在计算出饼图的边框、文本和其他可见元素的相对位置时回调。</p>
+<p>   为视图指定大小时，布局管理器会假设这个大小中包括了视图内部的边距（padding）的。我们必须自己处理padding。下面是<code>PieChart</code>中的<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>片段：</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">  <span class="comment">// 统计padding</span></div><div class="line">  <span class="keyword">float</span> xpad = (<span class="keyword">float</span>) (getPaddingLeft() + getPaddingRight());</div><div class="line">  <span class="keyword">float</span> ypad = (<span class="keyword">float</span>) (getPaddingTop() + getPaddingBottom());</div><div class="line"></div><div class="line">  <span class="comment">// 加上文本的宽度</span></div><div class="line">  <span class="keyword">if</span> (mShowText) xpad += mTextWidth;</div><div class="line"></div><div class="line">  <span class="keyword">float</span> ww = (<span class="keyword">float</span>) w - xpad;</div><div class="line">  <span class="keyword">float</span> hh = (<span class="keyword">float</span>) h - ypad;</div><div class="line">  </div><div class="line">  <span class="comment">// 计算出饼图的大小</span></div><div class="line">  <span class="keyword">float</span> diameter = Math.min(ww, hh);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>   实现<a href="http://developer.android.com/reference/android/view/View.html#onMeasure(int,int)" target="_blank" rel="external">onMeasure()</a>方法来更好的控制布局参数(layout parameters)。该方法的参数<a href="http://developer.android.com/reference/android/view/View.MeasureSpec.html" target="_blank" rel="external">View.MeasureSpec</a>中包含了父控件想要子视图绘制的大小，并且这个大小是要么是最大值，要么仅仅是一个建议。为了优化，这些值是以包装好了的形式存放，应当使用<a href="http://developer.android.com/reference/android/view/View.MeasureSpec.html" target="_blank" rel="external">View.MeasureSpec</a>来获取每个整形中的信息。</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">  <span class="comment">//super.onMeasure(widthMeasureSpec, heightMeasureSpec);</span></div><div class="line">  <span class="keyword">int</span> minw = getPaddingLeft() + getPaddingRight() + getSuggestedMinimumWidth();</div><div class="line">  <span class="keyword">int</span> w = resolveSizeAndState(minw, widthMeasureSpec, <span class="number">1</span>);</div><div class="line"></div><div class="line">  <span class="keyword">int</span> minh = MeasureSpec.getSize(w) - (<span class="keyword">int</span>) mTextWidth + getPaddingBottom() + getPaddingTop();</div><div class="line">  <span class="keyword">int</span> h = resolveSizeAndState(MeasureSpec.getSize(w) - (<span class="keyword">int</span>) mTextWidth, heightMeasureSpec, <span class="number">0</span>);</div><div class="line">  </div><div class="line">  setMeasuredDimension(w, h);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>   上面的代码有三个需要注意的地方：</p>
+<pre><code>* 计算考虑了内边距，这是view的职责。
+* [resolveSizeAndState()]用于确定试图最终的大小。通过对比视图期望的大小和传递进[onMeasure()]方法的大小来返回合适的[View.MeasureSpec]值。
+* [onMeasure()]方法没有返回值，而是通过[setMeasuredDimension()]方法设置。该方法是必需要调用的，否则会引发运行时异常。
+</code></pre><h3 id="Draw"><a href="#Draw" class="headerlink" title="Draw!"></a>Draw!</h3><p>   一旦创造完了需要的对象和测量好了尺寸，便可以实现<a href="http://developer.android.com/intl/zh-cn/reference/android/view/View.html#onDraw(android.graphics.Canvas)" target="_blank" rel="external">onDraw()</a>方法了。每个视图实现<a href="http://developer.android.com/intl/zh-cn/reference/android/view/View.html#onDraw(android.graphics.Canvas)" target="_blank" rel="external">onDraw()</a>方法的方式不同，但是也有一些共通性：</p>
+<pre><code>* 绘制文本使用[drawText()]，使用[setTypeface()]设置字体，文字颜色使用[setColor()]。
+* 绘制基本的图型使用[drawRect()]，[drawOval()]，[drawArc()]。使用[setStyle()]设置是否填充、只有边框、或者两者都有。
+* 通过[LinearGradient]来定义梯度填充。调用[setShader()]方法使用[LinearGradient]来填充图形。
+* 使用[drawBitmap()]方法绘制位图。
+</code></pre><p>  下面是绘制<code>PieChart</code>的代码。混合了文本，线，图形。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<h2 id="Making-the-View-Interactive"><a href="#Making-the-View-Interactive" class="headerlink" title="Making the View Interactive"></a>Making the View Interactive</h2><h2 id="Optimizing-the-View"><a href="#Optimizing-the-View" class="headerlink" title="Optimizing the View"></a>Optimizing the View</h2><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>捐赠</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pay/wechatpay.jpg" alt="张钧泉【君子乐道】 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/pay/alipay.jpg" alt="张钧泉【君子乐道】 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张钧泉【君子乐道】
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.张钧泉.top/2016/03/16/android/Custom View/" title="Custom View">http://www.张钧泉.top/2016/03/16/android/Custom View/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/View/" rel="tag"># View</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/16/android/View/" rel="next" title="View">
+                <i class="fa fa-chevron-left"></i> View
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/14/android/Android 性能优化/" rel="prev" title="Android 性能优化">
+                Android 性能优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2016/03/16/android/Custom View/"
+           data-title="Custom View" data-url="http://www.张钧泉.top/2016/03/16/android/Custom View/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar-my.jpg"
+                alt="张钧泉【君子乐道】" />
+            
+              <p class="site-author-name" itemprop="name">张钧泉【君子乐道】</p>
+              <p class="site-description motion-element" itemprop="description">张钧泉的博客，用于记录所学知识。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-a-View-Class"><span class="nav-number">1.</span> <span class="nav-text">Creating a View Class</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Subclass-a-View"><span class="nav-number">1.1.</span> <span class="nav-text">Subclass a View</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Define-Custom-Attributes"><span class="nav-number">1.2.</span> <span class="nav-text">Define Custom Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apply-Custom-Attributes"><span class="nav-number">1.3.</span> <span class="nav-text">Apply Custom Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Properties-and-Events"><span class="nav-number">1.4.</span> <span class="nav-text">Add Properties and Events</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Design-For-Accessibility"><span class="nav-number">1.5.</span> <span class="nav-text">Design For Accessibility</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementing-Custom-Drawing"><span class="nav-number">2.</span> <span class="nav-text">Implementing Custom Drawing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Override-onDraw"><span class="nav-number">2.1.</span> <span class="nav-text">Override onDraw()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Drawing-Objects"><span class="nav-number">2.2.</span> <span class="nav-text">Create Drawing Objects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handle-Layout-Events"><span class="nav-number">2.3.</span> <span class="nav-text">Handle Layout Events</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Draw"><span class="nav-number">2.4.</span> <span class="nav-text">Draw!</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Making-the-View-Interactive"><span class="nav-number">3.</span> <span class="nav-text">Making the View Interactive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimizing-the-View"><span class="nav-number">4.</span> <span class="nav-text">Optimizing the View</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张钧泉【君子乐道】</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"softwater"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+</body>
+</html>

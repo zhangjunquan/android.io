@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Android 传感器]]></title>
+      <url>/2017/10/12/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8/</url>
+      <content type="html"><![CDATA[<h1 id="硬件传感器和软件传感器"><a href="#硬件传感器和软件传感器" class="headerlink" title="硬件传感器和软件传感器"></a>硬件传感器和软件传感器</h1><p>有些传感器是基于硬件的，有些是基于软件的。</p>
+<p>基于硬件的传感器就是直接以芯片形式嵌入到 Android 设备中，直接从外部环境获取数据。</p>
+<p>基于软件的传感器并不是实际的硬件芯片，其传回的数据本质上也来自于硬件的传感器，只是这些数据通常会经过二次加工。基于软件的传感器也称为虚拟（virtual）传感器或合成（synthetic）传感器。</p>
+<h1 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h1><h2 id="动作（Motion）传感器"><a href="#动作（Motion）传感器" class="headerlink" title="动作（Motion）传感器"></a>动作（Motion）传感器</h2><p>在三个轴（x、y、z）上测量加速度和旋转角度。</p>
+<h3 id="加速传感器-TYPE-ACCELEROMETER"><a href="#加速传感器-TYPE-ACCELEROMETER" class="headerlink" title="加速传感器 TYPE_ACCELEROMETER"></a>加速传感器 TYPE_ACCELEROMETER</h3><p>硬件传感器</p>
+<h3 id="线性加速传感器-TYPE-LINEAR-ACCELERATION"><a href="#线性加速传感器-TYPE-LINEAR-ACCELERATION" class="headerlink" title="线性加速传感器 TYPE_LINEAR_ACCELERATION"></a>线性加速传感器 TYPE_LINEAR_ACCELERATION</h3><p>硬件或软件传感器</p>
+<h3 id="重力传感器-TYPE-GRAVITY"><a href="#重力传感器-TYPE-GRAVITY" class="headerlink" title="重力传感器 TYPE_GRAVITY"></a>重力传感器 TYPE_GRAVITY</h3><p>硬件或软件传感器</p>
+<h3 id="陀螺仪传感器-TYPE-GYROSCOPE"><a href="#陀螺仪传感器-TYPE-GYROSCOPE" class="headerlink" title="陀螺仪传感器 TYPE_GYROSCOPE"></a>陀螺仪传感器 TYPE_GYROSCOPE</h3><p>硬件传感器</p>
+<h3 id="旋转向量传感器-TYPE-ROTATION-VECTOR"><a href="#旋转向量传感器-TYPE-ROTATION-VECTOR" class="headerlink" title="旋转向量传感器 TYPE_ROTATION_VECTOR"></a>旋转向量传感器 TYPE_ROTATION_VECTOR</h3><p>硬件或软件传感器</p>
+<h2 id="环境（Environmental）传感器"><a href="#环境（Environmental）传感器" class="headerlink" title="环境（Environmental）传感器"></a>环境（Environmental）传感器</h2><p>测量不同环境参数，例如，周围环境的空气温度和压强、光照温度和湿度。</p>
+<h3 id="湿度（barometer）传感器-TYPE-RELATIVE-HUMIDITY"><a href="#湿度（barometer）传感器-TYPE-RELATIVE-HUMIDITY" class="headerlink" title="湿度（barometer）传感器 TYPE_RELATIVE_HUMIDITY"></a>湿度（barometer）传感器 TYPE_RELATIVE_HUMIDITY</h3><p>硬件传感器</p>
+<h3 id="光线（photometer）传感器-TYPE-LIGHT"><a href="#光线（photometer）传感器-TYPE-LIGHT" class="headerlink" title="光线（photometer）传感器 TYPE_LIGHT"></a>光线（photometer）传感器 TYPE_LIGHT</h3><p>硬件传感器</p>
+<h3 id="温度传感器-TYPE-AMBIENT-TEMPERATURE"><a href="#温度传感器-TYPE-AMBIENT-TEMPERATURE" class="headerlink" title="温度传感器 TYPE_AMBIENT_TEMPERATURE"></a>温度传感器 TYPE_AMBIENT_TEMPERATURE</h3><p>硬件传感器</p>
+<p>api 14(4.0)以前是 TYPE_TEMPERATURE</p>
+<h3 id="压力传感器-TYPE-PRESSURE"><a href="#压力传感器-TYPE-PRESSURE" class="headerlink" title="压力传感器 TYPE_PRESSURE"></a>压力传感器 TYPE_PRESSURE</h3><p>硬件传感器</p>
+<h2 id="位置（Position）传感器"><a href="#位置（Position）传感器" class="headerlink" title="位置（Position）传感器"></a>位置（Position）传感器</h2><p>测量设备的物理位置。</p>
+<h3 id="方向传感器-TYPE-ORIENTATION"><a href="#方向传感器-TYPE-ORIENTATION" class="headerlink" title="方向传感器 TYPE_ORIENTATION"></a>方向传感器 TYPE_ORIENTATION</h3><p>软件传感器，数据来自重力和磁场传感器</p>
+<h3 id="磁力传感器-TYPE-MAGNETIC-FIELD"><a href="#磁力传感器-TYPE-MAGNETIC-FIELD" class="headerlink" title="磁力传感器 TYPE_MAGNETIC_FIELD"></a>磁力传感器 TYPE_MAGNETIC_FIELD</h3><p>硬件传感器</p>
+<h3 id="临近传感器-TYPE-PROXIMITY"><a href="#临近传感器-TYPE-PROXIMITY" class="headerlink" title="临近传感器 TYPE_PROXIMITY"></a>临近传感器 TYPE_PROXIMITY</h3><p>硬件传感器</p>
+<h1 id="Android-传感器框架"><a href="#Android-传感器框架" class="headerlink" title="Android 传感器框架"></a>Android 传感器框架</h1><p>Android SDK 提供了 Android sensor framework，可以用来访问当前 Android 设备内置的传感器。例如，可以完成以下工作：</p>
+<ul>
+<li>确定当前 Android 设备内置了哪些传感器。</li>
+<li>确定某一个传感器的技术指标。例如，该传感器测量的最大范围、传感器制造商、对电量的要求、测量的精度等。</li>
+<li>获取传感器传回来的数据，以及定义传感器回传数据的精度。</li>
+<li>注册和注销传感器事件监听器。</li>
+</ul>
+<h2 id="主要的类和接口"><a href="#主要的类和接口" class="headerlink" title="主要的类和接口"></a>主要的类和接口</h2><h3 id="SensorManager-类"><a href="#SensorManager-类" class="headerlink" title="SensorManager 类"></a>SensorManager 类</h3><p>用于创建 sensor service 实例，提供了访问、枚举传感器、注册和注销传感器监听器的方法。还提供了与传感器经度、扫描频率、校正有关的常量。</p>
+<h3 id="Sensor-类"><a href="#Sensor-类" class="headerlink" title="Sensor 类"></a>Sensor 类</h3><p>提供了获取传感器技术参数的方法，如版本、类型、生产商等。</p>
+<h3 id="SensorEvent-类"><a href="#SensorEvent-类" class="headerlink" title="SensorEvent 类"></a>SensorEvent 类</h3><p>使用该类创建传感器事件对象，该对象包括原始的传感器回传数据、传感器类型、数据的精度以及触发事件的时间。</p>
+<h3 id="SensorEventListener-接口"><a href="#SensorEventListener-接口" class="headerlink" title="SensorEventListener 接口"></a>SensorEventListener 接口</h3><p>该接口包含两个回调方法，当传感器的回传值或精度发生变化时，系统会调用这两个方法。</p>
+<h2 id="传感器相关方法的使用"><a href="#传感器相关方法的使用" class="headerlink" title="传感器相关方法的使用"></a>传感器相关方法的使用</h2><h3 id="获取-SensorManager"><a href="#获取-SensorManager" class="headerlink" title="获取 SensorManager"></a>获取 SensorManager</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> /**</div><div class="line">  * 获取传感器管理对象</div><div class="line">  */</div><div class="line"> public static SensorManager getSensorManager(Context context) &#123;</div><div class="line">   return (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="检测是否存在某种传感器"><a href="#检测是否存在某种传感器" class="headerlink" title="检测是否存在某种传感器"></a>检测是否存在某种传感器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 检测是否存在某种类型的传感器</div><div class="line"> *</div><div class="line"> * @param type &#123;@link Sensor#TYPE_ALL&#125; 等 TYPE 字段</div><div class="line"> * @return true, 存在</div><div class="line"> */</div><div class="line">public static boolean checkSensorExist(SensorManager manager, int type) &#123;</div><div class="line">  return manager.getDefaultSensor(type) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="获取所有传感器"><a href="#获取所有传感器" class="headerlink" title="获取所有传感器"></a>获取所有传感器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 获取所有传感器</div><div class="line"> */</div><div class="line">public static List&lt;Sensor&gt; getAllSensors(SensorManager manager) &#123;</div><div class="line">  return manager.getSensorList(Sensor.TYPE_ALL);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="检测是否存在某种传感器-1"><a href="#检测是否存在某种传感器-1" class="headerlink" title="检测是否存在某种传感器"></a>检测是否存在某种传感器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 检测是否存在某种类型的传感器</div><div class="line"> *</div><div class="line"> * @param type &#123;@link Sensor#TYPE_ALL&#125; 等 TYPE 字段</div><div class="line"> * @return true, 存在</div><div class="line"> */</div><div class="line">public static boolean checkSensorExist(SensorManager manager, int type) &#123;</div><div class="line">  return manager.getDefaultSensor(type) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> 传感器 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android-传感器 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android ndk 开发]]></title>
+      <url>/2017/10/11/android/ndk/Android-ndk-%E5%BC%80%E5%8F%91/</url>
+      <content type="html"><![CDATA[<h1 id="ndk"><a href="#ndk" class="headerlink" title="ndk"></a>ndk</h1><p>NDK，Native Development Kit，NDK允许用户使用类似C / C++之类的原生代码语言执行部分程序。</p>
+<h2 id="为何要用到NDK"><a href="#为何要用到NDK" class="headerlink" title="为何要用到NDK?"></a>为何要用到NDK?</h2><ol>
+<li>代码的保护，由于apk的java层代码很容易被反编译，而C/C++库被反编译的难度较大。</li>
+<li>在NDK中调用第三方C/C++库，因为大部分的开源库都是用C/C++代码编写的。</li>
+<li>便于移植，用C/C++写的库可以方便在其他的嵌入式平台上再次使用。</li>
+</ol>
+<h2 id="下载-ndk"><a href="#下载-ndk" class="headerlink" title="下载 ndk"></a>下载 ndk</h2><p>ndk 官方首页：<a href="https://developer.android.com/ndk/index.html" target="_blank" rel="external">https://developer.android.com/ndk/index.html</a></p>
+<p>ndk 官方下载地址：<a href="https://developer.android.com/ndk/downloads/index.html" target="_blank" rel="external">https://developer.android.com/ndk/downloads/index.html</a></p>
+<p>我的百度网盘下载地址：链接:<a href="http://pan.baidu.com/s/1kVadnUZ" target="_blank" rel="external">http://pan.baidu.com/s/1kVadnUZ</a></p>
+<h2 id="mac-配置环境变量"><a href="#mac-配置环境变量" class="headerlink" title="mac 配置环境变量"></a>mac 配置环境变量</h2><p>修改用户目录下的 <code>.bash_profile</code> 文件，在末尾加上如下两句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export ANDROID_NDK=ndk存放目录</div><div class="line">export PATH=$&#123;PATH&#125;:$&#123;ANDROID_NDK&#125;</div></pre></td></tr></table></figure></p>
+<p>注意将 <code>ndk存放目录</code> 替换为自己 ndk 实际存放目录。</p>
+<h1 id="jni"><a href="#jni" class="headerlink" title="jni"></a>jni</h1><p>jni，Java Native Interface，若干的API实现了Java和其他语言的通信（主要是C&amp;C++）。</p>
+<h1 id="实现简单的加法实例"><a href="#实现简单的加法实例" class="headerlink" title="实现简单的加法实例"></a>实现简单的加法实例</h1><h2 id="在-Activity-中声明本地加法方法"><a href="#在-Activity-中声明本地加法方法" class="headerlink" title="在 Activity 中声明本地加法方法"></a>在 Activity 中声明本地加法方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public native int add(int num1, int num2);</div></pre></td></tr></table></figure>
+<p>填加该方法后会报错<br><img src="/images/android/ndk/pasted-0.png" alt="add 方法报错"></p>
+<p>这个错误可先不管，在最后一起解决。</p>
+<h2 id="生成头文件"><a href="#生成头文件" class="headerlink" title="生成头文件"></a>生成头文件</h2><p>终端进入到项目的 <code>src/main/java/</code> 目录里，使用下面的命令生成头文件。</p>
+<p>javah -jni 类权限定名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javah -jni com.zjq.ndk.MainActivity</div></pre></td></tr></table></figure>
+<p>之后在 java 目录里会多出来一个 <code>.h</code> 文件：<br><img src="/images/android/ndk/pasted-1.png" alt=".h 文件"></p>
+<p>创建 JNI Folder<br><img src="/images/android/ndk/pasted-2.png" alt="创建 jni 文件夹"><br>将之前生成的 <code>.h</code> 头文件移动到刚刚创建的 jni 文件夹里。</p>
+<p><img src="/images/android/ndk/pasted-3.png" alt="jni目录截图"></p>
+<h2 id="使用-C-或-C-实现本地方法"><a href="#使用-C-或-C-实现本地方法" class="headerlink" title="使用 C 或 C++ 实现本地方法"></a>使用 C 或 C++ 实现本地方法</h2><p>这个步骤在工作时应该是给 C 或 C++ 同事写。</p>
+<p>在 jni 目录里创建一个 <code>.c</code> 文件，姑且命名为 <code>add.c</code>。</p>
+<p>在 <code>add.c</code> 中导入头文件：<br><code>#include &quot;com_zjq_ndk_MainActivity.h&quot;</code>。</p>
+<p>将 <code>com_zjq_ndk_MainActivity.h</code> 中的 <code>Java_com_zjq_ndk_MainActivity_add</code> 复制到 <code>add.c</code> 文件里，添加参数变量名，并实现加法计算：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">JNIEXPORT jint JNICALL Java_com_zjq_ndk_MainActivity_add</div><div class="line">  (JNIEnv * env, jobject obj, jint num1, jint num2) &#123;</div><div class="line">    return num1 + num2;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="将-C-C-编写的文件生成动态链接库"><a href="#将-C-C-编写的文件生成动态链接库" class="headerlink" title="将 C/C++ 编写的文件生成动态链接库"></a>将 C/C++ 编写的文件生成动态链接库</h2><p>生成动态链接库，需要根据配置文件进行生成。</p>
+<p>在 jni 目录创建配置文件 <code>Android.mk</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">LOCAL_PATH := $(call my-dir)</div><div class="line">include $(CLEAR_VARS)</div><div class="line">LOCAL_MODULE := add </div><div class="line">LOCAL_SRC_FILES := add.c</div><div class="line">inclue $(BUILD_SHARED_LIBRARY)</div></pre></td></tr></table></figure></p>
+<p>上面代码的含义分别为：</p>
+<ul>
+<li>LOCAL_PATH 指定编译的路径。</li>
+<li>include $(CLEAR_VARS) 每个新模块开始处，清除所有的 LOCAL_xxx。</li>
+<li>LOCAL_MODULE 定义模块名称。</li>
+<li>LOCAL_SRC_FILES 源代码文件。</li>
+<li>include $(BUILD_SHARED_LIBRARY) 编译的是共享库及动态链接库。</li>
+</ul>
+<p>终端进入 jni 目录，执行命令：<code>ndk-build</code>。</p>
+<p>执行这个命令的前提是先配置好 ndk 的环境变量。</p>
+<p>在编写 <code>Android.mk</code> 时，注意不要写错了，否则会报错。因为 include 写错了，我就报了个错误：<br><code>Android.mk:5: *** missing separator.  Stop.</code></p>
+<p>成功生成的提示信息如下，会提示生成了各种 lib 库：<br><img src="/images/android/ndk/pasted-4.png" alt="各种.so 库"></p>
+<p>生成的文件结构如下</p>
+<p><img src="/images/android/ndk/pasted-5.png" alt="动态链接库生成后的文件结构"></p>
+<h2 id="jni-程序的实现"><a href="#jni-程序的实现" class="headerlink" title="jni 程序的实现"></a>jni 程序的实现</h2><h3 id="指定-ndk-目录"><a href="#指定-ndk-目录" class="headerlink" title="指定 ndk 目录"></a>指定 ndk 目录</h3><p>在 <code>local.properties</code> 文件中指定 ndk 的目录：<code>ndk.dir=~/Development/android-ndk-r14b</code>。</p>
+<h3 id="配置模块名"><a href="#配置模块名" class="headerlink" title="配置模块名"></a>配置模块名</h3><p>在所在模块的 <code>build.gradle</code> 中的 <code>android{defaultConfig{}}</code> 里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ndk&#123;</div><div class="line">  moduleName &quot;add&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="在-java-文件里加载动态库"><a href="#在-java-文件里加载动态库" class="headerlink" title="在 java 文件里加载动态库"></a>在 java 文件里加载动态库</h2><p>想使用刚刚生成的动态链接库，需要在 java 文件里加载库文件。<br>在静态代码块里加载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">static &#123;</div><div class="line">  System.loadLibrary(&quot;add&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意，生成的文件是 libadd，但是我们指定的模块名是 add，所以这里就填 add 就行了。</p>
+<h1 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h1><p>运行代码，出现了如下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Error:java.lang.RuntimeException: Error: Your project contains C++ files but it is not using a supported native build system.</div></pre></td></tr></table></figure></p>
+<p>根据 <a href="https://stackoverflow.com/questions/41791429/error-your-project-contains-c-files-but-it-is-not-using-a-supported-native-bu" target="_blank" rel="external">这里</a> 的答案，我们做如下步骤：</p>
+<p>右键模块名，选择 <code>Link C++ Project with Gradle</code><br><img src="/images/android/ndk/pasted-6.png" alt="Link C++ Project with Gradle"></p>
+<p>在出现的对话框里做如下选择：<br><img src="/images/android/ndk/pasted-7.png" alt="Android.mk 位置"><br>这里使用的是 ndk-build 创建动态库，并指定 <code>Android.mk</code> 文件的位置。</p>
+<p>这样包括之前声明 add 方法后出现的错误提示也解决了。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> ndk </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> ndk </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[css 边框]]></title>
+      <url>/2017/09/25/css/css-%E8%BE%B9%E6%A1%86/</url>
+      <content type="html"><![CDATA[<h1 id="制作边框"><a href="#制作边框" class="headerlink" title="制作边框"></a>制作边框</h1><p>在使用 Google 浏览器测试的过程中，我发现制作一个简单的边框，只需要指定边框样式 <code>border-style</code> 即可。浏览器会自动设置边框宽度及边框颜色。</p>
+<p><img src="/images/web/css/pasted-31.png" alt="最简单的边框"></p>
+<h1 id="边框宽度-border-width"><a href="#边框宽度-border-width" class="headerlink" title="边框宽度 border-width"></a>边框宽度 border-width</h1><p>分别设置四个边框的宽度，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">border-top-width: 1px;</div><div class="line">border-right-width: 2px;</div><div class="line">border-bottom-width: 3px;</div><div class="line">border-left-width: 4px;</div></pre></td></tr></table></figure></p>
+<p><img src="/images/web/css/pasted-32.png" alt="边框宽度"></p>
+<p>可使用 <code>border-width: 1px 2px 3px 4px;</code> 同时设置四个边框的宽度。</p>
+<p>border-width 值的个数：</p>
+<ul>
+<li>一个值：设置四个边框的宽度。</li>
+<li>两个值：分别设置上下、左右边框的宽度。</li>
+<li>三个值：分别设置上边框、右边框和左边框、下边框的宽度。</li>
+<li>四个值：分别设置上、右、下、左边框的宽度。</li>
+</ul>
+<p>border-width 还内置了几个值：</p>
+<ul>
+<li>thin：细边框。</li>
+<li>medium：中边框。</li>
+<li>thick：粗边框。</li>
+</ul>
+<h1 id="边框颜色-border-color"><a href="#边框颜色-border-color" class="headerlink" title="边框颜色 border-color"></a>边框颜色 border-color</h1><p>分别指定四个边的颜色：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">border-top-color: #f46208;</div><div class="line">border-right-color: #7c7c7c;</div><div class="line">border-bottom-color: aqua;</div><div class="line">border-left-color: blue;</div></pre></td></tr></table></figure></p>
+<p><img src="/images/web/css/pasted-33.png" alt="边框颜色"></p>
+<p>可使用 <code>border-color: #f46208 #7c7c7c aqua blue;</code> 同时指定四个边的颜色，其规则与 <code>border-width</code> 相同。</p>
+<h1 id="边框样式-border-style"><a href="#边框样式-border-style" class="headerlink" title="边框样式 border-style"></a>边框样式 border-style</h1><p>分别指定四个边框的样式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">border-top-style: solid;</div><div class="line">border-right-style: dashed;</div><div class="line">border-bottom-style: groove;</div><div class="line">border-left-style: double;</div></pre></td></tr></table></figure></p>
+<p>可使用 <code>border-style=solid dashed groove double</code> 同时指定四个边框的样式，其规则与 <code>border-width</code> 相同。</p>
+<p>下面表格是 <a href="http://www.w3school.com.cn/cssref/pr_border-style.asp" target="_blank" rel="external">border-style 可能的值</a>：<br><img src="/images/web/css/pasted-34.png" alt="border-style 可能的值"></p>
+<h1 id="同时指定某条边框的样式"><a href="#同时指定某条边框的样式" class="headerlink" title="同时指定某条边框的样式"></a>同时指定某条边框的样式</h1><p>根据上面的描述，想要单独控制上边框的样式，可以像下面这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">border-top-width: 4px;</div><div class="line">border-top-color: blue;</div><div class="line">border-top-style: double;</div></pre></td></tr></table></figure></p>
+<p>也可以像下面这样写，感觉更加简单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-top: 4px double blue;</div></pre></td></tr></table></figure></p>
+<p>同理，<code>border-right</code>、<code>border-bottom</code>、<code>border-left</code> 分别设置右、下、左边框样式。</p>
+<h1 id="图片边框-border-image"><a href="#图片边框-border-image" class="headerlink" title="图片边框 border-image"></a>图片边框 border-image</h1><h2 id="border-image-source"><a href="#border-image-source" class="headerlink" title="border-image-source"></a>border-image-source</h2><p>有这样一个<a href="http://www.w3school.com.cn/i/border.png" target="_blank" rel="external">图片</a>：<br><img src="/images/web/css/pasted-35.png" alt="border"><br>将其设置为矩形边框。<br>初始代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  width: 100px;</div><div class="line">  height: 100px;</div><div class="line">  border-style: solid;</div><div class="line">  border-image-source: url(&quot;http://www.w3school.com.cn/i/border.png&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>效果：<br><img src="/images/web/css/pasted-37.png" alt="border-image-source"><br>上图中只要四个角落有小点，那就是设置的图片，当然目前还看不清楚，因为没有设置边框图片的宽度。</p>
+<h2 id="border-image-width"><a href="#border-image-width" class="headerlink" title="border-image-width"></a>border-image-width</h2><p>设置边框图片的大小：<code>border-image-width: 26px;</code>，结果如下：<br><img src="/images/web/css/pasted-38.png" alt="border-image-width"><br>这里为什么要设置为26px？是有原因的。</p>
+<p>浏览器会将其分为九宫格，如下：<br><img src="/images/web/css/pasted-36.png" alt="border-nine"></p>
+<ul>
+<li>区域1、3、7、9分别放置在矩形的四个角落并且不会被拉伸，是固定不变的。</li>
+<li>区域2、4、6、8分别放置在矩形的四个边上，可拉伸的。</li>
+<li>区域5放置在矩形的中间位置。</li>
+</ul>
+<p>也就是宽和高都被分为了三份，而图片的大小为78 × 78，所以每份是26，所以上面设置的边框图片的大小是26px。</p>
+<p>问题又来了，为什么上面的例子是把整个图片都放在了四个角落？</p>
+<h2 id="border-image-slice"><a href="#border-image-slice" class="headerlink" title="border-image-slice"></a>border-image-slice</h2><p>因为还没有对其进行偏移，偏移方法如下，没有单位，因为单位只有像素，可以不写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-image-slice: 26;</div></pre></td></tr></table></figure></p>
+<p>该属性指定图片边框向内偏移多少像素。偏移之后剩下的图像会被拉伸为边框宽度。<br>这样还是不明白？在开发者工具里来调试一下就明白了。<br><img src="/images/web/css/pasted-39.gif" alt="border-slice"><br>首先将其调整为78，是因为原图是78，向内偏移78，就相当于没有偏移。然后慢慢减少向边框内的偏移量，边框内能看见的内容就会越来越少，最后停留在了26像素位置。</p>
+<h2 id="border-image-repeat"><a href="#border-image-repeat" class="headerlink" title="border-image-repeat"></a>border-image-repeat</h2><p>下面来设置边框图片的摆放模式，分为平铺、铺满、拉伸。</p>
+<p>平铺<code>border-image-repeat: repeat;</code>如下：<br><img src="/images/web/css/pasted-40.gif" alt="border-image-repeat:repeat"><br>铺满<code>border-image-repeat: round;</code>如下：<br><img src="/images/web/css/pasted-41.gif" alt="border-image-repeat:round"><br>拉伸<code>border-image-repeat: stretch;</code>如下：<br><img src="/images/web/css/pasted-42.gif" alt="border-image-repeat:stretch"></p>
+<h2 id="border-image-outset"><a href="#border-image-outset" class="headerlink" title="border-image-outset"></a>border-image-outset</h2><p>设置边框图像区域超出边框图像 <code>border-image-outset: 3;</code>，也就是边框图像比边框大：<br><img src="/images/web/css/pasted-43.gif" alt="border-image-outset"><br>由上图可知，变大 outset 的值，边框图像区域变得比 div 更大。</p>
+<h2 id="border-image-复合属性"><a href="#border-image-复合属性" class="headerlink" title="border-image 复合属性"></a>border-image 复合属性</h2><p><code>border-image</code>是上面所有属性的复合属性，其格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-image: border-image-source border-image-slice border-image-width border-image-outset border-image-repeat;</div></pre></td></tr></table></figure></p>
+<p>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  width: 100px;</div><div class="line">  height: 100px;</div><div class="line">  border:26px solid;</div><div class="line">  border-image:url(&quot;http://www.w3school.com.cn/i/border.png&quot;) 26 26 round;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里要注意指定 boder 的宽度才行，否则看起来 border 很细。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> css </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[css 圆角]]></title>
+      <url>/2017/08/30/css/css-%E5%9C%86%E8%A7%92/</url>
+      <content type="html"><![CDATA[<h1 id="border-radius-圆角"><a href="#border-radius-圆角" class="headerlink" title="border-radius 圆角"></a>border-radius 圆角</h1><p>兼容性：IE9+、Firefox 4+、Chrome、Safari 5+、Opera</p>
+<p>例子（为 div 设置圆角）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  background-color: #f46208;</div><div class="line">  width: 300px;</div><div class="line">  height: 300px;</div><div class="line">  border-radius: 20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果：</p>
+<p><img src="/images/web/css/pasted-25.png" alt="圆角"></p>
+<p><code>border-radius</code> 包含了 <code>border-top-left-radius</code>（左上角）、<code>border-top-right-radius</code>（右上角）、<code>border-bottom-left-radius</code>（左下角）、<code>border-bottom-right-radius</code>（右下角） 四个位置的圆角设置。</p>
+<p>可分别设置每个角的圆角大小：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">border-top-left-radius: 10px;</div><div class="line">border-top-right-radius: 20px;</div><div class="line">border-bottom-left-radius: 30px;</div><div class="line">border-bottom-right-radius: 35px;</div></pre></td></tr></table></figure></p>
+<h2 id="border-radius-值的个数"><a href="#border-radius-值的个数" class="headerlink" title="border-radius 值的个数"></a>border-radius 值的个数</h2><ul>
+<li><p>一个值：<code>border-radius=1px</code>，设置四个角。<br><img src="/images/web/css/pasted-27.png" alt="border-radius-1-value"></p>
+</li>
+<li><p>两个值：<code>border-radius=1px 2px</code>，分别设置左上角和右下角、右上角和左下角。<br><img src="/images/web/css/pasted-28.png" alt="border-radius-2-value"></p>
+</li>
+<li><p>三个值：<code>border-radius=1px 2px 3px</code>，分别设置左上角、右上角和左下角，右下角。<br><img src="/images/web/css/pasted-26.png" alt="border-radius-3-value"></p>
+</li>
+<li><p>四个值：<code>border-radius=1px 2px 3px 4px</code>，分别设置左上角、右上角、左下角、右下角。<br><img src="/images/web/css/pasted-29.png" alt="border-radius-4-value"></p>
+</li>
+</ul>
+<h2 id="设置百分比圆角制作圆及椭圆"><a href="#设置百分比圆角制作圆及椭圆" class="headerlink" title="设置百分比圆角制作圆及椭圆"></a>设置百分比圆角制作圆及椭圆</h2><p>制作圆及椭圆可将 <code>border-radius</code> 设置为 50%，表示每个圆角的大小为元素的边长的一半。</p>
+<h3 id="圆"><a href="#圆" class="headerlink" title="圆"></a>圆</h3><p>正方形设置四个圆角大小为 50% 可制作圆。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  background-color: #f46208;</div><div class="line">  width: 300px;</div><div class="line">  height: 300px;</div><div class="line">  border-radius: 50%;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="椭圆"><a href="#椭圆" class="headerlink" title="椭圆"></a>椭圆</h3><p>边长不等的矩形设置四个圆角大小为 50% 可制作椭圆。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  background-color: #f46208;</div><div class="line">  width: 500px;</div><div class="line">  height: 300px;</div><div class="line">  border-radius: 50%;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="例子：制作聊天气泡"><a href="#例子：制作聊天气泡" class="headerlink" title="例子：制作聊天气泡"></a>例子：制作聊天气泡</h3><p>这里制作了椭圆及圆，使用了伪元素。</p>
+<p><img src="/images/web/css/pasted-30.png" alt="聊天气泡"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">Hello, boys and girls!</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  width: 300px;</div><div class="line">  height: 100px;</div><div class="line">  border: 1px solid black;</div><div class="line">  border-radius: 50%;</div><div class="line">  font-weight: bold;</div><div class="line">  text-align: center;</div><div class="line">  line-height: 100px;</div><div class="line">  position: relative;</div><div class="line">&#125;</div><div class="line">div::before, div::after &#123;</div><div class="line">  content: &apos;&apos;;</div><div class="line">  border: 1px solid black;</div><div class="line">  display: block;</div><div class="line">  border-radius: 50%;</div><div class="line">  position: absolute;</div><div class="line">&#125;</div><div class="line">div::before &#123;</div><div class="line">  width: 50px;</div><div class="line">  height: 50px;</div><div class="line">  bottom: -50px;</div><div class="line">  right: 0;</div><div class="line">&#125;</div><div class="line">div::after &#123;</div><div class="line">  width: 30px;</div><div class="line">  height: 30px;</div><div class="line">  right: -10px;</div><div class="line">  bottom: -90px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[css 选择器]]></title>
+      <url>/2017/08/25/css/css-%E9%80%89%E6%8B%A9%E5%99%A8/</url>
+      <content type="html"><![CDATA[<h1 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h1><h2 id="基本选择器-1"><a href="#基本选择器-1" class="headerlink" title="基本选择器"></a>基本选择器</h2><h3 id="通配符选择器"><a href="#通配符选择器" class="headerlink" title="通配符选择器"></a>通配符选择器</h3><p>就是使用 <code>*</code> 号来匹配所有元素，主要用于去除浏览器自带样式的边距。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">* &#123;</div><div class="line">	margin: 0;</div><div class="line">	padding: 0;</div><div class="line">	border: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="元素选择器"><a href="#元素选择器" class="headerlink" title="元素选择器"></a>元素选择器</h3><p>将元素的名字作为选择器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">	background: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a>类选择器</h3><p>利用属性 <code>class</code> 中的类名作为选择器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.title &#123;</div><div class="line">	font-size: xx-large;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="ID选择器"><a href="#ID选择器" class="headerlink" title="ID选择器"></a>ID选择器</h3><p>利用 <code>id</code> 属性的名称作为选择器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#title &#123;</div><div class="line">	font-size: xx-large;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="后代选择器"><a href="#后代选择器" class="headerlink" title="后代选择器"></a>后代选择器</h3><p>以空格隔开表示选择器的后代。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.title span &#123;</div><div class="line">	font-size: small;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>表示选择 <code>class=&#39;title&#39;</code> 的元素的子元素中的所有span元素。</p>
+<h2 id="新增基本选择器"><a href="#新增基本选择器" class="headerlink" title="新增基本选择器"></a>新增基本选择器</h2><h3 id="子元素选择器"><a href="#子元素选择器" class="headerlink" title="子元素选择器"></a>子元素选择器</h3><p>概念：只能选择某元素的子元素。</p>
+<p>语法格式：父元素 &gt; 子元素</p>
+<p>兼容性：IE8+以上所有浏览器。</p>
+<p>示例</p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">  section &gt; div &#123;</div><div class="line">    color: red;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;section&gt;</div><div class="line">  &lt;article&gt;</div><div class="line">    &lt;div&gt;第二层div&lt;/div&gt;</div><div class="line">  &lt;/article&gt;</div><div class="line">  &lt;div&gt;第一层div&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div></pre></td></tr></table></figure></p>
+<p>结果<br><img src="\images\web\css\pasted-1.png" alt="子元素选择器"><br>子元素选择器只选择它下面的第一层元素。</p>
+<h3 id="相邻兄弟元素选择器"><a href="#相邻兄弟元素选择器" class="headerlink" title="相邻兄弟元素选择器"></a>相邻兄弟元素选择器</h3><p>概念：选择紧跟在元素后面的同级别的第一个元素。</p>
+<p>语法：元素 + 需要选择的元素</p>
+<p>兼容性：IE8+主流浏览器。</p>
+<p>例子</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;section&gt;</div><div class="line">  &lt;article&gt;</div><div class="line">    &lt;div&gt;第一个 div&lt;/div&gt;</div><div class="line">  &lt;/article&gt;</div><div class="line">  &lt;div&gt;我是div&lt;/div&gt;</div><div class="line">  &lt;article&gt;</div><div class="line">    &lt;div&gt;第二个 div&lt;/div&gt;</div><div class="line">  &lt;/article&gt;</div><div class="line">  &lt;article&gt;</div><div class="line">    &lt;div&gt;第三个 div&lt;/div&gt;</div><div class="line">  &lt;/article&gt;</div><div class="line">&lt;/section&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">  section &gt; div + article &#123;</div><div class="line">    color: red;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-0.png" alt="相邻兄弟元素选择器"><br>相邻兄弟元素选择器选择的是元素后面的第一个元素。</p>
+<h3 id="通用兄弟选择器"><a href="#通用兄弟选择器" class="headerlink" title="通用兄弟选择器"></a>通用兄弟选择器</h3><p>概念：选择某元素后面的所有同级别的某个元素。</p>
+<p>语法：元素 ~ 需要选择的元素</p>
+<p>兼容：IE8+主流浏览器。</p>
+<p>例子</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;section&gt;</div><div class="line">  &lt;article&gt;第一个 article&lt;/article&gt;</div><div class="line">  &lt;div&gt;我是div&lt;/div&gt;</div><div class="line">  &lt;article&gt;第二个 article&lt;/article&gt;</div><div class="line">  &lt;article&gt;第三个 article&lt;/article&gt;</div><div class="line">  &lt;div&gt;我是div&lt;/div&gt;</div><div class="line">  &lt;article&gt;第四个 article&lt;/article&gt;</div><div class="line">&lt;/section&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">  section &gt; div ~ article &#123;</div><div class="line">    color: red;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-2.png" alt="通用兄弟选择器"><br>通用兄弟选择器选择的是某个元素后面的所有被指定的同级别元素。</p>
+<h3 id="群组选择器"><a href="#群组选择器" class="headerlink" title="群组选择器"></a>群组选择器</h3><p>概念：将具有相同样式的元素分组在一起，每个选择器之间用英文逗号隔开。</p>
+<p>语法格式：元素1,元素2,…,元素n</p>
+<p>兼容性：IE6+以上主流浏览器。</p>
+<p>例子</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;section&gt;</div><div class="line">  &lt;article&gt;article&lt;/article&gt;</div><div class="line">  &lt;aside&gt;aside&lt;/aside&gt;</div><div class="line">  &lt;div&gt;div&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">  section &gt; article, section &gt; aside, section &gt; div &#123;</div><div class="line">    color: #f46208;</div><div class="line">    background: dimgray;</div><div class="line">    margin-top: 10px;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="/images/web/css/pasted-3.png" alt="群组选择器"><br>同时选择了 <code>section</code> 下的所有 <code>article</code>、<code>aside</code>、<code>div</code> 元素。</p>
+<h1 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h1><p>概念：选择带有指定属性、或带有指定属性值、或包含指定属性值、或属性值以某个字符串开头、或属性值以某个字符串结尾、或属性值包含某个字符串、指定属性值或以指定属性开头的属性值的html元素。</p>
+<p>语法：</p>
+<ul>
+<li>属性：<code>Element[attribute]</code></li>
+<li>属性值：<code>Element[attribute = &#39;value&#39;]</code></li>
+<li>包含属性值：<code>Element[attribute ~= &#39;value&#39;]</code></li>
+<li>属性值以某个字符串开头：<code>Element[attribute ^= &#39;value&#39;]</code></li>
+<li>属性值以某个字符串结尾：<code>Element[attribute $= &#39;value&#39;]</code></li>
+<li>属性值包含某个字符串：<code>Element[attribute *= &#39;value&#39;]</code></li>
+<li>属性值或以该值开头的属性值：<code>Element[attribute |= &#39;value&#39;]</code></li>
+</ul>
+<p>兼容性：IE8+以上主流浏览器</p>
+<p>例子</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;&quot;&gt;指定属性：a[href]&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#&quot;&gt;指定属性值：a[href=&apos;#&apos;]&lt;/a&gt;</div><div class="line">&lt;a class=&quot;one two&quot;&gt;指定包含某个属性值：a[class~=&quot;two&quot;]&lt;/a&gt;</div><div class="line">&lt;a href=&quot;http://www.baidu.com&quot;&gt;指定以字符串开头的属性值：a[href^=&apos;http&apos;]&lt;/a&gt;</div><div class="line">&lt;a href=&quot;http://www.张钧泉.top&quot;&gt;指定以字符串结尾的属性值：a[href$=&quot;.top&quot;]&lt;/a&gt;</div><div class="line">&lt;a href=&quot;http://news.qq.com/a/20170828/037540.htm&quot;&gt;指定包含字符串的属性值：a[href*=&quot;037540&quot;]&lt;/a&gt;</div><div class="line">&lt;a class=&quot;a&quot;&gt;指定属性值或以字符串开头的属性值：a[class|=&quot;a&quot;]&lt;/a&gt;</div><div class="line">&lt;a class=&quot;a-1&quot;&gt;指定属性值或以字符串开头的属性值：a[class|=&quot;a&quot;]&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">a &#123;</div><div class="line">  display: block;</div><div class="line">&#125;</div><div class="line">a[href] &#123;</div><div class="line">  text-decoration: none;</div><div class="line">&#125;</div><div class="line">a[href=&apos;#&apos;] &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div><div class="line">a[class~=&quot;two&quot;] &#123;</div><div class="line">  color: chartreuse;</div><div class="line">&#125;</div><div class="line">a[href^=&quot;http&quot;] &#123;</div><div class="line">  color: aqua;</div><div class="line">&#125;</div><div class="line">a[href$=&quot;.top&quot;] &#123;</div><div class="line">  color: black;</div><div class="line">&#125;</div><div class="line">a[href*=&quot;037540&quot;] &#123;</div><div class="line">  color: cornflowerblue;</div><div class="line">&#125;</div><div class="line">a[class|=&quot;a&quot;] &#123;</div><div class="line">  color: darkgreen;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-4.png" alt="属性选择器"></p>
+<h1 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h1><h2 id="动态伪类"><a href="#动态伪类" class="headerlink" title="动态伪类"></a>动态伪类</h2><p>用户和网站进行交互的时候才会体现出来。</p>
+<ul>
+<li>锚点伪类<ul>
+<li>:link 链接默认样式</li>
+<li>:visited 链接访问后的样式</li>
+</ul>
+</li>
+<li>用户行为伪类<ul>
+<li>:hover 鼠标放上后的样式</li>
+<li>:active 鼠标按下时的样式</li>
+<li>:focus 获取到焦点时的样式</li>
+</ul>
+</li>
+</ul>
+<p>例子<br>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;#&quot;&gt;动态伪类&lt;/a&gt;</div><div class="line">&lt;br/&gt;</div><div class="line">&lt;input&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">a &#123;</div><div class="line">  text-decoration: none;</div><div class="line">&#125;</div><div class="line">a:link &#123;</div><div class="line">  color: #000;</div><div class="line">&#125;</div><div class="line">a:visited&#123;</div><div class="line">  color: #7c7c7c;</div><div class="line">&#125;</div><div class="line">a:hover &#123;</div><div class="line">  color: blueviolet;</div><div class="line">&#125;</div><div class="line">a:active &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line">input &#123;</div><div class="line">  width: 200px;</div><div class="line">  height: 30px;</div><div class="line">  border:1px solid red;</div><div class="line">&#125;</div><div class="line">input:focus &#123;</div><div class="line">  background: cyan;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果<br><img src="/images/web/css/pasted-4.gif" alt="动态伪类"><br><img src="/images/web/css/pasted-5.gif" alt="动态伪类:focus"></p>
+<h2 id="UI元素状态伪类"><a href="#UI元素状态伪类" class="headerlink" title="UI元素状态伪类"></a>UI元素状态伪类</h2><p>:enabled、:disabled、:checked</p>
+<p>兼容性：IE9+主流浏览器，<code>:checked</code>只有Opera兼容</p>
+<p>例子<br>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">  用户名：&lt;input disabled&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div&gt;</div><div class="line">  密码：&lt;input&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">input &#123;</div><div class="line">  width: 300px;</div><div class="line">  height: 30px;</div><div class="line">&#125;</div><div class="line">input:disabled &#123;</div><div class="line">  border: 1px solid gray;</div><div class="line">&#125;</div><div class="line">input:enabled &#123;</div><div class="line">  border: 1px solid red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-5.png" alt="UI元素状态伪类"><br>默认是<code>:enabled的</code>。</p>
+<h2 id="CSS3结构类（-nth选择器）"><a href="#CSS3结构类（-nth选择器）" class="headerlink" title="CSS3结构类（:nth选择器）"></a>CSS3结构类（:nth选择器）</h2><table>
+<thead>
+<tr>
+<th>选择方法</th>
+<th>描述</th>
+<th>兼容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:first-child</td>
+<td>匹配其父元素的首个子元素</td>
+<td>IE8+主流浏览器</td>
+</tr>
+<tr>
+<td>:last-child</td>
+<td>匹配其父元素的最后一个子元素</td>
+<td>IE8+主流浏览器</td>
+</tr>
+<tr>
+<td>:nth-child()</td>
+<td>匹配其父元素的第几个子元素</td>
+<td>IE9+、FireFox4+主流浏览器</td>
+</tr>
+<tr>
+<td>:nth-last-child()</td>
+<td>匹配其父元素的第几个子元素，从最后一个子元素倒数</td>
+<td>IE9+、FireFox4+主流浏览器</td>
+</tr>
+<tr>
+<td>:nth-of-type()</td>
+<td>匹配其父元素的子元素中特定类型的第几个元素</td>
+<td>IE9+、FireFox4+主流浏览器</td>
+</tr>
+<tr>
+<td>:nth-last-of-type()</td>
+<td>匹配其父元素的子元素中特定类型的第几个元素，从最后一个倒着数</td>
+<td>IE9+、FireFox4+主流浏览器</td>
+</tr>
+<tr>
+<td>:first-of-type</td>
+<td>匹配其父元素的子元素中特定类型的首个元素</td>
+<td>IE9+主流浏览器</td>
+</tr>
+<tr>
+<td>:last-of-type</td>
+<td>匹配其父元素的子元素中特定类型的最后一个元素</td>
+<td>IE9+主流浏览器</td>
+</tr>
+<tr>
+<td>:only-child</td>
+<td>匹配父元素的唯一子元素</td>
+<td>IE9+主流浏览器</td>
+</tr>
+<tr>
+<td>:only-of-type</td>
+<td>匹配父元素的唯一特定类型子元素</td>
+<td>IE9+、FireFox4+主流浏览器</td>
+</tr>
+<tr>
+<td>:empty</td>
+<td>匹配没有子元素（包括文本节点）的每个元素</td>
+<td>IE9+主流浏览器</td>
+</tr>
+</tbody>
+</table>
+<h3 id="first-child"><a href="#first-child" class="headerlink" title=":first-child"></a>:first-child</h3><p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;div&gt;0-1&lt;/div&gt;</div><div class="line">&lt;div&gt;0-2&lt;/div&gt;</div><div class="line">&lt;div&gt;0-3&lt;/div&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;1-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;2-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:first-child &#123;</div><div class="line">   color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-6.png" alt=":first-child"><br>查找父元素中第一个元素，如果是div则选中。</p>
+<h3 id="last-child"><a href="#last-child" class="headerlink" title=":last-child"></a>:last-child</h3><p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;div&gt;0-1&lt;/div&gt;</div><div class="line">&lt;div&gt;0-2&lt;/div&gt;</div><div class="line">&lt;div&gt;0-3&lt;/div&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;1-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;2-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:last-child &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-7.png" alt=":last-child"><br>查找父元素中的最后一个元素，如果是div，则选中。body里的最后一个元素是section，不是div所以不被选中，0-3不是body里的最后一个元素，所以也不被选中。</p>
+<h3 id="nth-child"><a href="#nth-child" class="headerlink" title=":nth-child()"></a>:nth-child()</h3><p>从1开始计数。</p>
+<p>括号里的参数可以为大于0的数字，表示第几行；也可以是<code>n</code>，表示所有行；也可以是<code>2n</code>或<code>even</code>，表示偶数行；也可以是<code>2n+1</code>或<code>odd</code>，表示奇数行；也可以是<code>3n+1</code>，表示中间间隔2个，以此类推。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;div&gt;0-1&lt;/div&gt;</div><div class="line">&lt;div&gt;0-2&lt;/div&gt;</div><div class="line">&lt;div&gt;0-3&lt;/div&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;1-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;2-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:nth-child(2) &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-8.png" alt=":nth-child()"></p>
+<h3 id="nth-last-child"><a href="#nth-last-child" class="headerlink" title=":nth-last-child()"></a>:nth-last-child()</h3><p>从1开始计数，其参数与<code>:nth-child()</code>相同。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;div&gt;0-1&lt;/div&gt;</div><div class="line">&lt;div&gt;0-2&lt;/div&gt;</div><div class="line">&lt;div&gt;0-3&lt;/div&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;1-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;2-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:nth-last-child(2) &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-9.png" alt=":nth-last-child()"></p>
+<h3 id="nth-of-type"><a href="#nth-of-type" class="headerlink" title="nth-of-type()"></a>nth-of-type()</h3><p>参数与 <code>:nth-child()</code> 相同。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;div&gt;0-1&lt;/div&gt;</div><div class="line">&lt;a&gt;0-2&lt;/a&gt;</div><div class="line">&lt;div&gt;0-3&lt;/div&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;1-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;2-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:nth-of-type(2) &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-10.png" alt=":nth-of-type()"><br>这里要注意和 <code>:nth-child()</code> 的区别。这里的0-2我改为了a标签，不再是div标签，所以在匹配的时候会忽略0-2，因为 <code>:nth-of-type()</code> 在计数时会排除非指定元素；而如果是 <code>:nth-child()</code> 不会排除任何元素，会挨着数。</p>
+<h3 id="nth-last-of-type"><a href="#nth-last-of-type" class="headerlink" title=":nth-last-of-type()"></a>:nth-last-of-type()</h3><p>与 <code>:nth-last-child()</code> 一样是倒着数，功能与<code>:nth-of-type()</code> 相似。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;div&gt;0-1&lt;/div&gt;</div><div class="line">&lt;a&gt;0-2&lt;/a&gt;</div><div class="line">&lt;div&gt;0-3&lt;/div&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;1-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;2-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:nth-last-of-type(2) &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-11.png" alt=":nth-last-of-type()"></p>
+<h3 id="first-of-type、-last-of-type"><a href="#first-of-type、-last-of-type" class="headerlink" title=":first-of-type、:last-of-type"></a>:first-of-type、:last-of-type</h3><p>计数的时候会跳过非指定类型。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;div&gt;0-1&lt;/div&gt;</div><div class="line">&lt;div&gt;0-2&lt;/div&gt;</div><div class="line">&lt;div&gt;0-3&lt;/div&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;1-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;1-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;2-1&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-2&lt;/div&gt;</div><div class="line">  &lt;div&gt;2-3&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>:first-of-type css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:first-of-type &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-12.png" alt=":first-of-type"><br>:last-of-type css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:last-of-type &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-13.png" alt=":last-of-type"></p>
+<h3 id="only-child"><a href="#only-child" class="headerlink" title=":only-child"></a>:only-child</h3><p>匹配父元素只有一个子元素，并且子元素必须为指定元素。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;div&gt;</div><div class="line">  &lt;div&gt;0-1&lt;/div&gt;</div><div class="line">  &lt;a&gt;0-2&lt;/a&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div&gt;</div><div class="line">  &lt;div&gt;1-1&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;div&gt;2-1&lt;/div&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;section&gt;</div><div class="line">  &lt;a&gt;3-1&lt;/a&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:only-child &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-14.png" alt=":only-child"></p>
+<h3 id="only-of-type"><a href="#only-of-type" class="headerlink" title=":only-of-type"></a>:only-of-type</h3><p>与 <code>:only-child</code> 类似，但是只要父元素的子元素中只有一个指定类型的元素时就可匹配成功。</p>
+<p>html与 <code>:only-child</code> 一致，css如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div:only-of-type &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-15.png" alt=":only-of-type"><br>0-2是a标签，所以其父元素的子元素中只有一个div，那就是0-1，所以0-1匹配成功。如果是<code>:only-child</code>，是不能匹配成功的，因为其要求必须是唯一的子元素。</p>
+<h3 id="empty"><a href="#empty" class="headerlink" title=":empty"></a>:empty</h3><p><code>:empty</code>不是像上面一样在父元素的子元素中查找了，而是直接匹配相应元素。所匹配的元素中要求不能有任何内容，哪怕是一个空格。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&lt;/div&gt;</div><div class="line">&lt;div&gt;1&lt;/div&gt;</div><div class="line">&lt;div&gt; &lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div&#123;</div><div class="line">  height: 30px;</div><div class="line">&#125;</div><div class="line">div:empty &#123;</div><div class="line">  background: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-16.png" alt=":empty"></p>
+<h2 id="否定选择器"><a href="#否定选择器" class="headerlink" title="否定选择器"></a>否定选择器</h2><p>概念：<code>not(Element/Selector)</code> 匹配非指定元素/选择器。</p>
+<p>语法：父元素:not(子元素/子选择器)</p>
+<p>兼容性：IE9+主流浏览器</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;1&lt;/div&gt;</div><div class="line">&lt;div&gt;2&lt;/div&gt;</div><div class="line">&lt;div&gt;3&lt;/div&gt;</div><div class="line">&lt;div&gt;</div><div class="line">  &lt;span&gt;4-0&lt;/span&gt;</div><div class="line">  &lt;div&gt;4-1&lt;/div&gt;</div><div class="line">  &lt;a&gt;4-2&lt;/a&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div:not(:first-of-type) &#123;</div><div class="line">  color: blue;</div><div class="line">&#125;</div><div class="line">div :not(div) &#123;</div><div class="line">  color: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-17.png" alt=":not"><br>上面的css中 <code>div:not(:first-of-type)</code> 意思是：div的父元素中，除了第一个div 1以外，其余的div中字的颜色是蓝色。<code>div :not(div)</code> 的意思是div的子元素中的非div元素中的字的颜色是绿色，所以4-0和4-2都变为了绿色。</p>
+<h2 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h2><p>伪元素用于向某些选择器设置特殊效果。</p>
+<p>语法：元素::伪元素（Element::pseudo-element）</p>
+<p>兼容性：IE9+主流浏览器</p>
+<h3 id="first-line"><a href="#first-line" class="headerlink" title="::first-line"></a>::first-line</h3><p>匹配元素里的第一行，只能用于块级元素。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">  时光荏苒，岁月无声。日子不紧不慢的如涓涓溪水静静的流去，而从身边流去的只有时光，沉淀下来的是与你一路相伴的幸福和快乐，温馨和安暖。于我，在这个凋零都感受到诗意横溢的秋，只想做一件事，拈一片绯红的枫叶，轻轻地刻上我的心语。对信仰，是我今生永不改变的主题！而后，幸福的寄往有你的那个城市。从此，在我心里，于我的生命里，轻握你许的安暖，静静地在岁月的彼岸，为你守候一世永恒！</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">div::first-line &#123;</div><div class="line">  color: red;</div><div class="line">  background-color: #7c7c7c;</div><div class="line">  font-weight:bold;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-18.png" alt="::first-line"></p>
+<h3 id="first-letter"><a href="#first-letter" class="headerlink" title="::first-letter"></a>::first-letter</h3><p>匹配元素里的文本的第一个字符，只能用于块级元素。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">  时光荏苒，岁月无声。日子不紧不慢的如涓涓溪水静静的流去，而从身边流去的只有时光，沉淀下来的是与你一路相伴的幸福和快乐，温馨和安暖。于我，在这个凋零都感受到诗意横溢的秋，只想做一件事，拈一片绯红的枫叶，轻轻地刻上我的心语。对信仰，是我今生永不改变的主题！而后，幸福的寄往有你的那个城市。从此，在我心里，于我的生命里，轻握你许的安暖，静静地在岁月的彼岸，为你守候一世永恒！</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div::first-letter &#123;</div><div class="line">  color: red;</div><div class="line">  background-color: #7c7c7c;</div><div class="line">  font-weight:bold;</div><div class="line">  font-size: xx-large;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-19.png" alt="::first-letter"></p>
+<h3 id="before"><a href="#before" class="headerlink" title="::before"></a>::before</h3><p>在元素的内容前面插入新的内容，通常与 <code>content</code> 配合使用。</p>
+<p>特点：</p>
+<ul>
+<li>是父元素的第一个子元素</li>
+<li>是行级元素</li>
+<li>内容通过 <code>content</code> 写入</li>
+<li>没有对应的html标签，只有在浏览器中查看源码</li>
+</ul>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">  我是div</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  border:1px solid black;</div><div class="line">  height: 100px;</div><div class="line">  width: 300px;</div><div class="line">&#125;</div><div class="line">div::before&#123;</div><div class="line">  content: &apos;我是::before &apos;;</div><div class="line">  border: 2px solid red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-20.png" alt="::before"><br>在内容“我是div”前面添加了新的内容。</p>
+<h3 id="after"><a href="#after" class="headerlink" title="::after"></a>::after</h3><p>在元素的内容后面插入新的内容，使用 <code>content</code> 配合使用，多用于清除浮动。</p>
+<p>特点：</p>
+<ul>
+<li>是父元素的最后一个子元素</li>
+<li>是行级元素</li>
+<li>内容通过 <code>content</code> 写入</li>
+<li>没有对应的html标签，只有在浏览器中查看源码</li>
+</ul>
+<p>可以模仿 <code>::before</code> 写出如下效果：</p>
+<p><img src="\images\web\css\pasted-21.png" alt="::after"></p>
+<p>下面写一个 <code>::after</code> 清除浮动的例子。</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;header&gt;</div><div class="line">  &lt;div&gt;&lt;/div&gt;</div><div class="line">  &lt;div&gt;&lt;/div&gt;</div><div class="line">&lt;/header&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">div:first-child &#123;</div><div class="line">  width: 300px;</div><div class="line">  height: 30px;</div><div class="line">  background-color: #2e2e2e;</div><div class="line">  float: left;</div><div class="line">&#125;</div><div class="line">div:last-child &#123;</div><div class="line">  width: 400px;</div><div class="line">  height: 50px;</div><div class="line">  background-color: #f46208;</div><div class="line">  float: right;</div><div class="line">&#125;</div><div class="line">header &#123;</div><div class="line">  background-color: green;</div><div class="line">&#125;</div><div class="line">header::after &#123;</div><div class="line">  clear: both;</div><div class="line">  content: &apos;&apos;;</div><div class="line">  display: block;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-22.png" alt="::after清除浮动"><br>这里有两个div，一个左边浮动，一个右边浮动，还为header加了背景色。如果没有 <code>header::after</code> 设置为块级元素，清除浮动，header的背景色是显示不出来的，并且 <code>content=&#39;&#39;</code> 是不能少的。如果不写 <code>content=&#39;&#39;</code>，浏览器就认为伪元素 <code>after</code> 是没有内容的，浏览器就不会添加 <code>::after</code> 伪元素。</p>
+<h3 id="selection"><a href="#selection" class="headerlink" title="::selection"></a>::selection</h3><p>用于设置在浏览器中选中文本的背景色和前景色。</p>
+<p>兼容性：IE9+主流浏览器、Firefox中需要加-moz前缀。</p>
+<p>例子</p>
+<p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">  时光荏苒，岁月无声。日子不紧不慢的如涓涓溪水静静的流去，而从身边流去的只有时光，沉淀下来的是与你一路相伴的幸福和快乐，温馨和安暖。于我，在这个凋零都感受到诗意横溢的秋，只想做一件事，拈一片绯红的枫叶，轻轻地刻上我的心语。对信仰，是我今生永不改变的主题！而后，幸福的寄往有你的那个城市。从此，在我心里，于我的生命里，轻握你许的安暖，静静地在岁月的彼岸，为你守候一世永恒！</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">div::selection &#123;</div><div class="line">  background: red;</div><div class="line">  color: yellow;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果</p>
+<p><img src="\images\web\css\pasted-23.png" alt="::selection-23"></p>
+<p><img src="\images\web\css\pasted-24.png" alt="::selection-24"></p>
+<p>没有写样式前是蓝底白字，写了样式后是红底黄字。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> css </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 选择器 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[搭建hexo博客]]></title>
+      <url>/2017/08/24/hexo/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
+      <content type="html"><![CDATA[<p>看见许多大牛的博客都是使用hexo搭建的，我也尝试着搭建了自己的这个博客。<br>参考以下资料：<br>官方站点：<a href="http://hexo.io/zh-cn/" target="_blank" rel="external">http://hexo.io/zh-cn/</a><br>hexo主题：<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">https://github.com/hexojs/hexo/wiki/Themes</a><br>博客：<a href="http://ijiaober.github.io/categories/hexo/" target="_blank" rel="external">http://ijiaober.github.io/categories/hexo/</a><br>hexo常见问题解决方案：<a href="http://xuanwo.org/2014/08/14/hexo-usual-problem/" target="_blank" rel="external">http://xuanwo.org/2014/08/14/hexo-usual-problem/</a></p>
+<p>如果没有类别显示，则需要在对应主题下的_config.yml的widgets:栏目加上- category，在文章的开头需要定义categories: hexo，hexo就是文章的类别，当然可以随便改的。我总结的经验是根据默认配置了的标签来配置。如果是复数（tags），则配置为categories，如果是单数（tag），则配置为category。</p>
+<h2 id="添加多说评论问题"><a href="#添加多说评论问题" class="headerlink" title="添加多说评论问题"></a>添加多说评论问题</h2><p>添加多说评论建议参考这篇<a href="http://blog.csdn.net/itmyhome1990/article/details/43536171" target="_blank" rel="external">文章</a>，对于其中的第一步的通用代码，可以在多说网上注册并设置站点进行获取。<br>感觉多说网很不好用，反正我是看见很多人在问配置里的short_name在哪里获取。我也找了好久才发现其中的奥秘。进入<a href="http://duoshuo.com/" target="_blank" rel="external">多说官网</a>，登录后顶部会有后台管理按钮。进去后点击左侧的工具，就可以获得代码了。如果没有发现后台管理按钮的话，就点击开发者工具里的团队博客，在右侧插件下载里有个创建站点获取通用代码，设置好后就可以获取代码了。</p>
+<p>在多说评论中看评论信息，可能评论的地址不对。这就需要配置根目录下的_config.yml里的url栏，配置为域名即可。比如我的就配置为 url: <a href="http://softwater.github.io/" target="_blank" rel="external">http://softwater.github.io/</a>，其他的我使用的是默认的就行了。在comment.ejs中data-url配置为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%- config.url %&gt;&lt;%- config.root%&gt;&lt;%- page.path %&gt;</div></pre></td></tr></table></figure>
+<p>形式。这个配置拿过来可能会用不了，因为我从网上找到的配置拿来都用不了，后来经过尝试改了下可以用了，我猜想可能是主题不同获取的方式也不同吧。我想这里面的config.url和config.root应该对应的是根目录下的_config.yml里的url和root的配置，page对应的是comment.ejs里的第一句&lt;% if (page.comments){ %&gt;里的page。如果不知道配置是否正确，要么看源码，要么就自己尝试。我是看不懂源码的，我的尝试方法是在comment.ejs的section里写一个div来获取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&lt;%- config.url %&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>这样就能在网页上看见了。发布到github后可能会等一会儿才有效。</p>
+<h2 id="添加站内搜索"><a href="#添加站内搜索" class="headerlink" title="添加站内搜索"></a>添加站内搜索</h2><p>参考文章：<a href="http://blog.moyizhou.cn/web/search-engine-for-static-pages/" target="_blank" rel="external">http://blog.moyizhou.cn/web/search-engine-for-static-pages/</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android 性能优化]]></title>
+      <url>/2017/08/14/android/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+      <content type="html"><![CDATA[<p>这里收集了一些关于如何优化Android代码的文章，感谢前辈们写出的好文章，让我们获取知识如此的轻松愉悦。</p>
+<p><a href="http://www.infoq.com/cn/news/2015/01/google-android-performance" target="_blank" rel="external">Google的Android性能模式</a></p>
+<h1 id="胡凯的Android性能优化专题"><a href="#胡凯的Android性能优化专题" class="headerlink" title="胡凯的Android性能优化专题"></a>胡凯的Android性能优化专题</h1><ul>
+<li><a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="external">Android性能优化典范 - 第1季</a></li>
+<li><a href="http://hukai.me/android-performance-render/" target="_blank" rel="external">Android性能优化之渲染篇</a></li>
+<li><a href="http://hukai.me/android-performance-compute/" target="_blank" rel="external">Android性能优化之运算篇</a></li>
+<li><a href="http://hukai.me/android-performance-memory/" target="_blank" rel="external">Android性能优化之内存篇</a></li>
+<li><a href="http://hukai.me/android-performance-battery/" target="_blank" rel="external">Android性能优化之电量篇</a></li>
+<li><a href="http://hukai.me/android-performance-patterns-season-2/" target="_blank" rel="external">Android性能优化典范 - 第2季</a></li>
+<li><a href="http://hukai.me/android-performance-patterns-season-3/" target="_blank" rel="external">Android性能优化典范 - 第3季</a></li>
+<li><a href="http://hukai.me/android-performance-patterns-season-4/" target="_blank" rel="external">Android性能优化典范 - 第4季</a></li>
+<li><a href="http://hukai.me/android-performance-patterns-season-5/" target="_blank" rel="external">Android性能优化典范 - 第5季</a></li>
+<li><a href="http://hukai.me/android-performance-patterns-season-6/" target="_blank" rel="external">Android性能优化典范 - 第6季</a></li>
+</ul>
+<h1 id="Android-performance-bits-and-pieces"><a href="#Android-performance-bits-and-pieces" class="headerlink" title="Android performance bits and pieces"></a>Android performance bits and pieces</h1><ul>
+<li><a href="http://www.pushing-pixels.org/2013/09/17/android-performance-bits-and-pieces-part-i-measure-everything.html" target="_blank" rel="external">Android performance bits and pieces, part I – measure everything</a></li>
+<li><a href="http://www.pushing-pixels.org/2013/09/17/android-performance-bits-and-pieces-part-ii-use-fewer-views.html" target="_blank" rel="external">Android performance bits and pieces, part II – use fewer Views</a></li>
+<li><a href="http://www.pushing-pixels.org/2013/09/17/android-performance-bits-and-pieces-part-iii-sleight-of-hand.html" target="_blank" rel="external">Android performance bits and pieces, part III – sleight of hand</a></li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li><a href="http://www.trinea.cn/android/performance/" target="_blank" rel="external">Trinea 性能优化系列总篇</a></li>
+<li><a href="http://www.lightskystreet.com/2015/09/01/mat_usage/" target="_blank" rel="external">MAT - Memory Analyzer Tool 使用进阶</a></li>
+<li><a href="http://www.lightskystreet.com/2015/01/17/android-code-optimize-tips/" target="_blank" rel="external">Android代码优化小技巧</a></li>
+<li>Android性能优化案例研究[<a href="http://www.importnew.com/3784.html" target="_blank" rel="external">上</a>][<a href="http://www.importnew.com/4065.html" target="_blank" rel="external">下</a>]</li>
+<li><a href="http://android.blog.51cto.com/268543/308090/" target="_blank" rel="external">FrameLayou和布局优化</a></li>
+<li><a href="http://blog.csdn.net/xyz_lmn/article/details/14524567" target="_blank" rel="external">Android抽象布局——include、merge 、ViewStub</a></li>
+<li><a href="http://itindex.net/detail/47065-android-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86" target="_blank" rel="external">Android内存管理哪些事</a></li>
+<li><a href="http://jiajixin.cn/2015/01/06/memory_leak/" target="_blank" rel="external">Android内存泄漏研究</a></li>
+<li><a href="http://android.jobbole.com/78995/" target="_blank" rel="external">正确使用Android性能分析工具——TraceView</a></li>
+<li><a href="http://bjyzxxds.iteye.com/blog/1532937" target="_blank" rel="external">Shallow heap &amp; Retained heap</a></li>
+<li><a href="http://www.pocketdigi.com/20140607/1334.html" target="_blank" rel="external">Android开发:性能最佳实践-管理应用内存</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 性能 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Custom View]]></title>
+      <url>/2016/03/16/android/Custom%20View/</url>
+      <content type="html"><![CDATA[<h2 id="Creating-a-View-Class"><a href="#Creating-a-View-Class" class="headerlink" title="Creating a View Class"></a>Creating a View Class</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
+<ul>
+<li>遵从Android标准。</li>
+<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
+<li>Send accessibility events。</li>
+<li>兼容多个Android平台。</li>
+</ul>
+<p> Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
+<h3 id="Subclass-a-View"><a href="#Subclass-a-View" class="headerlink" title="Subclass a View"></a>Subclass a View</h3><p>  所有Android内建的视图都是继承自<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>。自己自定义的视图可以直接继承自<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>，也可以为了节省时间，继承自已经存在的子视图，如<a href="http://developer.android.com/reference/android/widget/Button.html" target="_blank" rel="external">Button</a>。</p>
+<p>  为了使Android Studio能够识别自定义View，我们必须提供至少拥有两个参数的构造器，一个参数是<a href="http://developer.android.com/reference/android/content/Context.html" target="_blank" rel="external">Context</a>，另一个是<a href="http://developer.android.com/reference/android/util/AttributeSet.html" target="_blank" rel="external">AttributeSet</a>。这个构造器能够使工具识别自定义View，在layout编辑器里布局时，便可以创建和修改。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PieChart</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">PieChart</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(context, attrs);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Define-Custom-Attributes"><a href="#Define-Custom-Attributes" class="headerlink" title="Define Custom Attributes"></a>Define Custom Attributes</h3><p>  添加一个内建的<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>作为用户交互界面，是使用XML元素对其进行声明，并且通过元素属性控制其外观样式和行为动作。写得好的自定义视图也应该是可以通过XML进行添加和样式控制。要让自定义view能拥有这些能力，我们必须：</p>
+<ul>
+<li>在<declare-styleable>中为view自定义属性</declare-styleable></li>
+<li>为XML layout中使用的属性自定义属性值</li>
+<li>在运行时获取属性值</li>
+<li>为自定义view设置上获取到的属性值</li>
+</ul>
+<p>  那么如何定义属性呢？<br>  通常是将属性值设置在项目的res/values/attrs.xml文件里。<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"PieChart"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"showText"</span> <span class="attr">format</span>=<span class="string">"boolean"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"labelPosition"</span> <span class="attr">format</span>=<span class="string">"enum"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"left"</span> <span class="attr">value</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"right"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">attr</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>  在编译的时候提示我属性名已经被定义过了<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Error:(124) Attribute &quot;showText&quot; has already been defined</div></pre></td></tr></table></figure></p>
+<p>  这里我就把两个属性都加上piechart_前缀就ok了，也就是换个没有被使用过的名字。<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"PieChart"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"piechart_showText"</span> <span class="attr">format</span>=<span class="string">"boolean"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"piechart_labelPosition"</span> <span class="attr">format</span>=<span class="string">"enum"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"left"</span> <span class="attr">value</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"right"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">attr</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>  上面的代码声明了两个自定义属性，showText和labelPosition，他们都属于styleable实例PieChart。依据惯例，styleable实例的名字与自定义的View的类名一致。尽管不一定非要按照这样的习惯来写，但是许多编辑器是根据这样的命名习惯来提供代码提示的。</p>
+<p>  这要定义后就能够在xml layout文件中使用了。唯一不同的是自定义属性所从属的命名空间(namespace)不是<code><a href="http://schemas.android.com/apk/res/android" target="_blank" rel="external">http://schemas.android.com/apk/res/android</a></code>，而是<code><a href="http://schemas.android.com/apk/res/你的包名" target="_blank" rel="external">http://schemas.android.com/apk/res/你的包名</a></code>。</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">  &lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line"><span class="tag">    <span class="attr">xmlns:custom</span>=<span class="string">"http://schemas.android.com/apk/com.zjq.exercise"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">    &gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">com.zjq.exercise.view.PieChart</span></span></div><div class="line"><span class="tag">      <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">      <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">      <span class="attr">custom:showText</span>=<span class="string">"true"</span></span></div><div class="line"><span class="tag">      <span class="attr">custom:labelPosition</span>=<span class="string">"left"</span></span></div><div class="line"><span class="tag">      /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>  为了不一直重复长长的命名空间，便使用<code>xmlns</code>为<code><a href="http://schemas.android.com/apk/com.zjq.exercise" target="_blank" rel="external">http://schemas.android.com/apk/com.zjq.exercise</a></code>指明了一个简单的别名，别名可以随便取。<code>com.zjq.exercise</code>是我自己的包名。</p>
+<p>  添加到layout xml中的自定义视图需要使用全路径名。如果是内部类，还要指明外部类。举例：<code>PieChart</code>有一个内部类<code>PieView</code>，要这样使用<code>PieView</code>：<code>包名.PieChart$PieView</code></p>
+<h3 id="Apply-Custom-Attributes"><a href="#Apply-Custom-Attributes" class="headerlink" title="Apply Custom Attributes"></a>Apply Custom Attributes</h3><p>  自定义视图被定义在xml文件里后，我们所指定的属性会从resource bundle（资源包）中读入，并且以<code><a href="http://developer.android.com/reference/android/util/AttributeSet.html" target="_blank" rel="external">AttributeSet</a></code>传递给该view的构造器。可以直接从<code><a href="http://developer.android.com/reference/android/util/AttributeSet.html" target="_blank" rel="external">AttributeSet</a></code>中读取属性值，但是有许多不利因素：</p>
+<ul>
+<li>Resource references within attribute values are not resolved</li>
+<li>Styles are not applied</li>
+</ul>
+<p>  作为替代的，传递<code><a href="http://developer.android.com/reference/android/util/AttributeSet.html" target="_blank" rel="external">AttributeSet</a></code>到<code><a href="http://developer.android.com/reference/android/content/res/Resources.Theme.html#obtainStyledAttributes(android.util.AttributeSet,int[],int,int)" target="_blank" rel="external">obtainStyledAttributes()</a></code>方法，该方法返回一个包含所使用的属性的<code><a href="http://developer.android.com/reference/android/content/res/TypedArray.html" target="_blank" rel="external">TypedArray</a></code>。</p>
+<p>  Android资源编译器做了许多工作，让我们调用<code><a href="http://developer.android.com/reference/android/content/res/Resources.Theme.html#obtainStyledAttributes(android.util.AttributeSet,int[],int,int)" target="_blank" rel="external">obtainStyledAttributes()</a></code>方法更简单。编译器会在R.java文件中为每一组资源文件中的<code><declare-styleable></declare-styleable></code>中的属性生成id，也会为其中的属性定义常量。我们使用这些预先定义好的常量从<code><a href="http://developer.android.com/reference/android/content/res/TypedArray.html" target="_blank" rel="external">TypedArray</a></code>中获取属性。</p>
+<p>  这里是我获取属性的代码。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> mShowText;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> mTextPos;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">PieChart</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>(context, attrs);</div><div class="line">  TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PieChart, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line"></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    mShowText = array.getBoolean(R.styleable.PieChart_piechart_showText, <span class="keyword">false</span>);</div><div class="line">    mTextPos = array.getInteger(R.styleable.PieChart_piechart_labelPosition, <span class="number">0</span>);</div><div class="line">  &#125; <span class="keyword">finally</span> &#123;</div><div class="line">    array.recycle();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  <em><code><a href="http://developer.android.com/reference/android/content/res/TypedArray.html" target="_blank" rel="external">TypedArray</a></code>是共享资源，用了之后必须要回收。</em></p>
+<h3 id="Add-Properties-and-Events"><a href="#Add-Properties-and-Events" class="headerlink" title="Add Properties and Events"></a>Add Properties and Events</h3><p>   属性是控制行为和外观的非常强大的一种方式，但是它们只能在view被初始化时才能读取。为了能够提供动态的控制，可以暴露属性的getter和setter方法。<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isShowText</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> mShowText;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setShowText</span><span class="params">(<span class="keyword">boolean</span> showText)</span> </span>&#123;</div><div class="line">  mShowText = showText;</div><div class="line">  invalidate();</div><div class="line">  requestLayout();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>   setShowText方法调用了<a href="http://developer.android.com/reference/android/view/View.html#invalidate()" target="_blank" rel="external">invalidate()</a>和<a href="http://developer.android.com/reference/android/view/View.html#requestLayout()" target="_blank" rel="external">requestLayout()</a>方法。这是保证view行为正常的重要步骤。必须在改变了可能引起view外观改变的属性后使view无效，以便于系统知道该view需要重绘了。同样地，在改变了可能引起view尺寸或者形状改变的时候，也需要请求一个新的布局。忘记了调用这些方法，可能会出现很难查找的bugs。</p>
+<p>   自定义view也需要提供事件监听来传达重要的事件。</p>
+<h3 id="Design-For-Accessibility"><a href="#Design-For-Accessibility" class="headerlink" title="Design For Accessibility"></a>Design For Accessibility</h3><h2 id="Implementing-Custom-Drawing"><a href="#Implementing-Custom-Drawing" class="headerlink" title="Implementing Custom Drawing"></a>Implementing Custom Drawing</h2><h3 id="Override-onDraw"><a href="#Override-onDraw" class="headerlink" title="Override onDraw()"></a>Override onDraw()</h3><p>   最为重要的便是实现<code><a href="http://developer.android.com/intl/zh-cn/reference/android/view/View.html#onDraw(android.graphics.Canvas)" target="_blank" rel="external">onDraw()</a></code>方法。该方法有一个<code><a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a></code>参数，用于自定义视图绘制自己。<code><a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a></code>类也定义了诸如文字、线、图片等等基本图形的绘制。在绘制图形前，需要先创建<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>对象。</p>
+<h3 id="Create-Drawing-Objects"><a href="#Create-Drawing-Objects" class="headerlink" title="Create Drawing Objects"></a>Create Drawing Objects</h3><p>   <a href="http://developer.android.com/reference/android/graphics/package-summary.html" target="_blank" rel="external">android.graphics</a>将绘制分为了两个部分：</p>
+<ul>
+<li>要绘制什么，由<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a>决定</li>
+<li>怎么绘制，由<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>决定</li>
+</ul>
+<p>   举个例子，<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a>提供了绘制线的方法，而<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>提供了方法来设置线的颜色。<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a>提供了绘制矩形的方法，而<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>提供了方法来设置是否使用某种颜色对其填充。简而言之，<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="external">Canvas</a>定义了能够在屏幕上绘制什么样的图像，<a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a>定义了所绘制图像的颜色、风格、字体。</p>
+<p>   在绘制任何东西之前，都需要先创建一个或者多个<code><a href="http://developer.android.com/reference/android/graphics/Paint.html" target="_blank" rel="external">Paint</a></code>，<code>PieChart<code>在<code>init</code>方法中做了这些事情，该方法由构造器调用。<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">mTextPaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</div><div class="line">mTextPaint.setColor(mTextColor);</div><div class="line"><span class="keyword">if</span> (mTextHeight == <span class="number">0</span>) &#123;</div><div class="line">    mTextHeight = mTextPaint.getTextSize();</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    mTextPaint.setTextSize(mTextHeight);</div><div class="line">&#125;</div><div class="line"></div><div class="line">mPiePaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</div><div class="line">mPiePaint.setStyle(Paint.Style.FILL);</div><div class="line">mPiePaint.setTextSize(mTextHeight);</div><div class="line"></div><div class="line">mShadowPaint = <span class="keyword">new</span> Paint(<span class="number">0</span>);</div><div class="line">mShadowPaint.setColor(<span class="number">0xff101010</span>);</div><div class="line">mShadowPaint.setMaskFilter(<span class="keyword">new</span> BlurMaskFilter(<span class="number">8</span>, BlurMaskFilter.Blur.NORMAL));</div><div class="line"></div><div class="line">...</div></pre></td></tr></table></figure></code></code></p>
+<p>   提前创建好对象是非常重要的一种优化方式。视图绘制非常频繁，许多绘制对象的创建需要耗费很多资源。在<code><a href="http://developer.android.com/intl/zh-cn/reference/android/view/View.html#onDraw(android.graphics.Canvas)" target="_blank" rel="external">onDraw()</a></code>方法里创建这些对象会大大降低性能，甚至界面绘制不流畅。</p>
+<h3 id="Handle-Layout-Events"><a href="#Handle-Layout-Events" class="headerlink" title="Handle Layout Events"></a>Handle Layout Events</h3><p>   要知道view的大小，以便于更好的绘制。复杂的自定义视图会根据自己在屏幕中的形状和大小执行多次布局计算。我们不能够假定视图在屏幕上的大小。即便只有一个应用使用我们的自定义试图，但是也要适配不同屏幕尺寸，多种屏幕密度，以及竖屏和横屏之间的切换。<br>   不过，<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>有许多方法来进行测量，并且大多数都是不用重写的。若不需要特别的控制其大小，直接继承<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>就可以了。当视图被赋予大小之后便会调用<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>方法，当然，后来因为其他原因改变了大小，也会重新调用<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>方法。计算出来的位置、尺寸以及与其大小相关的值都在<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>方法里，便不用在绘制的时候每次都去重新计算了。在<code>PieChart</code>例子中，<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>方法会在计算出饼图的边框、文本和其他可见元素的相对位置时回调。</p>
+<p>   为视图指定大小时，布局管理器会假设这个大小中包括了视图内部的边距（padding）的。我们必须自己处理padding。下面是<code>PieChart</code>中的<a href="http://developer.android.com/reference/android/view/View.html#onSizeChanged(int,int,int,int)" target="_blank" rel="external">onSizeChanged()</a>片段：</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">  <span class="comment">// 统计padding</span></div><div class="line">  <span class="keyword">float</span> xpad = (<span class="keyword">float</span>) (getPaddingLeft() + getPaddingRight());</div><div class="line">  <span class="keyword">float</span> ypad = (<span class="keyword">float</span>) (getPaddingTop() + getPaddingBottom());</div><div class="line"></div><div class="line">  <span class="comment">// 加上文本的宽度</span></div><div class="line">  <span class="keyword">if</span> (mShowText) xpad += mTextWidth;</div><div class="line"></div><div class="line">  <span class="keyword">float</span> ww = (<span class="keyword">float</span>) w - xpad;</div><div class="line">  <span class="keyword">float</span> hh = (<span class="keyword">float</span>) h - ypad;</div><div class="line">  </div><div class="line">  <span class="comment">// 计算出饼图的大小</span></div><div class="line">  <span class="keyword">float</span> diameter = Math.min(ww, hh);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>   实现<a href="http://developer.android.com/reference/android/view/View.html#onMeasure(int,int)" target="_blank" rel="external">onMeasure()</a>方法来更好的控制布局参数(layout parameters)。该方法的参数<a href="http://developer.android.com/reference/android/view/View.MeasureSpec.html" target="_blank" rel="external">View.MeasureSpec</a>中包含了父控件想要子视图绘制的大小，并且这个大小是要么是最大值，要么仅仅是一个建议。为了优化，这些值是以包装好了的形式存放，应当使用<a href="http://developer.android.com/reference/android/view/View.MeasureSpec.html" target="_blank" rel="external">View.MeasureSpec</a>来获取每个整形中的信息。</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">  <span class="comment">//super.onMeasure(widthMeasureSpec, heightMeasureSpec);</span></div><div class="line">  <span class="keyword">int</span> minw = getPaddingLeft() + getPaddingRight() + getSuggestedMinimumWidth();</div><div class="line">  <span class="keyword">int</span> w = resolveSizeAndState(minw, widthMeasureSpec, <span class="number">1</span>);</div><div class="line"></div><div class="line">  <span class="keyword">int</span> minh = MeasureSpec.getSize(w) - (<span class="keyword">int</span>) mTextWidth + getPaddingBottom() + getPaddingTop();</div><div class="line">  <span class="keyword">int</span> h = resolveSizeAndState(MeasureSpec.getSize(w) - (<span class="keyword">int</span>) mTextWidth, heightMeasureSpec, <span class="number">0</span>);</div><div class="line">  </div><div class="line">  setMeasuredDimension(w, h);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>   上面的代码有三个需要注意的地方：</p>
+<pre><code>* 计算考虑了内边距，这是view的职责。
+* [resolveSizeAndState()]用于确定试图最终的大小。通过对比视图期望的大小和传递进[onMeasure()]方法的大小来返回合适的[View.MeasureSpec]值。
+* [onMeasure()]方法没有返回值，而是通过[setMeasuredDimension()]方法设置。该方法是必需要调用的，否则会引发运行时异常。
+</code></pre><h3 id="Draw"><a href="#Draw" class="headerlink" title="Draw!"></a>Draw!</h3><p>   一旦创造完了需要的对象和测量好了尺寸，便可以实现<a href="http://developer.android.com/intl/zh-cn/reference/android/view/View.html#onDraw(android.graphics.Canvas)" target="_blank" rel="external">onDraw()</a>方法了。每个视图实现<a href="http://developer.android.com/intl/zh-cn/reference/android/view/View.html#onDraw(android.graphics.Canvas)" target="_blank" rel="external">onDraw()</a>方法的方式不同，但是也有一些共通性：</p>
+<pre><code>* 绘制文本使用[drawText()]，使用[setTypeface()]设置字体，文字颜色使用[setColor()]。
+* 绘制基本的图型使用[drawRect()]，[drawOval()]，[drawArc()]。使用[setStyle()]设置是否填充、只有边框、或者两者都有。
+* 通过[LinearGradient]来定义梯度填充。调用[setShader()]方法使用[LinearGradient]来填充图形。
+* 使用[drawBitmap()]方法绘制位图。
+</code></pre><p>  下面是绘制<code>PieChart</code>的代码。混合了文本，线，图形。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<h2 id="Making-the-View-Interactive"><a href="#Making-the-View-Interactive" class="headerlink" title="Making the View Interactive"></a>Making the View Interactive</h2><h2 id="Optimizing-the-View"><a href="#Optimizing-the-View" class="headerlink" title="Optimizing the View"></a>Optimizing the View</h2><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> View </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[View]]></title>
+      <url>/2016/03/16/android/View/</url>
+      <content type="html"><![CDATA[<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
+<ul>
+<li>遵从Android标准。</li>
+<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
+<li>Send accessibility events。</li>
+<li><p>兼容多个Android平台。</p>
+<p>Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/guide/topics/ui/how-android-draws.html" target="_blank" rel="external">How Android Draws Views</a><br> <a href="https://plus.google.com/+ArpitMathur/posts/cT1EuBbxEgN" target="_blank" rel="external">Arpit Mathur制作的View绘制流程图</a><br> <a href="https://groups.google.com/forum/#!topic/android-developers/fkvRZ7JOEBU" target="_blank" rel="external">Difference between invalidate and requestLayout for Viewgroup</a><br> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ssh配置]]></title>
+      <url>/2016/03/15/git/ssh/</url>
+      <content type="html"><![CDATA[<h2 id="以oschina为例，描述如何生成ssh-key"><a href="#以oschina为例，描述如何生成ssh-key" class="headerlink" title="以oschina为例，描述如何生成ssh key"></a>以oschina为例，描述如何生成ssh key</h2><p> 以下命令均在终端执行，系统环境为mac os。</p>
+<h3 id="1、利用命令生成id-rsa和id-rsa-pub文件。id-rsa是私钥文件，id-rsa-pub是公钥文件。"><a href="#1、利用命令生成id-rsa和id-rsa-pub文件。id-rsa是私钥文件，id-rsa-pub是公钥文件。" class="headerlink" title="1、利用命令生成id_rsa和id_rsa.pub文件。id_rsa是私钥文件，id_rsa.pub是公钥文件。"></a>1、利用命令生成id_rsa和id_rsa.pub文件。id_rsa是私钥文件，id_rsa.pub是公钥文件。</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa</div></pre></td></tr></table></figure>
+<p> 可以加上-C命令进行注释：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;user1&quot;</div></pre></td></tr></table></figure></p>
+<p> 将备注换成自己的，我用的是自己的邮箱。<br> <img src="/images/git/ssh/生成ssh_key命令.png" alt="生成ssh_key命令"><br> 确定后会提示生成的文件保存在哪里，直接点击确定，就是不更改保存的地址，生成的文件将会保存在括号中所提示的位置，此处就是/Users/[用户名]/.ssh。<br> <img src="/images/git/ssh/ssh_key生成_0.png" alt="ssh_key生成操作1"><br> 然后会提示输入密码，这个密码我不知道是干什么的，点击确定默认没有密码。<br> <img src="/images/git/ssh/ssh_key生成_1.png" alt="ssh_key生成操作2"><br> 确认密码，输入与上面一致的密码，我这里是直接确定键。<br> <img src="/images/git/ssh/ssh_key生成_2.png" alt="ssh_key生成操作3"></p>
+<p> 这时会在用户目录下的.ssh文件夹下生成id_rsa和id_rsa.pub文件。<br> .ssh文件夹是隐藏的，如果提示没有该文件夹，就自己先建立一个就行了。注意文件名是”.ssh”。<br> mac os系统中.ssh文件夹的目录：/Users/[用户名]/.ssh。[用户名]是自己登录的电脑用户名。</p>
+<h3 id="2、将公钥（也就是id-rsa-pub文件）中的内容拷贝到项目托管服务器中添加上。"><a href="#2、将公钥（也就是id-rsa-pub文件）中的内容拷贝到项目托管服务器中添加上。" class="headerlink" title="2、将公钥（也就是id_rsa.pub文件）中的内容拷贝到项目托管服务器中添加上。"></a>2、将公钥（也就是id_rsa.pub文件）中的内容拷贝到项目托管服务器中添加上。</h3><p> 登录<a href="http://git.oschina.net/" target="_blank" rel="external">git.oschina.net</a>，依次点击右上角的人头像图标 → 左侧的ssh公钥，将id_rsa.pub文件中的内容复制到公钥框中，点击确定。</p>
+<p> <img src="/images/git/ssh/oschina_add_key_0.png" alt="oschina添加ssh key操作1"><br> <img src="/images/git/ssh/oschina_add_key_1.png" alt="oschina添加ssh key操作2"><br> <img src="/images/git/ssh/oschina_add_key_2.png" alt="oschina添加ssh key操作3"></p>
+<h3 id="3、检测是否配置正确。"><a href="#3、检测是否配置正确。" class="headerlink" title="3、检测是否配置正确。"></a>3、检测是否配置正确。</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@git.oschina.net</div></pre></td></tr></table></figure>
+<p> 返回如下的提示则成功了。<br> <img src="/images/git/ssh/oschina_successed.png" alt="oschina访问成功"></p>
+<h2 id="配置多个ssh-key"><a href="#配置多个ssh-key" class="headerlink" title="配置多个ssh key"></a>配置多个ssh key</h2><p> 当需要用一台电脑访问多个git仓库服务器的时候，就需要配置多个对应的ssh key了。比如除了访问oschina外，还有github、coding、公司的git lab服务器等等。<br> 怎样配置呢？很简单的。先配置好oschina来试一下。<br> 在.ssh文件夹下创建一个config文件。可以鼠标右键创建，mac上右键我没有看见创建文件的选项，我就用命令：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch ~/.ssh/config</div></pre></td></tr></table></figure></p>
+<p> （不同系统环境创建文件的命令不一样）。</p>
+<p> 在config里配置好oschina的密钥文件。<br> <img src="/images/git/ssh/config_0.png" alt="oschina配置1"><br> User 有的是全部都是写git，我写的是我的用户名，貌似两者都能正常访问。</p>
+<p> 配置好后，使用<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@git.oschina.net</div></pre></td></tr></table></figure></p>
+<p> 进行测试是否成功。成功了！但是我们的配置是没有起到效果的。不信我们接下来做个试验。<br> 先生成github的ssh key。<br> 在生成的时候注意改下生成文件的名字，前面要加上路径。<br> <img src="/images/git/ssh/生成ssh_key全图.png" alt="生成github的ssh key"></p>
+<p> 然后依葫芦画瓢的在config文件里添加上github的配置。config文件可以添加许多个这样的配置，复制一下前面的，换行贴上，然后改下别名、域名、用户名及私钥文件地址。<br> <img src="/images/git/ssh/config_2.png" alt="github config配置"></p>
+<p> 使用ssh -T git@github.com测试，发现这个时候并没有成功。Permission denied (publickey).。</p>
+<p> 尝试了许多次后，我想可能是因为存在了默认名字的id_rsa文件导致的，可能系统根本就没有读取config文件或者读取了后没有效果。所以为了验证之前配置的oschina访问成功是否是意外，我将id_rsa文件名改成id_rsa_oschina和id_rsa_oschina.pub。config文件里的配置当然也得改。<br> <img src="/images/git/ssh/config_1.png" alt="oschina配置2"></p>
+<p> 使用ssh -T git@git.oschina.net进行测试，连oschina都不能访问了。这个时候怎么办呢？让系统知道我们自己定义的密钥文件就行了嘛。<br> 使用如下命令将两个私钥文件添加到SSH agent中。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-add ~/.ssh/id_rsa_oschina</div><div class="line">ssh-add ~/.ssh/id_rsa_github</div></pre></td></tr></table></figure></p>
+<p> 这样oschina和github能正常访问了，github返回如下。<br> <img src="/images/git/ssh/github_successed.png" alt="github访问成功"></p>
+<p> 记得我第一次配置的时候没有这么复杂，后来改去改来，这次配置就变得复杂了。也忘了之前是怎么弄的了，好记心不如烂笔头，更何况记心不好的我。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p> <a href="http://blog.csdn.net/feng88724/article/details/9386909" target="_blank" rel="external">多个SSH key切换</a><br> <a href="https://help.github.com/categories/ssh/" target="_blank" rel="external">github help-ssh</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> git </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[推荐资源]]></title>
+      <url>/2016/03/14/android/%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90/</url>
+      <content type="html"><![CDATA[<ul>
+<li><a href="http://www.importnew.com/3988.html" target="_blank" rel="external">Android开发者必知的开发资源</a></li>
+<li><a href="http://blog.csdn.net/lxcay9/article/details/40541459" target="_blank" rel="external">android 国外比较火的网站</a></li>
+<li><a href="http://liangruijun.blog.51cto.com/3061169/623555" target="_blank" rel="external">学Android开发的人可以去的几个网站</a></li>
+<li><a href="http://www.iteye.com/news/5516-25-you-should-read-the-android-site" target="_blank" rel="external">25个你应该阅读的Android网站</a></li>
+<li><a href="http://www.androiddesignpatterns.com/2014/12/activity-fragment-transitions-in-android-lollipop-part1.html" target="_blank" rel="external">Getting Started with Activity &amp; Fragment Transitions (part 1)</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[资料网站]]></title>
+      <url>/2016/03/14/android/%E8%B5%84%E6%96%99%E7%BD%91%E7%AB%99/</url>
+      <content type="html"><![CDATA[<ul>
+<li><a href="http://developer.android.com/index.html" target="_blank" rel="external">android developer</a></li>
+<li><a href="http://android.jobbole.com/" target="_blank" rel="external">安卓 - 伯乐在线</a></li>
+<li><a href="http://hukai.me/android-training-course-in-chinese/index.html" target="_blank" rel="external">google android官方培训教程中文版</a></li>
+<li><a href="http://www.infoq.com/cn/android/?utm_source=infoq&amp;utm_medium=header_graybar&amp;utm_campaign=topic_clk" target="_blank" rel="external">info</a></li>
+<li><a href="https://github.com/android-cn/android-open-project-analysis" target="_blank" rel="external">Android 开源项目源码解析</a></li>
+<li><a href="http://www.apkbus.com/" target="_blank" rel="external">apkbus</a></li>
+<li><a href="http://androidweekly.net/" target="_blank" rel="external">androidweekly</a></li>
+<li><a href="https://github.com/AWCNTT/ArticleTranslateProject" target="_blank" rel="external">android开发技术周报</a></li>
+<li><a href="https://plus.google.com/communities/105153134372062985968" target="_blank" rel="external">Android Development - 社群 - Google+</a></li>
+<li><a href="http://www.androiddesignpatterns.com/" target="_blank" rel="external">android design patterns</a></li>
+<li><a href="https://github.com/wasabeef" target="_blank" rel="external">wasabeef</a></li>
+<li><a href="https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw?ytsession=sJypzzS5NBeF5WHF6Da7UzUXxpb1WqQLQlCFjUV7Q14OTN6UCOO0BgSX-BNMLKEJ9kaRlzGKBa4CVcPy__z5Kfuj3GmaUJH0zz330gIyiZwdGSjLYf8E-Z2jFw6d9WGAchoQeYAyOX_lM8p9og2dmL_jSQM5SvRAF_0wBEG2wy6MEUH5pAUSLgAvK5ozwoY0_VMNGRUCJQIByguP1wqRGxUvhuqDEWWhDSnzLZkE4EbrqNr_MIrW55fC1aU2Thc95TEK7Y7Hb6U3lKTu53DeAZT5zv7L9-kKZB7Qpu6Do25i8edDuGsS7OK87yd9k0Ovgv2O2CrUCuqW8x4n2f3g2w" target="_blank" rel="external">Google Developers - YouTube</a></li>
+</ul>
+<ul>
+<li>工具<ul>
+<li><a href="http://blog.csdn.net/column/details/zsl-androidstudio.html" target="_blank" rel="external">Android Studio 权威教程</a></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[大神博客]]></title>
+      <url>/2016/03/14/android/%E5%A4%A7%E7%A5%9E%E5%8D%9A%E5%AE%A2/</url>
+      <content type="html"><![CDATA[<ul>
+<li><a href="http://blog.csdn.net/lmj623565791" target="_blank" rel="external">Hongyang</a></li>
+<li><a href="http://blog.csdn.net/singwhatiwanna/article/list/6" target="_blank" rel="external">任玉刚的csdn博客</a></li>
+<li><a href="http://www.cnblogs.com/over140/" target="_blank" rel="external">农民伯伯</a></li>
+<li><a href="http://blog.csdn.net/guolin_blog" target="_blank" rel="external">郭霖</a></li>
+<li><a href="http://blog.danlew.net/" target="_blank" rel="external">danlew</a></li>
+<li><a href="http://blog.csdn.net/maosidiaoxian" target="_blank" rel="external">貌似掉线的博客</a></li>
+<li><a href="http://www.lightskystreet.com/" target="_blank" rel="external">lightskystreet</a>[<a href="https://github.com/lightSky" target="_blank" rel="external">github</a>] </li>
+<li><a href="http://blog.csdn.net/luoshengyang" target="_blank" rel="external">老罗的Android之旅</a></li>
+<li><a href="http://www.bignerdranch.com/blog/" target="_blank" rel="external">书呆子博客</a></li>
+</ul>
+<ul>
+<li><a href="https://github.com/xxv/android-lifecycle" target="_blank" rel="external">activity与fragment生命周期图</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ios基础]]></title>
+      <url>/2015/05/06/ios/swift/ios%E5%9F%BA%E7%A1%80/</url>
+      <content type="html"><![CDATA[<p>Swift是开发IOS和OS X应用的新语言。与C和Objective-C有许多相似的地方。</p>
+<p>Swift提供了C和Objective-C的所拥有的基本功能，像Int作为整形，Double和Float作为浮点数，Bool作为布尔类型，String为字符串。也提供十分重要的两种类型，Array和Dictionary。</p>
+<p>Swift使用变量存储值，也使用大量值不可变的变量。这被称为常量，但是比C中的常量更加强大。Swift中大量使用常量以提高代码安全性和更加清楚哪些变量的值是不可变的。</p>
+<p>除了以前熟悉的类型外，Swift还引进了Objectivew-C里没有的一些先进的类型，像tuples（元组）。可以利用元组创建并传递一组数据。函数也可以利用元组返回一组复合的值。</p>
+<p>Swift也引进了可选类型，可以用于处理缺省值。可选的意思是要么“有值且值为x”，要么“没有值”。可选类型与Objective-C中使用nil有点像，但不同的Swift中可以用于所有类型，不仅仅局限于类。可选类型是安全的且比Objective-C中的nil更富有含义，并且是Swift中许多特性的核心。</p>
+<p>可选类型是Swift是类型安全语言的一个例子。Swift帮助你更加了解代码需要哪种类型。若需要String类型，你赋值了个Int类型，则类型安全会告诉你犯错了。这会在开发过程中尽早的让你处理一些错误。</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Adapter]]></title>
+      <url>/2015/05/03/android/Adapter/</url>
+      <content type="html"><![CDATA[<p>Adapter</p>
+<p><img src="/images/android/Adapter.png" alt="Adapter"></p>
+<p><a href="http://developer.android.com/reference/android/widget/Adapter.html" target="_blank" rel="external">Adapter</a>：Adapter是<a href="http://developer.android.com/reference/android/widget/AdapterView.html" target="_blank" rel="external">AdapterView</a>和数据之间的桥梁。Adapter提供访问每一条数据，也负责为每一条数据创建<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>。</p>
+<p><a href="http://developer.android.com/reference/android/widget/ListAdapter.html" target="_blank" rel="external">ListAdapter</a>：<a href="http://developer.android.com/reference/android/widget/ListView.html" target="_blank" rel="external">ListView</a>和数据之间的桥梁。通常数据来源于Cursor，但也不全是这样。ListView可以显示任何被ListAdapter包装的数据。</p>
+<p><a href="http://developer.android.com/reference/android/widget/SpinnerAdapter.html" target="_blank" rel="external">SpinnerAdapter</a>：<a href="http://developer.android.com/reference/android/widget/Spinner.html" target="_blank" rel="external">Spinner</a>和数据之间的桥梁。spinner adapter允许定义两种不同的视图：一种是spinner本身展示视图，另一种是按下spinner展示的下拉列表。</p>
+<p><a href="http://developer.android.com/reference/android/widget/WrapperListAdapter.html" target="_blank" rel="external">WrapperListAdapter</a>：包裹着另一种列表适配器的适配器。被包裹的adapter可以通过<a href="http://developer.android.com/reference/android/widget/WrapperListAdapter.html#getWrappedAdapter(" target="_blank" rel="external">getWrappedAdapter()</a>)方法获取。</p>
+<p><a href="http://developer.android.com/reference/android/widget/BaseAdapter.html" target="_blank" rel="external">BaseAdapter</a>：<a href="http://developer.android.com/reference/android/widget/Adapter.html" target="_blank" rel="external">Adapter</a>的通用实现基类，可以用于<a href="http://developer.android.com/reference/android/widget/ListView.html" target="_blank" rel="external">ListView</a>和<a href="http://developer.android.com/reference/android/widget/Spinner.html" target="_blank" rel="external">Spinner</a>。</p>
+<p><a href="http://developer.android.com/reference/android/widget/CursorAdapter.html" target="_blank" rel="external">CursorAdapter</a>：将<a href="http://developer.android.com/reference/android/database/Cursor.html" target="_blank" rel="external">Cursor</a>绑定到<a href="http://developer.android.com/reference/android/widget/ListView.html" target="_blank" rel="external">ListView</a>中。必须包含_id字段，否则无法正常执行。此外，使用<a href="http://developer.android.com/reference/android/database/MergeCursor.html" target="_blank" rel="external">mergeCursor</a>时若有重复的_id字段也不会正常执行。</p>
+<p><a href="http://developer.android.com/reference/android/widget/ResourceCursorAdapter.html" target="_blank" rel="external">ResourceCursorAdapter</a>：指定一个xml来创建视图。</p>
+<p><a href="http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html" target="_blank" rel="external">SimpleCursorAdapter</a>：将cursor中的内容映射到xml中定义的文本和图片控件上。可以指定想要哪列内容，哪种控件来显示该列内容。绑定数据有两种情况。<br>1、<a href="http://developer.android.com/reference/android/widget/SimpleCursorAdapter.ViewBinder.html" target="_blank" rel="external">SimpleCursorAdapter.ViewBinder</a>可用，<a href="http://developer.android.com/reference/android/widget/SimpleCursorAdapter.ViewBinder.html#setViewValue(android.view.View, android.database.Cursor, int" target="_blank" rel="external">setViewValue(android.view.View, android.database.Cursor, int)</a>)方法被调用。若返回的值是true，证明已经绑定了。若返回的值为false，且是绑定到TextView上，<a href="http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html#setViewText(android.widget.TextView, java.lang.String" target="_blank" rel="external">setViewText(TextView, String)</a>)被调用。若返回的值为false，且是绑定到ImageView上，<a href="http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html#setViewImage(android.widget.ImageView, java.lang.String" target="_blank" rel="external">setViewImage(ImageView, String)</a>)方法被调用。若没有发现可绑定的，则跑出<a href="http://developer.android.com/reference/java/lang/IllegalStateException.html" target="_blank" rel="external">IllegalStateException</a>异常。若该适配器与过滤器一起使用，创建<a href="http://developer.android.com/reference/android/widget/AutoCompleteTextView.html" target="_blank" rel="external">AutoCompleteTextView</a>实例，可以使用<a href="http://developer.android.com/reference/android/widget/SimpleCursorAdapter.CursorToStringConverter.html" target="_blank" rel="external">SimpleCursorAdapter.CursorToStringConverter</a>和<a href="http://developer.android.com/reference/android/widget/FilterQueryProvider.html" target="_blank" rel="external">FilterQueryProvider</a>控制过滤。可以查看更多<a href="http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html#convertToString(android.database.Cursor" target="_blank" rel="external">convertToString(android.database.Cursor)</a>)和<a href="http://developer.android.com/reference/android/widget/CursorAdapter.html#runQueryOnBackgroundThread(java.lang.CharSequence" target="_blank" rel="external">runQueryOnBackgroundThread(CharSequence)</a>)信息。</p>
+<p><a href="http://developer.android.com/reference/android/widget/SimpleAdapter.html" target="_blank" rel="external">SimpleAdapter</a>：将静态数据绑定到xml里定义的控件。数据可以是键值对形式的数组集合。集合中的一条数据对应列表的一行。每组键值对对应一列数据。用xml定义一行数据的展示，将键值对中的key值指定到对应的view上。将数据绑定到视图上有两种情况。<br>1、<a href="http://developer.android.com/reference/android/widget/SimpleAdapter.ViewBinder.html" target="_blank" rel="external">SimpleAdapter.ViewBinder</a>可用，<a href="http://developer.android.com/reference/android/widget/SimpleAdapter.ViewBinder.html#setViewValue(android.view.View, java.lang.Object, java.lang.String" target="_blank" rel="external">setViewValue(android.view.View, Object, String)</a>)方法被调用。若返回的值为true，绑定已经发生了。若返回的为false，下面的views将会一次尝试：</p>
+<ul>
+<li>视图实现了Checkable（如CheckBox）。绑定的值期望是boolean类型。</li>
+<li>TextView。期望的值是字符串，且<a href="http://developer.android.com/reference/android/widget/SimpleAdapter.html#setViewText(android.widget.TextView, java.lang.String" target="_blank" rel="external">setViewText(TextView, String)</a>)方法将被调用。</li>
+<li>ImageView。期望的值是资源id或字符串且<a href="http://developer.android.com/reference/android/widget/SimpleAdapter.html#setViewImage(android.widget.ImageView, int" target="_blank" rel="external">setViewImage(ImageView, int)</a>)或<a href="http://developer.android.com/reference/android/widget/SimpleAdapter.html#setViewImage(android.widget.ImageView, java.lang.String" target="_blank" rel="external">setViewImage(ImageView, String)</a>)将被调用。<br>若没有合适的绑定，将跑出<a href="http://developer.android.com/reference/java/lang/IllegalStateException.html" target="_blank" rel="external">IllegalStateException</a>异常。</li>
+</ul>
+<p><a href="http://developer.android.com/reference/android/widget/ArrayAdapter.html" target="_blank" rel="external">ArrayAdapter</a>：BaseAdapter针对数组的特定子类。也就是说该类使用于只有一个TextView的情况。若想要使用复杂的布局，使用带有id字段的构造器。该id字段可以指向复杂布局中的一个TextView。</p>
+<p>被指定的TextView将会被数组中每个元素的toString()方法的值所填充。可以添加自定义的列表和数组对象并重写toString()方法以决定列表中的展示内容。</p>
+<p>想要展示除TextView之外的内容，如ImageViews，或除toString()方法返回的内容外还有其他内容想要赋值到视图上，重写<a href="http://developer.android.com/reference/android/widget/ArrayAdapter.html#getView(int, android.view.View, android.view.ViewGroup" target="_blank" rel="external">getView(int, View, ViewGroup)</a>)方法并返回视图的类型。</p>
+<p><a href="http://developer.android.com/reference/android/widget/HeaderViewListAdapter.html" target="_blank" rel="external">HeaderViewListAdapter</a>：当ListView有header时使用ListAdapter。ListAdapter包裹着另外的adapter，也一直追踪header的状态及其相关的数据。该适配器被设计为基类；不能直接在类中使用该类。</p>
+<p><a href="http://developer.android.com/reference/android/widget/Filterable.html" target="_blank" rel="external">Filterable</a>：定义过滤的方式。可过滤的类所拥有的数据被过滤器所限制。过滤类通常被适配器实现。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[service]]></title>
+      <url>/2015/04/13/android/service/</url>
+      <content type="html"><![CDATA[<p>Service是android的组件之一，能执行耗时的操作，不会提供操作界面。其他的组件都能启动service，且即使用户切换到其他的应用后，service也能在后台继续运行。另外，组件也可以绑定到一个service，已便于与该service进行交互，哪怕是进程间的通信（IPC）也是可以的。例如，service可以在后台处理网络有关的事件，播放音乐，执行文件操作，与content provider进行交互。</p>
+<p>服务的两种启动形式：</p>
+<h4 id="Started"><a href="#Started" class="headerlink" title="Started"></a>Started</h4><p>利用组件（如activity）调用<a href="http://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)" target="_blank" rel="external">startService()</a>方法启动。只要启动之后就会一直运行在后台，即使启动他的组件已经被销毁了。通常，started service执行单一的操作且不会反回结果给启动者。如，started service通过网络下载或者上传文件。当操作完之后，service应当自己停止。</p>
+<h4 id="Bound"><a href="#Bound" class="headerlink" title="Bound"></a>Bound</h4><p>利用组件调用<a href="http://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent,android.content.ServiceConnection,int)" target="_blank" rel="external">bindService()</a>方法来绑定到service。bound service提供客户端和服务端交换模式，允许组件与之交换，发送请求，获取结果，即使是跨进程（IPC）也可以。bound service只在其他组件绑定的时候运行。可以有多个组件同时绑定到service，当所有组件都解绑后service将会被销毁。</p>
+<p>service可以以两种形式运行，可以是started（后台一直运行），也允许进行绑定操作。取决于是否实现了这对方法：<a href="onStartCommand(">onStartCommand()</a>)允许组件启动service，<a href="onBind(">onBind()</a>)允许绑定。</p>
+<p>不管程序是started，bound，还是两者都有，任何组件（哪怕是其他程序的组件）都可以使用service，使用方式与任何组件使用activity一样 —— 利用<a href="http://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a>启动。可以在manifest文件里声明service为私有的，阻止其他的程序访问。更多讨论参加<a href="http://developer.android.com/guide/components/services.html#Declaring" target="_blank" rel="external">Declaring the service in the manifest</a></p>
+<p>警告：service运行在它的宿主进程的主线程里 —— service不会创建它自己的线程且不会运行在其他的进程里（除非自己指定）。这意味着,如果service执行密集的cpu操作或者是阻塞（如mp3后台播放或者网络），应该在service里创建一个新的线程来处理这些工作。</p>
+<h2 id="The-Basics"><a href="#The-Basics" class="headerlink" title="The Basics"></a>The Basics</h2><p>继承<a href="http://developer.android.com/reference/android/app/Service.html" target="_blank" rel="external">Service</a>（或者其子类）来创建Service。我们需要重写一些方法来处理service的生命周期，和提供让组件绑定的机制。</p>
+<p><a href="http://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent,int,int)" target="_blank" rel="external">onStartCommand()</a></p>
+<p>组件通过调用<a href="http://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)" target="_blank" rel="external">startService()</a>方法启动service，系统会自动回调<a href="http://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent,int,int)" target="_blank" rel="external">onStartCommand()</a>方法。一旦该方法被调用则表明服务已经被启动并且可以一直在后台运行。如果实现了该方法，在service完成了所有工作后应该调用<a href="http://developer.android.com/reference/android/app/Service.html#stopSelf()" target="_blank" rel="external">stopSelf()</a>或者是<a href="http://developer.android.com/reference/android/content/Context.html#stopService(android.content.Intent)" target="_blank" rel="external">stopService()</a>停止该服务。如果只是想要提供绑定功能，不需要实现该方法。</p>
+<p><a href="http://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)" target="_blank" rel="external">onBind()</a></p>
+<p>当其他组件通过<a href="http://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent,android.content.ServiceConnection,int)" target="_blank" rel="external">bindService()</a>来绑定服务（例如执行远程过程调用[RPC]），系统会调用该方法。在这个方法里，返回<a href="http://developer.android.com/reference/android/os/IBinder.html" target="_blank" rel="external">IBinder</a>来提供客户端与服务之间通信的接口。必须实现该方法，如果不允许其他组件绑定，应当返回null。</p>
+<p><a href="http://developer.android.com/reference/android/app/Service.html#onCreate()" target="_blank" rel="external">onCreate()</a></p>
+<p>当服务首次被创建时，系统调用该方法，且只执行一次（在执行<a href="http://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent,int,int)" target="_blank" rel="external">onStartCommand()</a>或者<a href="http://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)" target="_blank" rel="external">onBind()</a>之前）。如果service已经启动了，不会调用该方法。</p>
+<p><a href="http://developer.android.com/reference/android/app/Service.html#onDestroy()" target="_blank" rel="external">onDestroy()</a></p>
+<p>当service不再使用且已经被销毁时系统回调该方法。应当实现该方法来清空像线程，注册的监听，广播接收者等资源。这是服务最后回调的方法。</p>
+<p>若组件通过<a href="http://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)" target="_blank" rel="external">startService()</a>启动的服务（将会导致调用<a href="http://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent,int,int)" target="_blank" rel="external">onStartCommand()</a>方法），服务会一直运行，知道服务调用自己的<a href="http://developer.android.com/reference/android/app/Service.html#stopSelf()" target="_blank" rel="external">stopSelf()</a>停止自己或者是其他组件调用<a href="http://developer.android.com/reference/android/content/Context.html#stopService(android.content.Intent)" target="_blank" rel="external">stopService()</a>停止该服务。</p>
+<p>若组件调用<a href="http://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent,android.content.ServiceConnection,int)" target="_blank" rel="external">bindService()</a>来创建服务（<a href="http://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent,int,int)" target="_blank" rel="external">onStartCommand()</a>方法不会被调用），服务只在有组件绑定的情况下运行。当所有组件都对该service移除绑定后，系统将会销毁该服务。</p>
+<p>android系统会在内存不足时强制停止服务，系统必需为用户当前交互的activity获取资源。若service绑定到了某个activity，并且用户正与该activity交互，service有较小的可能被杀死，如果service声明了<a href="http://developer.android.com/guide/components/services.html#Foreground" target="_blank" rel="external">在前台运行</a>，几乎不会被杀死。另外，若service被启动了并且长期运行，随着时间推移，系统将会降低它在后台任务中的位置，服务将会变得容易被杀死 —— 那么必需合理的处理系统重启服务。如果系统杀死了我们的服务，系统将会在资源充足时重启它（当然这也决定于<a href="http://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent,int,int)" target="_blank" rel="external">onStartCommand()</a>方法的返回值）。更多关于系统销毁service的信息参见<a href="http://developer.android.com/guide/components/processes-and-threads.html" target="_blank" rel="external">Processes and Threading</a>文档。</p>
+<h2 id="如何使用Service"><a href="#如何使用Service" class="headerlink" title="如何使用Service"></a>如何使用Service</h2><h3 id="Declaring-a-service-in-the-manifest"><a href="#Declaring-a-service-in-the-manifest" class="headerlink" title="Declaring a service in the manifest"></a>Declaring a service in the manifest</h3><p>像activity和其他的组件一样，必需在manifest文件里声明所有的service。声明service很简单，添加<a href="http://developer.android.com/guide/topics/manifest/service-element.html" target="_blank" rel="external"><service></service></a>元素作为<a href="http://developer.android.com/guide/topics/manifest/application-element.html" target="_blank" rel="external"><application></application></a>元素的子元素。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">...</span> &gt;</span></div><div class="line"> 		...</div><div class="line"> 		<span class="tag">&lt;<span class="name">application</span> <span class="attr">...</span> &gt;</span></div><div class="line">     		<span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">".ExampleService"</span> /&gt;</span></div><div class="line">     		...</div><div class="line"> 		<span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://developer.android.com/guide/components/services.html" target="_blank" rel="external">http://developer.android.com/guide/components/services.html</a></p>
+<p><a href="http://www.educity.cn/wenda/89960.html" target="_blank" rel="external">我参考的对上面官方的service文档的翻译文章</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[函数与极限]]></title>
+      <url>/2015/04/11/%E6%95%B0%E5%AD%A6/%E5%87%BD%E6%95%B0%E4%B8%8E%E6%9E%81%E9%99%90/</url>
+      <content type="html"><![CDATA[<p>微积分系列主要主要参考的是<a href="http://product.dangdang.com/1900289792.html" target="_blank" rel="external">这本书</a>。请购买原书阅读。</p>
+<h2 id="第一章-函数与极限"><a href="#第一章-函数与极限" class="headerlink" title="第一章 函数与极限"></a>第一章 函数与极限</h2><h3 id="1-1-函数"><a href="#1-1-函数" class="headerlink" title="1.1 函数"></a>1.1 函数</h3><h4 id="一、实数"><a href="#一、实数" class="headerlink" title="一、实数"></a>一、实数</h4><h5 id="1-数轴"><a href="#1-数轴" class="headerlink" title="1.数轴"></a>1.数轴</h5><p>数轴是定义了原点、放向、单位长度的直线。其上的每个点表示一个确定的实数，每个实数可看成数轴上一个确定的点。</p>
+<h5 id="2-区间"><a href="#2-区间" class="headerlink" title="2.区间"></a>2.区间</h5><p>若 R 表示实数集，当$a,b \in R$，且a &lt; b，可定义如下区间范围：<br>有限区间：<br>    $[a, b] = \lbrace x|a \leq  x \leq b, x \in R\rbrace$<br>    $(a, b) = \lbrace x|a&lt; x &lt; b, x \in R\rbrace$<br>    $[a, b) = \lbrace x|a \leq x &lt; b, x \in R\rbrace$<br>    $(a, b] = \lbrace x|a &lt; x \leq b, x \in R\rbrace$</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 微积分 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[SwitchButton]]></title>
+      <url>/2015/04/06/android/switchbutton/</url>
+      <content type="html"><![CDATA[<h2 id="Class-Overview"><a href="#Class-Overview" class="headerlink" title="Class Overview"></a>Class Overview</h2><blockquote>
+<p>A Switch is a two-state toggle switch widget that can select between two options. The user may drag the “thumb” back and forth to choose the selected option, or simply tap to toggle as if it were a checkbox. The text property controls the text displayed in the label for the switch, whereas the off and on text controls the text on the thumb. Similarly, the textAppearance and the related setTypeface() methods control the typeface and style of label text, whereas the switchTextAppearance and the related seSwitchTypeface() methods control that of the thumb.</p>
+</blockquote>
+<p>Switch是在两种状态下互相切换，提供两种选择的小物件。用户可以向后或向前拖动thumb（控件上面左右滑动的那个东西）来进行选择，也可以向checkbox一样点击来切换状态。text属性指示switch的label（就是switch前面有个文本描述，点击文本也可以操作switch），而off（android:textOff）和on（android:textOn）指定控件上面显示的文本。</p>
+<p>Switch是android api level 14（Android 4.0, 4.0.1, 4.0.2）添加的。所以较早的版本用不了，只好自己实现效果。牛人很多，但就是不是我。所以看看别人是怎么实现的吧：<a href="https://github.com/kyleduo/SwitchButton" target="_blank" rel="external">https://github.com/kyleduo/SwitchButton</a>。但是当我真正在做项目的时候，还是发现了一些问题，我也给SwitchButton提出了<a href="https://github.com/kyleduo/SwitchButton/issues/12" target="_blank" rel="external">issue</a>，英语不好，但愿对方能看懂。其实我早就发现对方是会汉语的（下面有他的链接），只是在github上不好意思写中文，难道这是病么？</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="http://developer.android.com/reference/android/widget/Switch.html" target="_blank" rel="external">google官网 switch</a></li>
+<li><a href="http://www.kyleduo.com/?p=222" target="_blank" rel="external">kyleduo - SwitchButton的Why/What/How</a></li>
+<li><a href="http://www.kyleduo.com/?p=344" target="_blank" rel="external">kyleduo - SwitchButton 1.2</a></li>
+</ul>
+<h2 id="其他链接"><a href="#其他链接" class="headerlink" title="其他链接"></a>其他链接</h2><ul>
+<li><a href="https://github.com/kyleduo/SwitchButton" target="_blank" rel="external">https://github.com/kyleduo/SwitchButton</a></li>
+<li><a href="https://github.com/Serchinastico/CoolSwitch" target="_blank" rel="external">https://github.com/Serchinastico/CoolSwitch</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android-widget </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[android]]></title>
+      <url>/2015/03/17/android/android/</url>
+      <content type="html"><![CDATA[<h3 id="需要整理的文章"><a href="#需要整理的文章" class="headerlink" title="需要整理的文章"></a>需要整理的文章</h3><ul>
+<li><a href="http://cyrilmottier.com/2014/11/17/grid-spacing-on-android/" target="_blank" rel="external">Grid Spacing on Android</a></li>
+<li><a href="https://publicobject.com/2015/01/03/fancy-flow-control-did-i-succeed/" target="_blank" rel="external">Fancy Flow Control: Did it throw?</a></li>
+<li><a href="http://www.jianshu.com/p/59b89c26f9e0" target="_blank" rel="external">Android 开发工具之Codota——搜索最好的Android 代码</a></li>
+<li><a href="http://blog.danlew.net/2015/01/06/handling-android-resources-with-non-standard-formats/" target="_blank" rel="external">Handling Android resources with non-standard formats</a></li>
+</ul>
+<h3 id="函数响应式编程"><a href="#函数响应式编程" class="headerlink" title="函数响应式编程"></a>函数响应式编程</h3><ul>
+<li><a href="http://www.bignerdranch.com/blog/what-is-functional-reactive-programming/?utm_source=Android+Weekly&amp;utm_campaign=8d924b498e-Android_Weekly_140&amp;utm_medium=email&amp;utm_term=0_4eb677ad19-8d924b498e-337894005" target="_blank" rel="external">什么是函数响应式编程</a></li>
+</ul>
+<h3 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h3><ul>
+<li><a href="http://blog.csdn.net/cainiao413/article/details/6319763" target="_blank" rel="external">Android的Intent+uri应用实例</a></li>
+<li><a href="http://ryanharter.com/blog/2014/11/26/whats-your-intent/" target="_blank" rel="external">What’s Your Intent?</a></li>
+</ul>
+<h3 id="适配"><a href="#适配" class="headerlink" title="适配"></a>适配</h3><ul>
+<li><a href="http://blog.chengyunfeng.com/?p=687" target="_blank" rel="external">Android 开发者给设计师的一些提示建议</a></li>
+<li><a href="http://jingyan.baidu.com/article/37bce2be11b6cd1002f3a2c0.html" target="_blank" rel="external">android屏幕适配方法</a></li>
+<li><a href="https://github.com/yeol/blog/blob/master/Designer&#39;s_guide_to_DPI.md" target="_blank" rel="external">DESIGNER’S GUIDE TO DPI</a></li>
+</ul>
+<h3 id="消息推送"><a href="#消息推送" class="headerlink" title="消息推送"></a>消息推送</h3><ul>
+<li><a href="http://zhiweiofli.iteye.com/blog/1972513" target="_blank" rel="external">Android开发陷阱：利用PendingIntent传递唯一的Intent</a></li>
+<li><a href="http://my.oschina.net/youranhongcha/blog/196933?p=1" target="_blank" rel="external">说说PendingIntent的内部机制</a></li>
+<li><a href="http://harvey8819.blog.163.com/blog/static/162365181201132691559986/" target="_blank" rel="external">android PendingIntent：有用的requestCode参数</a></li>
+<li><a href="http://macleo.iteye.com/blog/1476293" target="_blank" rel="external">Android推送通知实现归纳</a></li>
+<li><a href="http://ryantang.me/blog/2013/08/06/baidu-push-service/" target="_blank" rel="external">Android推送服务——百度云推送</a></li>
+</ul>
+<h3 id="布局优化"><a href="#布局优化" class="headerlink" title="布局优化"></a>布局优化</h3><ul>
+<li><a href="http://android.blog.51cto.com/268543/308090/" target="_blank" rel="external">FrameLayou和布局优化</a></li>
+<li><a href="http://blog.csdn.net/xyz_lmn/article/details/14524567" target="_blank" rel="external">Android抽象布局——include、merge 、ViewStub</a></li>
+<li><a href="http://android.jobbole.com/78189/" target="_blank" rel="external">Android：一个高效的UI才是一个拉风的UI（一）</a></li>
+</ul>
+<h3 id="android-性能"><a href="#android-性能" class="headerlink" title="android - 性能"></a>android - 性能</h3><ul>
+<li><a href="http://www.infoq.com/news/2015/01/google-android-performance" target="_blank" rel="external">google android性能模式</a><br>  [<a href="http://www.infoq.com/cn/news/2015/01/google-android-performance" target="_blank" rel="external">中文翻译</a>]</li>
+<li><a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="external">Android性能优化典范 - 胡凯</a></li>
+<li>Android性能优化案例研究[<a href="http://www.importnew.com/3784.html" target="_blank" rel="external">上</a>][<a href="http://www.importnew.com/4065.html" target="_blank" rel="external">下</a>]</li>
+<li><a href="http://www.lightskystreet.com/2015/01/17/android-code-optimize-tips/" target="_blank" rel="external">android 代码优化小技巧</a></li>
+<li><a href="http://android.jobbole.com/78189/" target="_blank" rel="external">Android：一个高效的UI才是一个拉风的UI（一）</a></li>
+<li><a href="http://android.jobbole.com/72156/" target="_blank" rel="external">Layout Inflation不能这么用</a></li>
+<li><a href="http://itindex.net/detail/47065-android-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86" target="_blank" rel="external">Android内存管理哪些事</a></li>
+<li><a href="http://jiajixin.cn/2015/01/06/memory_leak/" target="_blank" rel="external">Android内存泄漏研究</a></li>
+<li><a href="http://android.jobbole.com/78995/" target="_blank" rel="external">正确使用Android性能分析工具——TraceView</a></li>
+<li><a href="http://bjyzxxds.iteye.com/blog/1532937" target="_blank" rel="external">Shallow heap &amp; Retained heap</a></li>
+<li><a href="http://www.pocketdigi.com/20140607/1334.html" target="_blank" rel="external">Android开发:性能最佳实践-管理应用内存</a></li>
+<li><a href="http://www.trinea.cn/android/performance/" target="_blank" rel="external">性能优化系列总篇</a></li>
+</ul>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ul>
+<li><a href="http://blog.sina.com.cn/s/blog_540316260101ftge.html" target="_blank" rel="external">如何在Mac中使用Android SDK，使用adb工具避免出现-bash: adb: command not found</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
