@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.张钧泉.top/2017/10/23/android/传感器/Android-传感器——位置传感器/">
+    <link itemprop="mainEntityOfPage" href="http://www.张钧泉.top/2017/10/23/android/传感器/Android-传感器——指南针/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张钧泉【君子乐道】">
@@ -315,7 +315,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/23/android/传感器/Android-传感器——位置传感器/" itemprop="url">Android 传感器——位置传感器</a></h1>
+                <a class="post-title-link" href="/2017/10/23/android/传感器/Android-传感器——指南针/" itemprop="url">Android 传感器——指南针</a></h1>
         
 
         <div class="post-meta">
@@ -343,8 +343,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-23T22:34:19+08:00">
-                2017-10-23
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-25T15:22:15+08:00">
+                2017-10-25
               </time>
             
           </span>
@@ -380,17 +380,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/传感器/位置传感器/" itemprop="url" rel="index">
-                    <span itemprop="name">位置传感器</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -402,8 +391,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/23/android/传感器/Android-传感器——位置传感器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/23/android/传感器/Android-传感器——位置传感器/" itemprop="commentCount"></span>
+                <a href="/2017/10/23/android/传感器/Android-传感器——指南针/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/23/android/传感器/Android-传感器——指南针/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -464,12 +453,13 @@
       
         
           
-          概述Android 平台提供了 磁场传感器 和 方向传感器 传感器用于确定设备的位置，还提供了 邻近传感器 测量设备正面到某一个邻近物体的距离。磁场和邻近传感器是基于硬件的传感器。方向传感器是基于软件的，该传感器的回传数据来自加速度传感器和磁场传感器。
-位置传感器对于确定设备在真实世界中的物理位置非
+          本篇文章记录的是简易指南针的实现。
+Android 废弃了方向传感器 Sensor.TYPE_ORIENTATION 的使用，获取手机旋转的角度推荐的方式是通过加速度传感器和地磁传感器共同计算得出。
+获取相关传感器及传感器管理对象123456789101112131415161718192021pr
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/23/android/传感器/Android-传感器——位置传感器/#more" rel="contents">
+            <a class="btn" href="/2017/10/23/android/传感器/Android-传感器——指南针/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -734,7 +724,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.张钧泉.top/2017/10/12/android/传感器/Android-传感器——动作传感器/">
+    <link itemprop="mainEntityOfPage" href="http://www.张钧泉.top/2017/10/12/android/传感器/Android-传感器——摇一摇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张钧泉【君子乐道】">
@@ -753,7 +743,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/12/android/传感器/Android-传感器——动作传感器/" itemprop="url">Android 传感器——动作传感器</a></h1>
+                <a class="post-title-link" href="/2017/10/12/android/传感器/Android-传感器——摇一摇/" itemprop="url">Android 传感器——摇一摇</a></h1>
         
 
         <div class="post-meta">
@@ -781,8 +771,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-23T18:28:30+08:00">
-                2017-10-23
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-24T12:03:36+08:00">
+                2017-10-24
               </time>
             
           </span>
@@ -818,17 +808,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/传感器/动作传感器/" itemprop="url" rel="index">
-                    <span itemprop="name">动作传感器</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -840,8 +819,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/12/android/传感器/Android-传感器——动作传感器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/12/android/传感器/Android-传感器——动作传感器/" itemprop="commentCount"></span>
+                <a href="/2017/10/12/android/传感器/Android-传感器——摇一摇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/12/android/传感器/Android-传感器——摇一摇/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -902,13 +881,12 @@
       
         
           
-          概述Android 平台支持一些用于监视设备动作的传感器，例如：倾斜、震动、旋转、摆动。
-设备的移动通常是对用户输入的直接反应，例如，用户正在游戏中飙车，或控制一个小球。这种情况可以对设备本身的相对位置进行监测。
-设备所处的物理环境也会反应在设备动作上，例如，用户正在驾驶汽车，Android 设备放
+          本篇文章记录摇一摇功能的实现。
+获取 SensorManager 及 Sensor12345678910private SensorManager mSensorManager;private Sensor mSensor;@Override protected void onCreate(Bund
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/12/android/传感器/Android-传感器——动作传感器/#more" rel="contents">
+            <a class="btn" href="/2017/10/12/android/传感器/Android-传感器——摇一摇/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1006,8 +984,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-17T21:57:40+08:00">
-                2017-10-17
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-24T13:41:14+08:00">
+                2017-10-24
               </time>
             
           </span>
@@ -2433,7 +2411,7 @@ Android性
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

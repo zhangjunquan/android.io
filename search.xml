@@ -3,38 +3,19 @@
   
     
     <entry>
-      <title><![CDATA[Android 传感器——位置传感器]]></title>
-      <url>/2017/10/23/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8%E2%80%94%E2%80%94%E4%BD%8D%E7%BD%AE%E4%BC%A0%E6%84%9F%E5%99%A8/</url>
-      <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Android 平台提供了 <strong>磁场传感器</strong> 和 <strong>方向传感器</strong> 传感器用于确定设备的位置，还提供了 <strong>邻近传感器</strong> 测量设备正面到某一个邻近物体的距离。磁场和邻近传感器是基于硬件的传感器。方向传感器是基于软件的，该传感器的回传数据来自加速度传感器和磁场传感器。</p>
-<p>位置传感器对于确定设备在真实世界中的物理位置非常有用。例如，可以组合磁场传感器和加速度传感器测量设备相对于地磁北极的位置，还可以利用方向传感器确定当前设备相对于自身参照系的位置。</p>
-<h1 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h1><h2 id="方向传感器返回值"><a href="#方向传感器返回值" class="headerlink" title="方向传感器返回值"></a>方向传感器返回值</h2><ul>
-<li><p>SensorEvent.values[0]：绕着 z 轴旋转的角度。</p>
-<p>  正常拿着手机，y 轴正对着北方，该值是0；如果 y 轴指向南方，该值是180；y 轴指向东方，该值是90；y 轴指向西方，该值是270。</p>
-</li>
-<li><p>SensorEvent.values[1]：绕着 x 轴旋转的角度。</p>
-<p>  当从 z 轴正方向朝向 y 轴正方向，该值为正直；反之，为负值。该值在180到-180之间变动。</p>
-</li>
-<li><p>SensorEvent.values[2]：绕着 y 轴旋转的角度。</p>
-<p>  当从 z 轴正方向朝向 x 轴正方向，该值为正直；反之，为负值。该值在180到-180之间变动。</p>
-</li>
-</ul>
-<h2 id="磁场传感器返回值"><a href="#磁场传感器返回值" class="headerlink" title="磁场传感器返回值"></a>磁场传感器返回值</h2><ul>
-<li>SensorEvent.values[0]：绕着 x 轴的磁力（µT,millitesla，毫特斯拉）。</li>
-<li>SensorEvent.values[1]：绕着 y 轴的磁力（µT,millitesla，毫特斯拉）。</li>
-<li>SensorEvent.values[2]：绕着 z 轴的磁力（µT,millitesla，毫特斯拉）。</li>
-</ul>
-<h2 id="邻近传感器返回值"><a href="#邻近传感器返回值" class="headerlink" title="邻近传感器返回值"></a>邻近传感器返回值</h2><p>该传感器只返回一个值：SensorEvent.values[0]：手机正面距离邻近物体的距离（cm）。</p>
-<h1 id="简易指南针实现"><a href="#简易指南针实现" class="headerlink" title="简易指南针实现"></a>简易指南针实现</h1><p>Android 废弃了方向传感器 <code>Sensor.TYPE_ORIENTATION</code> 的使用，获取手机旋转的角度推荐的方式是通过加速度传感器和地磁传感器共同计算得出。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-]]></content>
+      <title><![CDATA[Android 传感器——指南针]]></title>
+      <url>/2017/10/23/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8%E2%80%94%E2%80%94%E6%8C%87%E5%8D%97%E9%92%88/</url>
+      <content type="html"><![CDATA[<p>本篇文章记录的是简易指南针的实现。</p>
+<p>Android 废弃了方向传感器 <code>Sensor.TYPE_ORIENTATION</code> 的使用，获取手机旋转的角度推荐的方式是通过加速度传感器和地磁传感器共同计算得出。</p>
+<h1 id="获取相关传感器及传感器管理对象"><a href="#获取相关传感器及传感器管理对象" class="headerlink" title="获取相关传感器及传感器管理对象"></a>获取相关传感器及传感器管理对象</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">private SensorManager mSensorManager;</div><div class="line">/**</div><div class="line"> * 磁力传感器</div><div class="line"> */</div><div class="line">private Sensor mMagneticSensor;</div><div class="line">/**</div><div class="line"> * 加速度传感器</div><div class="line"> */</div><div class="line">private Sensor mAccelerometerSensor;</div><div class="line"></div><div class="line">@Override protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">  super.onCreate(savedInstanceState);</div><div class="line">  setContentView(R.layout.activity_compass);</div><div class="line"></div><div class="line">  mCompassPanView = (ImageView) findViewById(R.id.compass_pan_view);</div><div class="line"></div><div class="line">  mSensorManager = SensorUtil.getSensorManager(this);</div><div class="line"></div><div class="line">  mMagneticSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);</div><div class="line">  mAccelerometerSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="注册及取消监听"><a href="#注册及取消监听" class="headerlink" title="注册及取消监听"></a>注册及取消监听</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@Override protected void onResume() &#123;</div><div class="line">  super.onResume();</div><div class="line">  mSensorManager.registerListener(mSensorEventListener, mMagneticSensor,</div><div class="line">      SensorManager.SENSOR_DELAY_GAME);</div><div class="line">  mSensorManager.registerListener(mSensorEventListener, mAccelerometerSensor,</div><div class="line">      SensorManager.SENSOR_DELAY_GAME);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override protected void onPause() &#123;</div><div class="line">  mSensorManager.unregisterListener(mSensorEventListener);</div><div class="line">  super.onPause();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="在监听中实现罗盘旋转"><a href="#在监听中实现罗盘旋转" class="headerlink" title="在监听中实现罗盘旋转"></a>在监听中实现罗盘旋转</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">private SensorEventListener mSensorEventListener = new SensorEventListener() &#123;</div><div class="line">  float[] accelerometerValues = new float[3];</div><div class="line">  float[] magneticFieldValues = new float[3];</div><div class="line"></div><div class="line">  private float lastRotateDegree;</div><div class="line"></div><div class="line">  @Override public void onSensorChanged(SensorEvent event) &#123;</div><div class="line">    // 判断是加速度传感器还是磁力传感器</div><div class="line">    if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) &#123;</div><div class="line">      accelerometerValues = event.values.clone();// 赋值时要调用 clone 方法。</div><div class="line">    &#125; else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) &#123;</div><div class="line">      magneticFieldValues = event.values.clone();// 赋值时要调用 clone 方法。</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    float[] R = new float[9];</div><div class="line">    float[] values = new float[3];</div><div class="line"></div><div class="line">    SensorManager.getRotationMatrix(R, null, accelerometerValues, magneticFieldValues);</div><div class="line">    SensorManager.getOrientation(R, values);</div><div class="line">    // 将旋转角度取反，用于旋转指南针背景图</div><div class="line">    float rotateDegree = -(float) Math.toDegrees(values[0]);</div><div class="line">    if (Math.abs(rotateDegree - lastRotateDegree) &gt; 1) &#123;</div><div class="line">      mCompassPanView.setRotation(rotateDegree);</div><div class="line">      lastRotateDegree = rotateDegree;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override public void onAccuracyChanged(Sensor sensor, int accuracy) &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
       
         <categories>
             
             <category>  android </category>
             
             <category> 传感器 </category>
-            
-            <category> 位置传感器 </category>
             
         </categories>
         
@@ -105,17 +86,13 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Android 传感器——动作传感器]]></title>
-      <url>/2017/10/12/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8%E2%80%94%E2%80%94%E5%8A%A8%E4%BD%9C%E4%BC%A0%E6%84%9F%E5%99%A8/</url>
-      <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Android 平台支持一些用于监视设备动作的传感器，例如：倾斜、震动、旋转、摆动。</p>
-<p>设备的移动通常是对用户输入的直接反应，例如，用户正在游戏中飙车，或控制一个小球。这种情况可以对设备本身的相对位置进行监测。</p>
-<p>设备所处的物理环境也会反应在设备动作上，例如，用户正在驾驶汽车，Android 设备放在座椅上，Android 设备没有移动，但是会随着汽车的形式而移动，也会不断震动。这种情况需要考虑设备以外的参照系。动作传感器一般不会用于监测设备的位置，设备的位置需要使用其他类型的传感器进行监测，如磁场传感器。</p>
-<h1 id="回传数据"><a href="#回传数据" class="headerlink" title="回传数据"></a>回传数据</h1><p>所有的动作传感器都会返回一个长度为3、类型为浮点数的数组。对于不同的传感器，这三个值的意义不同。例如，对于加速传感器，会返回三个坐标轴的数据；对于陀螺仪传感器，会返回三个坐标轴的旋转角度。</p>
-<h1 id="加速度传感器的使用"><a href="#加速度传感器的使用" class="headerlink" title="加速度传感器的使用"></a>加速度传感器的使用</h1><p>加速度的概念：描述物体运动速度改变快慢的物理量，以 m/s<sup>2</sup> 为单位。大部分 Android 手机都有加速度传感器共我们实时监测加速度的变化。</p>
-<h2 id="摇一摇功能"><a href="#摇一摇功能" class="headerlink" title="摇一摇功能"></a>摇一摇功能</h2><h3 id="获取-SensorManager-及-Sensor"><a href="#获取-SensorManager-及-Sensor" class="headerlink" title="获取 SensorManager 及 Sensor"></a>获取 <code>SensorManager</code> 及 <code>Sensor</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">private SensorManager mSensorManager;</div><div class="line">private Sensor mSensor;</div><div class="line"></div><div class="line">@Override protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">  super.onCreate(savedInstanceState);</div><div class="line">  setContentView(...);</div><div class="line">  </div><div class="line">  mSensorManager = SensorUtil.getSensorManager(this);</div><div class="line">  mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      <title><![CDATA[Android 传感器——摇一摇]]></title>
+      <url>/2017/10/12/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8%E2%80%94%E2%80%94%E6%91%87%E4%B8%80%E6%91%87/</url>
+      <content type="html"><![CDATA[<p>本篇文章记录摇一摇功能的实现。</p>
+<h1 id="获取-SensorManager-及-Sensor"><a href="#获取-SensorManager-及-Sensor" class="headerlink" title="获取 SensorManager 及 Sensor"></a>获取 <code>SensorManager</code> 及 <code>Sensor</code></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">private SensorManager mSensorManager;</div><div class="line">private Sensor mSensor;</div><div class="line"></div><div class="line">@Override protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">  super.onCreate(savedInstanceState);</div><div class="line">  setContentView(...);</div><div class="line">  </div><div class="line">  mSensorManager = SensorUtil.getSensorManager(this);</div><div class="line">  mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>获取 <code>SensorManager</code> 我封装到了一个工具类里，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 获取传感器管理对象</div><div class="line"> */</div><div class="line">public static SensorManager getSensorManager(Context context) &#123;</div><div class="line">  return (SensorManager) context.getSystemService(SENSOR_SERVICE);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="监听传感器数据变化及取消监听"><a href="#监听传感器数据变化及取消监听" class="headerlink" title="监听传感器数据变化及取消监听"></a>监听传感器数据变化及取消监听</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override protected void onResume() &#123;</div><div class="line">  super.onResume();</div><div class="line">  mSensorManager.registerListener(mSensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override protected void onPause() &#123;</div><div class="line">  super.onPause();</div><div class="line">  mSensorManager.unregisterListener(mSensorEventListener);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="监听回调中实现摇一摇功能"><a href="#监听回调中实现摇一摇功能" class="headerlink" title="监听回调中实现摇一摇功能"></a>监听回调中实现摇一摇功能</h3><p>我们自己规定一个值，假定加速度传感器返回的某个轴上的加速度大于了改值，则触发摇一摇功能。因为设备一直会收到垂直向下的地球引力，其加速度约为 9.8 m/s<sup>2</sup>，所以我们假定的值要大于 9.8。</p>
+<h1 id="监听传感器数据变化及取消监听"><a href="#监听传感器数据变化及取消监听" class="headerlink" title="监听传感器数据变化及取消监听"></a>监听传感器数据变化及取消监听</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override protected void onResume() &#123;</div><div class="line">  super.onResume();</div><div class="line">  mSensorManager.registerListener(mSensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override protected void onPause() &#123;</div><div class="line">  super.onPause();</div><div class="line">  mSensorManager.unregisterListener(mSensorEventListener);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="监听回调中实现摇一摇功能"><a href="#监听回调中实现摇一摇功能" class="headerlink" title="监听回调中实现摇一摇功能"></a>监听回调中实现摇一摇功能</h1><p>我们自己规定一个值，假定加速度传感器返回的某个轴上的加速度大于了改值，则触发摇一摇功能。因为设备一直会收到垂直向下的地球引力，其加速度约为 9.8 m/s<sup>2</sup>，所以我们假定的值要大于 9.8。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">private SensorEventListener mSensorEventListener = new SensorEventListener() &#123;</div><div class="line">  @Override public void onSensorChanged(SensorEvent event) &#123;</div><div class="line">    mActivityAccelerometerSensorBinding.setSensorEvent(event);</div><div class="line"></div><div class="line">    // 加速度可能是负值，所以要取绝对值</div><div class="line">    float xValue = Math.abs(event.values[0]);</div><div class="line">    float yValue = Math.abs(event.values[1]);</div><div class="line">    float zValue = Math.abs(event.values[2]);</div><div class="line">    if (xValue &gt; 15 || yValue &gt; 15 || zValue &gt; 15) &#123;</div><div class="line">      // 用户摇动了手机，触发摇一摇</div><div class="line">      ..........</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override public void onAccuracyChanged(Sensor sensor, int accuracy) &#123;</div><div class="line">    Log.e(&quot;精度  = &quot;, String.valueOf(accuracy));</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
       
         <categories>
@@ -123,8 +100,6 @@
             <category> android </category>
             
             <category> 传感器 </category>
-            
-            <category> 动作传感器 </category>
             
         </categories>
         
@@ -143,8 +118,12 @@
       <content type="html"><![CDATA[<h1 id="硬件传感器和软件传感器"><a href="#硬件传感器和软件传感器" class="headerlink" title="硬件传感器和软件传感器"></a>硬件传感器和软件传感器</h1><p>有些传感器是基于硬件的，有些是基于软件的。</p>
 <p>基于硬件的传感器就是直接以芯片形式嵌入到 Android 设备中，直接从外部环境获取数据。</p>
 <p>基于软件的传感器并不是实际的硬件芯片，其传回的数据本质上也来自于硬件的传感器，只是这些数据通常会经过二次加工。基于软件的传感器也称为虚拟（virtual）传感器或合成（synthetic）传感器。</p>
-<h1 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h1><h2 id="动作（Motion）传感器"><a href="#动作（Motion）传感器" class="headerlink" title="动作（Motion）传感器"></a>动作（Motion）传感器</h2><p>在三个轴（x、y、z）上测量加速度和旋转角度。</p>
+<h1 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h1><h2 id="动作（Motion）传感器"><a href="#动作（Motion）传感器" class="headerlink" title="动作（Motion）传感器"></a>动作（Motion）传感器</h2><p>Android 平台支持一些用于监视设备动作的传感器，例如：倾斜、震动、旋转、摆动，在三个轴（x、y、z）上测量加速度和旋转角度。</p>
+<p>设备的移动通常是对用户输入的直接反应，例如，用户正在游戏中飙车，或控制一个小球。这种情况可以对设备本身的相对位置进行监测。</p>
+<p>设备所处的物理环境也会反应在设备动作上，例如，用户正在驾驶汽车，Android 设备放在座椅上，Android 设备没有移动，但是会随着汽车的移动而移动，也会不断震动。这种情况需要考虑设备以外的参照系。动作传感器一般不会用于监测设备的位置，设备的位置需要使用其他类型的传感器进行监测，如磁场传感器。</p>
+<p>所有的动作传感器都会返回一个长度为3、类型为浮点数的数组。对于不同的传感器，这三个值的意义不同。例如，对于加速传感器，会返回三个坐标轴的数据；对于陀螺仪传感器，会返回三个坐标轴的旋转角度。</p>
 <h3 id="加速度传感器-TYPE-ACCELEROMETER"><a href="#加速度传感器-TYPE-ACCELEROMETER" class="headerlink" title="加速度传感器 TYPE_ACCELEROMETER"></a>加速度传感器 TYPE_ACCELEROMETER</h3><p>硬件传感器</p>
+<p>加速度的概念：描述物体运动速度改变快慢的物理量，以 m/s<sup>2</sup> 为单位。大部分 Android 手机都有加速度传感器共我们实时监测加速度的变化。</p>
 <h3 id="线性加速传感器-TYPE-LINEAR-ACCELERATION"><a href="#线性加速传感器-TYPE-LINEAR-ACCELERATION" class="headerlink" title="线性加速传感器 TYPE_LINEAR_ACCELERATION"></a>线性加速传感器 TYPE_LINEAR_ACCELERATION</h3><p>硬件或软件传感器</p>
 <h3 id="重力传感器-TYPE-GRAVITY"><a href="#重力传感器-TYPE-GRAVITY" class="headerlink" title="重力传感器 TYPE_GRAVITY"></a>重力传感器 TYPE_GRAVITY</h3><p>硬件或软件传感器</p>
 <h3 id="陀螺仪传感器-TYPE-GYROSCOPE"><a href="#陀螺仪传感器-TYPE-GYROSCOPE" class="headerlink" title="陀螺仪传感器 TYPE_GYROSCOPE"></a>陀螺仪传感器 TYPE_GYROSCOPE</h3><p>硬件传感器</p>
@@ -155,10 +134,31 @@
 <h3 id="温度传感器-TYPE-AMBIENT-TEMPERATURE"><a href="#温度传感器-TYPE-AMBIENT-TEMPERATURE" class="headerlink" title="温度传感器 TYPE_AMBIENT_TEMPERATURE"></a>温度传感器 TYPE_AMBIENT_TEMPERATURE</h3><p>硬件传感器</p>
 <p>api 14(4.0)以前是 TYPE_TEMPERATURE</p>
 <h3 id="压力传感器-TYPE-PRESSURE"><a href="#压力传感器-TYPE-PRESSURE" class="headerlink" title="压力传感器 TYPE_PRESSURE"></a>压力传感器 TYPE_PRESSURE</h3><p>硬件传感器</p>
-<h2 id="位置（Position）传感器"><a href="#位置（Position）传感器" class="headerlink" title="位置（Position）传感器"></a>位置（Position）传感器</h2><p>测量设备的物理位置。</p>
+<h2 id="位置（Position）传感器"><a href="#位置（Position）传感器" class="headerlink" title="位置（Position）传感器"></a>位置（Position）传感器</h2><p>Android 平台提供了 <strong>磁场传感器</strong> 和 <strong>方向传感器</strong> 传感器用于确定设备的位置，还提供了 <strong>邻近传感器</strong> 测量设备正面到某一个邻近物体的距离。磁场和邻近传感器是基于硬件的传感器。方向传感器是基于软件的，该传感器的回传数据来自重力传感器和磁场传感器。</p>
+<p>位置传感器对于确定设备在真实世界中的物理位置非常有用。例如，可以组合磁场传感器和加速度传感器测量设备相对于地磁北极的位置，还可以利用方向传感器确定当前设备相对于自身参照系的位置。</p>
 <h3 id="方向传感器-TYPE-ORIENTATION"><a href="#方向传感器-TYPE-ORIENTATION" class="headerlink" title="方向传感器 TYPE_ORIENTATION"></a>方向传感器 TYPE_ORIENTATION</h3><p>软件传感器，数据来自重力和磁场传感器</p>
+<p>方向传感器的返回值：</p>
+<ul>
+<li><p>SensorEvent.values[0]：绕着 z 轴旋转的角度。</p>
+<p>  正常拿着手机，y 轴正对着北方，该值是0；如果 y 轴指向南方，该值是180；y 轴指向东方，该值是90；y 轴指向西方，该值是270。</p>
+</li>
+<li><p>SensorEvent.values[1]：绕着 x 轴旋转的角度。</p>
+<p>  当从 z 轴正方向朝向 y 轴正方向，该值为正直；反之，为负值。该值在180到-180之间变动。</p>
+</li>
+<li><p>SensorEvent.values[2]：绕着 y 轴旋转的角度。</p>
+<p>  当从 z 轴正方向朝向 x 轴正方向，该值为正直；反之，为负值。该值在180到-180之间变动。</p>
+</li>
+</ul>
+<p>Android 废弃了方向传感器 <code>Sensor.TYPE_ORIENTATION</code> 的使用，获取手机旋转的角度推荐的方式是通过加速度传感器和地磁传感器共同计算得出。</p>
 <h3 id="磁力传感器-TYPE-MAGNETIC-FIELD"><a href="#磁力传感器-TYPE-MAGNETIC-FIELD" class="headerlink" title="磁力传感器 TYPE_MAGNETIC_FIELD"></a>磁力传感器 TYPE_MAGNETIC_FIELD</h3><p>硬件传感器</p>
-<h3 id="临近传感器-TYPE-PROXIMITY"><a href="#临近传感器-TYPE-PROXIMITY" class="headerlink" title="临近传感器 TYPE_PROXIMITY"></a>临近传感器 TYPE_PROXIMITY</h3><p>硬件传感器</p>
+<p>磁场传感器返回值：</p>
+<ul>
+<li>SensorEvent.values[0]：绕着 x 轴的磁力（µT,millitesla，毫特斯拉）。</li>
+<li>SensorEvent.values[1]：绕着 y 轴的磁力（µT,millitesla，毫特斯拉）。</li>
+<li>SensorEvent.values[2]：绕着 z 轴的磁力（µT,millitesla，毫特斯拉）。</li>
+</ul>
+<h3 id="邻近传感器-TYPE-PROXIMITY"><a href="#邻近传感器-TYPE-PROXIMITY" class="headerlink" title="邻近传感器 TYPE_PROXIMITY"></a>邻近传感器 TYPE_PROXIMITY</h3><p>硬件传感器</p>
+<p>邻近传感器返回值：<br>该传感器只返回一个值：SensorEvent.values[0]：手机正面距离邻近物体的距离（cm）。</p>
 <h1 id="Android-传感器框架"><a href="#Android-传感器框架" class="headerlink" title="Android 传感器框架"></a>Android 传感器框架</h1><p>Android SDK 提供了 Android sensor framework，可以用来访问当前 Android 设备内置的传感器。例如，可以完成以下工作：</p>
 <ul>
 <li>确定当前 Android 设备内置了哪些传感器。</li>
@@ -173,7 +173,12 @@
 <h2 id="传感器相关方法的使用"><a href="#传感器相关方法的使用" class="headerlink" title="传感器相关方法的使用"></a>传感器相关方法的使用</h2><h3 id="获取-SensorManager"><a href="#获取-SensorManager" class="headerlink" title="获取 SensorManager"></a>获取 SensorManager</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> /**</div><div class="line">  * 获取传感器管理对象</div><div class="line">  */</div><div class="line"> public static SensorManager getSensorManager(Context context) &#123;</div><div class="line">   return (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="检测是否存在某种传感器"><a href="#检测是否存在某种传感器" class="headerlink" title="检测是否存在某种传感器"></a>检测是否存在某种传感器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 检测是否存在某种类型的传感器</div><div class="line"> *</div><div class="line"> * @param type &#123;@link Sensor#TYPE_ALL&#125; 等 TYPE 字段</div><div class="line"> * @return true, 存在</div><div class="line"> */</div><div class="line">public static boolean checkSensorExist(SensorManager manager, int type) &#123;</div><div class="line">  return manager.getDefaultSensor(type) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="获取所有传感器"><a href="#获取所有传感器" class="headerlink" title="获取所有传感器"></a>获取所有传感器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 获取所有传感器</div><div class="line"> */</div><div class="line">public static List&lt;Sensor&gt; getAllSensors(SensorManager manager) &#123;</div><div class="line">  return manager.getSensorList(Sensor.TYPE_ALL);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="检测是否存在某种传感器-1"><a href="#检测是否存在某种传感器-1" class="headerlink" title="检测是否存在某种传感器"></a>检测是否存在某种传感器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 检测是否存在某种类型的传感器</div><div class="line"> *</div><div class="line"> * @param type &#123;@link Sensor#TYPE_ALL&#125; 等 TYPE 字段</div><div class="line"> * @return true, 存在</div><div class="line"> */</div><div class="line">public static boolean checkSensorExist(SensorManager manager, int type) &#123;</div><div class="line">  return manager.getDefaultSensor(type) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+<h3 id="检测是否存在某种传感器-1"><a href="#检测是否存在某种传感器-1" class="headerlink" title="检测是否存在某种传感器"></a>检测是否存在某种传感器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 检测是否存在某种类型的传感器</div><div class="line"> *</div><div class="line"> * @param type &#123;@link Sensor#TYPE_ALL&#125; 等 TYPE 字段</div><div class="line"> * @return true, 存在</div><div class="line"> */</div><div class="line">public static boolean checkSensorExist(SensorManager manager, int type) &#123;</div><div class="line">  return manager.getDefaultSensor(type) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><ul>
+<li><a href="../Android-传感器——摇一摇/">摇一摇</a></li>
+<li><a href="/2017/10/23/android/传感器/Android-传感器——指南针/">指南针</a></li>
+</ul>
+]]></content>
       
         <categories>
             
@@ -707,36 +712,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[View]]></title>
-      <url>/2016/03/16/android/View/</url>
-      <content type="html"><![CDATA[<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
-<ul>
-<li>遵从Android标准。</li>
-<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
-<li>Send accessibility events。</li>
-<li><p>兼容多个Android平台。</p>
-<p>Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
-</li>
-</ul>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/guide/topics/ui/how-android-draws.html" target="_blank" rel="external">How Android Draws Views</a><br> <a href="https://plus.google.com/+ArpitMathur/posts/cT1EuBbxEgN" target="_blank" rel="external">Arpit Mathur制作的View绘制流程图</a><br> <a href="https://groups.google.com/forum/#!topic/android-developers/fkvRZ7JOEBU" target="_blank" rel="external">Difference between invalidate and requestLayout for Viewgroup</a><br> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> android </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> android </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Custom View]]></title>
       <url>/2016/03/16/android/Custom%20View/</url>
       <content type="html"><![CDATA[<h2 id="Creating-a-View-Class"><a href="#Creating-a-View-Class" class="headerlink" title="Creating a View Class"></a>Creating a View Class</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
@@ -814,6 +789,36 @@
         <tags>
             
             <tag> View </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[View]]></title>
+      <url>/2016/03/16/android/View/</url>
+      <content type="html"><![CDATA[<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
+<ul>
+<li>遵从Android标准。</li>
+<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
+<li>Send accessibility events。</li>
+<li><p>兼容多个Android平台。</p>
+<p>Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/guide/topics/ui/how-android-draws.html" target="_blank" rel="external">How Android Draws Views</a><br> <a href="https://plus.google.com/+ArpitMathur/posts/cT1EuBbxEgN" target="_blank" rel="external">Arpit Mathur制作的View绘制流程图</a><br> <a href="https://groups.google.com/forum/#!topic/android-developers/fkvRZ7JOEBU" target="_blank" rel="external">Difference between invalidate and requestLayout for Viewgroup</a><br> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
             
         </tags>
         
