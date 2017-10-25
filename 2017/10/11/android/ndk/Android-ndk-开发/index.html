@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="ndkNDK，Native Development Kit，NDK允许用户使用类似C / C++之类的原生代码语言执行部分程序。 为何要用到NDK? 代码的保护，由于apk的java层代码很容易被反编译，而C/C++库被反编译的难度较大。 在NDK中调用第三方C/C++库，因为大部分的开源库都是用C/C++代码编写的。 便于移植，用C/C++写的库可以方便在其他的嵌入式平台上再次使用。  下载 n">
+<meta name="description" content="jnijni，Java Native Interface（Java 本地接口），若干的API实现了Java和其他语言的通信（主要是C&amp;amp;C++）。 ndkNDK，Native Development Kit，通过 ndk 可以在 Android 中更加方便的通过 jni 来访问本地代码。 为何要用到NDK? 代码的保护，由于apk的java层代码很容易被反编译，而C/C++库被反编译的难度较">
 <meta name="keywords" content="android,ndk">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android ndk 开发">
 <meta property="og:url" content="http://www.张钧泉.top/2017/10/11/android/ndk/Android-ndk-开发/index.html">
 <meta property="og:site_name" content="张钧泉的博客">
-<meta property="og:description" content="ndkNDK，Native Development Kit，NDK允许用户使用类似C / C++之类的原生代码语言执行部分程序。 为何要用到NDK? 代码的保护，由于apk的java层代码很容易被反编译，而C/C++库被反编译的难度较大。 在NDK中调用第三方C/C++库，因为大部分的开源库都是用C/C++代码编写的。 便于移植，用C/C++写的库可以方便在其他的嵌入式平台上再次使用。  下载 n">
+<meta property="og:description" content="jnijni，Java Native Interface（Java 本地接口），若干的API实现了Java和其他语言的通信（主要是C&amp;amp;C++）。 ndkNDK，Native Development Kit，通过 ndk 可以在 Android 中更加方便的通过 jni 来访问本地代码。 为何要用到NDK? 代码的保护，由于apk的java层代码很容易被反编译，而C/C++库被反编译的难度较">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/android/ndk/pasted-0.png">
 <meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/android/ndk/pasted-1.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/android/ndk/pasted-5.png">
 <meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/android/ndk/pasted-6.png">
 <meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/android/ndk/pasted-7.png">
-<meta property="og:updated_time" content="2017-10-12T05:36:33.000Z">
+<meta property="og:updated_time" content="2017-10-25T08:48:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android ndk 开发">
-<meta name="twitter:description" content="ndkNDK，Native Development Kit，NDK允许用户使用类似C / C++之类的原生代码语言执行部分程序。 为何要用到NDK? 代码的保护，由于apk的java层代码很容易被反编译，而C/C++库被反编译的难度较大。 在NDK中调用第三方C/C++库，因为大部分的开源库都是用C/C++代码编写的。 便于移植，用C/C++写的库可以方便在其他的嵌入式平台上再次使用。  下载 n">
+<meta name="twitter:description" content="jnijni，Java Native Interface（Java 本地接口），若干的API实现了Java和其他语言的通信（主要是C&amp;amp;C++）。 ndkNDK，Native Development Kit，通过 ndk 可以在 Android 中更加方便的通过 jni 来访问本地代码。 为何要用到NDK? 代码的保护，由于apk的java层代码很容易被反编译，而C/C++库被反编译的难度较">
 <meta name="twitter:image" content="http://www.xn--e1tz71a184a.top/images/android/ndk/pasted-0.png">
 
 
@@ -170,7 +170,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">君子乐道。上善若水。水善利万物而不争，处众人之所恶，故几于道。居善地，心善渊，与善仁，言善信，正善治，事善能，动善时。夫唯不争，故无尤。</p>
+        <p class="site-subtitle">黑发不知勤学早，白首方悔读书迟</p>
       
   </div>
 
@@ -351,8 +351,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-12T13:36:33+08:00">
-                2017-10-12
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-25T16:48:29+08:00">
+                2017-10-25
               </time>
             
           </span>
@@ -459,25 +459,29 @@
       
 
       
-        <h1 id="ndk"><a href="#ndk" class="headerlink" title="ndk"></a>ndk</h1><p>NDK，Native Development Kit，NDK允许用户使用类似C / C++之类的原生代码语言执行部分程序。</p>
+        <h1 id="jni"><a href="#jni" class="headerlink" title="jni"></a>jni</h1><p>jni，Java Native Interface（Java 本地接口），若干的API实现了Java和其他语言的通信（主要是C&amp;C++）。</p>
+<h1 id="ndk"><a href="#ndk" class="headerlink" title="ndk"></a>ndk</h1><p>NDK，Native Development Kit，通过 ndk 可以在 Android 中更加方便的通过 jni 来访问本地代码。</p>
 <h2 id="为何要用到NDK"><a href="#为何要用到NDK" class="headerlink" title="为何要用到NDK?"></a>为何要用到NDK?</h2><ol>
 <li>代码的保护，由于apk的java层代码很容易被反编译，而C/C++库被反编译的难度较大。</li>
-<li>在NDK中调用第三方C/C++库，因为大部分的开源库都是用C/C++代码编写的。</li>
+<li>可以很方便的使用目前已有的C/C++开源库库。</li>
 <li>便于移植，用C/C++写的库可以方便在其他的嵌入式平台上再次使用。</li>
+<li>提高程序在某些特定情形下的执行效率。</li>
 </ol>
-<h2 id="下载-ndk"><a href="#下载-ndk" class="headerlink" title="下载 ndk"></a>下载 ndk</h2><p>ndk 官方首页：<a href="https://developer.android.com/ndk/index.html" target="_blank" rel="external">https://developer.android.com/ndk/index.html</a></p>
-<p>ndk 官方下载地址：<a href="https://developer.android.com/ndk/downloads/index.html" target="_blank" rel="external">https://developer.android.com/ndk/downloads/index.html</a></p>
-<p>我的百度网盘下载地址：链接:<a href="http://pan.baidu.com/s/1kVadnUZ" target="_blank" rel="external">http://pan.baidu.com/s/1kVadnUZ</a></p>
+<h2 id="下载-ndk"><a href="#下载-ndk" class="headerlink" title="下载 ndk"></a>下载 ndk</h2><ol>
+<li>ndk 官方首页：<a href="https://developer.android.com/ndk/index.html" target="_blank" rel="external">https://developer.android.com/ndk/index.html</a></li>
+<li>ndk 官方下载地址：<a href="https://developer.android.com/ndk/downloads/index.html" target="_blank" rel="external">https://developer.android.com/ndk/downloads/index.html</a></li>
+<li>我的百度网盘下载地址：<a href="http://pan.baidu.com/s/1kVadnUZ" target="_blank" rel="external">http://pan.baidu.com/s/1kVadnUZ</a></li>
+</ol>
 <h2 id="mac-配置环境变量"><a href="#mac-配置环境变量" class="headerlink" title="mac 配置环境变量"></a>mac 配置环境变量</h2><p>修改用户目录下的 <code>.bash_profile</code> 文件，在末尾加上如下两句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export ANDROID_NDK=ndk存放目录</div><div class="line">export PATH=$&#123;PATH&#125;:$&#123;ANDROID_NDK&#125;</div></pre></td></tr></table></figure></p>
 <p>注意将 <code>ndk存放目录</code> 替换为自己 ndk 实际存放目录。</p>
-<h1 id="jni"><a href="#jni" class="headerlink" title="jni"></a>jni</h1><p>jni，Java Native Interface，若干的API实现了Java和其他语言的通信（主要是C&amp;C++）。</p>
 <h1 id="实现简单的加法实例"><a href="#实现简单的加法实例" class="headerlink" title="实现简单的加法实例"></a>实现简单的加法实例</h1><h2 id="在-Activity-中声明本地加法方法"><a href="#在-Activity-中声明本地加法方法" class="headerlink" title="在 Activity 中声明本地加法方法"></a>在 Activity 中声明本地加法方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public native int add(int num1, int num2);</div></pre></td></tr></table></figure>
-<p>填加该方法后会报错<br><img src="/images/android/ndk/pasted-0.png" alt="add 方法报错"></p>
+<p>添加该方法后会报错<br><img src="/images/android/ndk/pasted-0.png" alt="add 方法报错"></p>
 <p>这个错误可先不管，在最后一起解决。</p>
 <h2 id="生成头文件"><a href="#生成头文件" class="headerlink" title="生成头文件"></a>生成头文件</h2><p>终端进入到项目的 <code>src/main/java/</code> 目录里，使用下面的命令生成头文件。</p>
 <p>javah -jni 类权限定名。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javah -jni com.zjq.ndk.MainActivity</div></pre></td></tr></table></figure>
-<p>之后在 java 目录里会多出来一个 <code>.h</code> 文件：<br><img src="/images/android/ndk/pasted-1.png" alt=".h 文件"></p>
+<p>之后在 java 目录里会多出来一个 <code>.h</code> 文件：<br><img src="/images/android/ndk/pasted-1.png" alt=".h 文件"><br>生成的头文件里的内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/* DO NOT EDIT THIS FILE - it is machine generated */</div><div class="line">#include &lt;jni.h&gt;</div><div class="line">/* Header for class com_zjq_ndk_MainActivity */</div><div class="line"></div><div class="line">#ifndef _Included_com_zjq_ndk_MainActivity</div><div class="line">#define _Included_com_zjq_ndk_MainActivity</div><div class="line">#ifdef __cplusplus</div><div class="line">extern &quot;C&quot; &#123;</div><div class="line">#endif</div><div class="line">/*</div><div class="line"> * Class:     com_zjq_ndk_MainActivity</div><div class="line"> * Method:    add</div><div class="line"> * Signature: (II)I</div><div class="line"> */</div><div class="line">JNIEXPORT jint JNICALL Java_com_zjq_ndk_MainActivity_add</div><div class="line">  (JNIEnv *, jobject, jint, jint);</div><div class="line"></div><div class="line">#ifdef __cplusplus</div><div class="line">&#125;</div><div class="line">#endif</div><div class="line">#endif</div></pre></td></tr></table></figure></p>
+<p>我们主要关心的是 <code>Java_com_zjq_ndk_MainActivity_add</code> 方法，可以看出其格式为 <code>Java_包名_类名_方法名</code>。方法中后面两个参数 <code>jint</code> 就是我们需要传入的两个加数。</p>
 <p>创建 JNI Folder<br><img src="/images/android/ndk/pasted-2.png" alt="创建 jni 文件夹"><br>将之前生成的 <code>.h</code> 头文件移动到刚刚创建的 jni 文件夹里。</p>
 <p><img src="/images/android/ndk/pasted-3.png" alt="jni目录截图"></p>
 <h2 id="使用-C-或-C-实现本地方法"><a href="#使用-C-或-C-实现本地方法" class="headerlink" title="使用 C 或 C++ 实现本地方法"></a>使用 C 或 C++ 实现本地方法</h2><p>这个步骤在工作时应该是给 C 或 C++ 同事写。</p>
@@ -726,7 +730,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -737,7 +741,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -748,7 +752,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -783,7 +787,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ndk"><span class="nav-number">1.</span> <span class="nav-text">ndk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为何要用到NDK"><span class="nav-number">1.1.</span> <span class="nav-text">为何要用到NDK?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载-ndk"><span class="nav-number">1.2.</span> <span class="nav-text">下载 ndk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mac-配置环境变量"><span class="nav-number">1.3.</span> <span class="nav-text">mac 配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jni"><span class="nav-number">2.</span> <span class="nav-text">jni</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现简单的加法实例"><span class="nav-number">3.</span> <span class="nav-text">实现简单的加法实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Activity-中声明本地加法方法"><span class="nav-number">3.1.</span> <span class="nav-text">在 Activity 中声明本地加法方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成头文件"><span class="nav-number">3.2.</span> <span class="nav-text">生成头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-C-或-C-实现本地方法"><span class="nav-number">3.3.</span> <span class="nav-text">使用 C 或 C++ 实现本地方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将-C-C-编写的文件生成动态链接库"><span class="nav-number">3.4.</span> <span class="nav-text">将 C/C++ 编写的文件生成动态链接库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jni-程序的实现"><span class="nav-number">3.5.</span> <span class="nav-text">jni 程序的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定-ndk-目录"><span class="nav-number">3.5.1.</span> <span class="nav-text">指定 ndk 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置模块名"><span class="nav-number">3.5.2.</span> <span class="nav-text">配置模块名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-java-文件里加载动态库"><span class="nav-number">3.6.</span> <span class="nav-text">在 java 文件里加载动态库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误解决"><span class="nav-number">4.</span> <span class="nav-text">错误解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jni"><span class="nav-number">1.</span> <span class="nav-text">jni</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ndk"><span class="nav-number">2.</span> <span class="nav-text">ndk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为何要用到NDK"><span class="nav-number">2.1.</span> <span class="nav-text">为何要用到NDK?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载-ndk"><span class="nav-number">2.2.</span> <span class="nav-text">下载 ndk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mac-配置环境变量"><span class="nav-number">2.3.</span> <span class="nav-text">mac 配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现简单的加法实例"><span class="nav-number">3.</span> <span class="nav-text">实现简单的加法实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Activity-中声明本地加法方法"><span class="nav-number">3.1.</span> <span class="nav-text">在 Activity 中声明本地加法方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成头文件"><span class="nav-number">3.2.</span> <span class="nav-text">生成头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-C-或-C-实现本地方法"><span class="nav-number">3.3.</span> <span class="nav-text">使用 C 或 C++ 实现本地方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将-C-C-编写的文件生成动态链接库"><span class="nav-number">3.4.</span> <span class="nav-text">将 C/C++ 编写的文件生成动态链接库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jni-程序的实现"><span class="nav-number">3.5.</span> <span class="nav-text">jni 程序的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定-ndk-目录"><span class="nav-number">3.5.1.</span> <span class="nav-text">指定 ndk 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置模块名"><span class="nav-number">3.5.2.</span> <span class="nav-text">配置模块名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-java-文件里加载动态库"><span class="nav-number">3.6.</span> <span class="nav-text">在 java 文件里加载动态库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误解决"><span class="nav-number">4.</span> <span class="nav-text">错误解决</span></a></li></ol></div>
             
 
           </div>
