@@ -3,6 +3,423 @@
   
     
     <entry>
+      <title><![CDATA[Android Drawable 之 selector]]></title>
+      <url>/2017/10/28/android/drawable/Android-Drawable-%E4%B9%8B-selector/</url>
+      <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#StateList" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#StateList</a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:constantSize=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">    android:dither=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">    android:variablePadding=[&quot;true&quot; | &quot;false&quot;] &gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</div><div class="line">        android:state_pressed=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_focused=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_hovered=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_selected=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_checkable=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_checked=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_enabled=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_activated=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_window_focused=[&quot;true&quot; | &quot;false&quot;] /&gt;</div><div class="line">&lt;/selector&gt;</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android:constantSize</td>
+<td>true，表示内部所有 Drawable 大小的最大值；false，随着 Drawable 变化而变化大小</td>
+</tr>
+<tr>
+<td>android:variablePadding</td>
+<td>true，表示 padding 随着 Drawable 的变化而变化；false，表示 padding 是所有状态的 padding 的最大值</td>
+</tr>
+</tbody>
+</table>
+<p><code>&lt;item&gt;</code> 中除了一个指定 Drawable 资源的属性以为，其余的都是 View 所处的状态，系统会根据 View 所处的状态决定使用哪个 Item 作为展示。</p>
+<p>View 常用的状态如下：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android:state_pressed</td>
+<td>按下状态</td>
+</tr>
+<tr>
+<td>android:state_focused</td>
+<td>获取焦点</td>
+</tr>
+<tr>
+<td>android:state_selected</td>
+<td>选择了 View</td>
+</tr>
+<tr>
+<td>android:state_checkable</td>
+<td>View 可选择</td>
+</tr>
+<tr>
+<td>android:state_checked</td>
+<td>View 被选中，一般用于 CheckBox</td>
+</tr>
+<tr>
+<td>android:state_enabled</td>
+<td>View 可用</td>
+</tr>
+</tbody>
+</table>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p><img src="/images/android/drawable/QQ20171028-172021.gif" alt="selector 实例"></p>
+<p>左侧矩形区域其实是个 EditTextView，右侧有两个 CheckBox。</p>
+<ol>
+<li>state_pressed：按下 EditTextView 变成黑色。</li>
+</ol>
+<ul>
+<li>state_focused：单击 EditTextView 使其获得焦点变为蓝色。</li>
+<li>state_enabled：单击是否可用，可切换 EditTextView 是否可用状态，不可用时变为灰色，可用时变为正常状态绿色。</li>
+<li>state_selected：单击是否选中，可选中 EditTextView，选中后变为红色，取消选中变为正常状态绿色。</li>
+<li>state_checked：是否选中选择框也添加了与 EditTextView 相同的背景，当选中时，state_checked 对其有作用，将变为紫色。state_checked 一般用于 CheckBox 这种来回切换选中状态的控件。</li>
+</ul>
+<p>selector 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item android:state_selected=&quot;true&quot;</div><div class="line">      android:drawable=&quot;@android:color/holo_red_dark&quot;/&gt;</div><div class="line">  &lt;item android:state_checked=&quot;true&quot;</div><div class="line">      android:drawable=&quot;@android:color/holo_purple&quot;/&gt;</div><div class="line">  &lt;item android:state_pressed=&quot;true&quot;</div><div class="line">      android:drawable=&quot;@android:color/black&quot;/&gt;</div><div class="line">  &lt;item android:state_focused=&quot;true&quot;</div><div class="line">      android:drawable=&quot;@android:color/holo_blue_bright&quot;/&gt;</div><div class="line">  &lt;item android:state_enabled=&quot;false&quot;</div><div class="line">      android:drawable=&quot;@android:color/darker_gray&quot;/&gt;</div><div class="line">  &lt;item android:drawable=&quot;@android:color/holo_green_dark&quot;/&gt;</div><div class="line">&lt;/selector&gt;</div></pre></td></tr></table></figure></p>
+<p>布局文件代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;android.support.constraint.ConstraintLayout</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</div><div class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    tools:context=&quot;com.zjq.drawable.StateListDrawableActivity&quot;</div><div class="line">    &gt;</div><div class="line"></div><div class="line">  &lt;EditText</div><div class="line">      android:layout_width=&quot;100dp&quot;</div><div class="line">      android:layout_height=&quot;100dp&quot;</div><div class="line">      android:layout_marginLeft=&quot;8dp&quot;</div><div class="line">      app:layout_constraintLeft_toLeftOf=&quot;parent&quot;</div><div class="line">      app:layout_constraintTop_toTopOf=&quot;parent&quot;</div><div class="line">      android:layout_marginTop=&quot;8dp&quot;</div><div class="line">      android:background=&quot;@drawable/state_list&quot;</div><div class="line">      android:clickable=&quot;true&quot;</div><div class="line">      android:longClickable=&quot;true&quot;</div><div class="line">      android:id=&quot;@+id/editText&quot;</div><div class="line">      /&gt;</div><div class="line">  &lt;CheckBox</div><div class="line">      android:text=&quot;是否可用&quot;</div><div class="line">      android:layout_width=&quot;wrap_content&quot;</div><div class="line">      android:layout_height=&quot;wrap_content&quot;</div><div class="line">      android:id=&quot;@+id/is_available_view&quot;</div><div class="line">      android:checked=&quot;true&quot;</div><div class="line">      app:layout_constraintLeft_toRightOf=&quot;@+id/editText&quot;</div><div class="line">      android:layout_marginLeft=&quot;32dp&quot;</div><div class="line">      app:layout_constraintTop_toTopOf=&quot;parent&quot;</div><div class="line">      android:layout_marginTop=&quot;32dp&quot;</div><div class="line">      /&gt;</div><div class="line">  &lt;CheckBox</div><div class="line">      android:text=&quot;是否选中&quot;</div><div class="line">      android:layout_width=&quot;wrap_content&quot;</div><div class="line">      android:layout_height=&quot;wrap_content&quot;</div><div class="line">      android:id=&quot;@+id/is_selected_view&quot;</div><div class="line">      android:layout_marginLeft=&quot;0dp&quot;</div><div class="line">      app:layout_constraintLeft_toLeftOf=&quot;@+id/is_available_view&quot;</div><div class="line">      android:layout_marginTop=&quot;8dp&quot;</div><div class="line">      app:layout_constraintTop_toBottomOf=&quot;@+id/is_available_view&quot;</div><div class="line">      android:background=&quot;@drawable/state_list&quot;</div><div class="line">      /&gt;</div><div class="line"></div><div class="line">&lt;/android.support.constraint.ConstraintLayout&gt;</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[机动车 C2 科目二]]></title>
+      <url>/2017/10/27/%E8%BD%A6/%E6%9C%BA%E5%8A%A8%E8%BD%A6-C2-%E7%A7%91%E7%9B%AE%E4%BA%8C/</url>
+      <content type="html"><![CDATA[<p>本文章记录 C2 科目二考试的步骤。</p>
+<h1 id="陡坡定点停车起步"><a href="#陡坡定点停车起步" class="headerlink" title="陡坡定点停车起步"></a>陡坡定点停车起步</h1><h2 id="停车"><a href="#停车" class="headerlink" title="停车"></a>停车</h2><ol>
+<li>左经对路中心箭头行驶。</li>
+</ol>
+<ul>
+<li>当左后视镜下沿超过白色实线时停车。</li>
+<li>拉手刹。</li>
+</ul>
+<h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><ol>
+<li>松手刹。</li>
+</ol>
+<ul>
+<li>方向盘向左90<sup>°</sup></li>
+<li>加油门，起步。</li>
+<li>上坡之后回正方向盘。</li>
+</ul>
+<h1 id="直角转弯"><a href="#直角转弯" class="headerlink" title="直角转弯"></a>直角转弯</h1><ol>
+<li>左经对着路中心白色箭头、雨刮器中心点螺帽对右边黄线中心行驶。</li>
+</ol>
+<ul>
+<li>要到直角时打左转向灯。</li>
+<li>左车门内把手前端与地面角横线斜起重合时左打死。</li>
+<li>关转向灯。</li>
+<li>左经要到路中心时回正。</li>
+</ul>
+<h1 id="s-型曲线行驶"><a href="#s-型曲线行驶" class="headerlink" title="s 型曲线行驶"></a>s 型曲线行驶</h1><ol>
+<li>左边车头与黄线接触时向左一圈。</li>
+</ol>
+<ul>
+<li>左边车头与黄线内侧线重合时向左90<sup>°</sup>。</li>
+<li>左边车头到路中心时向右90<sup>°</sup>，即回平十二点。</li>
+<li>左边车头与黄线接触时向右回一圈，即回正。</li>
+<li>中间车头与黄线接触时向右打一圈。</li>
+<li>右边车头与黄线内侧接触时，向右打90<sup>°</sup>。</li>
+<li>进入侧方位停车：当左侧门内把手前端与角横线对其时向左打死。当左经到路中心时回正，左经对路中心箭头行走，当肩膀与横线对其时停车。</li>
+</ul>
+<h1 id="侧方位停车"><a href="#侧方位停车" class="headerlink" title="侧方位停车"></a>侧方位停车</h1><h2 id="进库"><a href="#进库" class="headerlink" title="进库"></a>进库</h2><ol>
+<li>调整右后视镜，使角横线在镜子中心。</li>
+</ol>
+<ul>
+<li>挂倒挡</li>
+<li>起步，右后视镜里角横线从镜子里消失时向右一圈。</li>
+<li>左边车尾跟第二根虚斜线斜起重叠时回正。</li>
+<li>车轮压线时向左打死。</li>
+<li>车头左侧缝与线平行时停车。</li>
+</ul>
+<h2 id="出库"><a href="#出库" class="headerlink" title="出库"></a>出库</h2><ol>
+<li>左转向灯，挂前进挡。</li>
+</ol>
+<ul>
+<li>起步，当右雨刮与凸起处与黄线重合时回正并向右打一圈，看右后视镜，当车身平行黄线时回正。</li>
+</ul>
+<h1 id="倒车入库"><a href="#倒车入库" class="headerlink" title="倒车入库"></a>倒车入库</h1><h2 id="反倒（右侧进入）"><a href="#反倒（右侧进入）" class="headerlink" title="反倒（右侧进入）"></a>反倒（右侧进入）</h2><ol>
+<li>调整右反光镜，车门把手在镜子三分之一处。</li>
+</ol>
+<ul>
+<li>挂倒挡，起步，左反光镜底部与角横线下口重合时向右打死。</li>
+<li>观察右反光镜右车尾凸起部位与地面角要接近时，小于30cm，马上向左回半圈。</li>
+<li>车辆退进库里，右车尾与地面黄线平行时，回正。</li>
+<li>左边反光镜底部与黄线下口重合时停车。</li>
+<li>进入正倒。</li>
+</ul>
+<h2 id="正倒（左侧进入）"><a href="#正倒（左侧进入）" class="headerlink" title="正倒（左侧进入）"></a>正倒（左侧进入）</h2><ol>
+<li>挂前进挡，车辆行驶到左肩膀与地面角横线平行时，向左一圈90<sup>°</sup>。</li>
+</ol>
+<ul>
+<li>行驶到左门内把手与地面角横线重合时停车。</li>
+<li>挂倒退档，起步，通过左后视镜观察左后轮与地面角的角度，如大了向左打，如小了向右打。</li>
+<li>直到退进去，车尾与地面黄线平行时方向回正。</li>
+<li>当左反光镜底部与黄线下口重合时停车。</li>
+</ul>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Drawable 之 layer-list]]></title>
+      <url>/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-layer-list/</url>
+      <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#LayerList" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#LayerList</a></p>
+<h1 id="layer-list-语法"><a href="#layer-list-语法" class="headerlink" title="layer-list 语法"></a>layer-list 语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;layer-list</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</div><div class="line">        android:id=&quot;@[+][package:]id/resource_name&quot;</div><div class="line">        android:top=&quot;dimension&quot;</div><div class="line">        android:right=&quot;dimension&quot;</div><div class="line">        android:bottom=&quot;dimension&quot;</div><div class="line">        android:left=&quot;dimension&quot; /&gt;</div><div class="line">&lt;/layer-list&gt;</div></pre></td></tr></table></figure>
+<p><code>&lt;layer-list&gt;</code> 中可以有多个 <code>&lt;item&gt;</code>，每个 <code>&lt;item&gt;</code> 表示一层，后面的层会覆盖在前面的层上。</p>
+<p><code>android:drawable</code> 可以使用其他的 Drawable 资源来进行展示。</p>
+<p>有四个控制 Drawable 与 view 四个边的距离的属性：<code>android:top</code>、<code>android:right</code>、<code>android:bottom</code>、<code>android:left</code>。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="层级演示"><a href="#层级演示" class="headerlink" title="层级演示"></a>层级演示</h2><p><img src="/images/android/drawable/pasted-4.png" alt="层级演示结果"></p>
+<p>上面的例子中，其实两张图的大小是一模一样的，红色图片没有调整边距，蓝色图片调整了边距。调整边距后，Item 会相应缩小。</p>
+<p>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item android:drawable=&quot;@drawable/ic_android_red_800_24dp&quot;/&gt;</div><div class="line">  &lt;item</div><div class="line">      android:drawable=&quot;@drawable/ic_android_blue_700_24dp&quot;</div><div class="line">      android:top=&quot;10dp&quot;</div><div class="line">      android:bottom=&quot;10dp&quot;</div><div class="line">      android:left=&quot;10dp&quot;</div><div class="line">      android:right=&quot;10dp&quot;</div><div class="line">      /&gt;</div><div class="line">&lt;/layer-list&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="官方文档上的偏移实例"><a href="#官方文档上的偏移实例" class="headerlink" title="官方文档上的偏移实例"></a>官方文档上的偏移实例</h2><p><img src="/images/android/drawable/pasted-0.png" alt="官方文档上的实例"></p>
+<p>这里是三个图片，每张图片是一个 <code>&lt;item&gt;</code>，书写顺序依次是红、绿、蓝。</p>
+<p>LayerDrawable 实现如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">    &lt;item&gt;</div><div class="line">      &lt;bitmap android:src=&quot;@drawable/android_red&quot;</div><div class="line">        android:gravity=&quot;center&quot; /&gt;</div><div class="line">    &lt;/item&gt;</div><div class="line">    &lt;item android:top=&quot;10dp&quot; android:left=&quot;10dp&quot;&gt;</div><div class="line">      &lt;bitmap android:src=&quot;@drawable/android_green&quot;</div><div class="line">        android:gravity=&quot;center&quot; /&gt;</div><div class="line">    &lt;/item&gt;</div><div class="line">    &lt;item android:top=&quot;20dp&quot; android:left=&quot;20dp&quot;&gt;</div><div class="line">      &lt;bitmap android:src=&quot;@drawable/android_blue&quot;</div><div class="line">        android:gravity=&quot;center&quot; /&gt;</div><div class="line">    &lt;/item&gt;</div><div class="line">&lt;/layer-list&gt;</div></pre></td></tr></table></figure></p>
+<p>最后使用 ImageView 展示出来：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;ImageView</div><div class="line">    android:layout_height=&quot;wrap_content&quot;</div><div class="line">    android:layout_width=&quot;wrap_content&quot;</div><div class="line">    android:src=&quot;@drawable/layers&quot; /&gt;</div></pre></td></tr></table></figure></p>
+<p>因为没有图片，所以我自己做了几个图片实现了一下效果，如图：<br><img src="/images/android/drawable/pasted-5.png" alt="偏移"></p>
+<p>在上面的例子中，没有直接使用 Item 指定图片，而是在 Item 中嵌套了 bitmap 来指定图片，如果直接使用 item 指定图片会是什么效果呢？下面来测试一下。</p>
+<p>layer-list 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item</div><div class="line">      android:drawable=&quot;@drawable/ic_android_red_800_24dp&quot;</div><div class="line">      /&gt;</div><div class="line">  &lt;item</div><div class="line">      android:drawable=&quot;@drawable/ic_android_green_600_24dp&quot;</div><div class="line">      android:top=&quot;10dp&quot;</div><div class="line">      android:left=&quot;10dp&quot;</div><div class="line">      /&gt;</div><div class="line">  &lt;item</div><div class="line">      android:drawable=&quot;@drawable/ic_android_blue_700_24dp&quot;</div><div class="line">      android:top=&quot;20dp&quot;</div><div class="line">      android:left=&quot;20dp&quot;</div><div class="line">      /&gt;</div><div class="line">&lt;/layer-list&gt;</div></pre></td></tr></table></figure></p>
+<p>使用 ImageView 展示出来就能查看效果了。这里将两种效果放在一起对比一下，如图：<br><img src="/images/android/drawable/pasted-6.png" alt="偏移对比图"></p>
+<h2 id="输入框"><a href="#输入框" class="headerlink" title="输入框"></a>输入框</h2><p>实现出来的效果如下：<br><img src="/images/android/drawable/pasted-1.png" alt="输入框效果图"></p>
+<p>第一步，绘制背景色<br><img src="/images/android/drawable/pasted-2.png" alt="绘制背景色"></p>
+<p>第二步，盖住上部分<br><img src="/images/android/drawable/pasted-3.png" alt="盖住上部分"></p>
+<p>第三步，留出两边的折线<br><img src="/images/android/drawable/pasted-1.png" alt="输入框效果图"></p>
+<p>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item&gt;</div><div class="line">    &lt;shape android:shape=&quot;rectangle&quot;&gt;</div><div class="line">      &lt;solid android:color=&quot;#ac2400&quot;/&gt;</div><div class="line">    &lt;/shape&gt;</div><div class="line">  &lt;/item&gt;</div><div class="line">  &lt;item android:bottom=&quot;6dp&quot;&gt;</div><div class="line">    &lt;shape android:shape=&quot;rectangle&quot;&gt;</div><div class="line">      &lt;solid android:color=&quot;@android:color/white&quot;/&gt;</div><div class="line">    &lt;/shape&gt;</div><div class="line">  &lt;/item&gt;</div><div class="line">  &lt;item</div><div class="line">      android:bottom=&quot;1dp&quot;</div><div class="line">      android:left=&quot;1dp&quot;</div><div class="line">      android:right=&quot;1dp&quot;</div><div class="line">      &gt;</div><div class="line">    &lt;shape android:shape=&quot;rectangle&quot;&gt;</div><div class="line">      &lt;solid android:color=&quot;@android:color/white&quot;/&gt;</div><div class="line">    &lt;/shape&gt;</div><div class="line">  &lt;/item&gt;</div><div class="line">&lt;/layer-list&gt;</div></pre></td></tr></table></figure></p>
+<p>最后在 EditText 中使用 <code>android:background=&quot;@drawable/...&quot;</code> 进行显示。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Drawable 之 bitmap 及 nine-path]]></title>
+      <url>/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-bitmap-%E5%8F%8A-nine-path/</url>
+      <content type="html"><![CDATA[<p>本节讲解的是 bitmap 及 nine-path。</p>
+<h1 id="BitmapDrawable-中的部分属性"><a href="#BitmapDrawable-中的部分属性" class="headerlink" title="BitmapDrawable 中的部分属性"></a>BitmapDrawable 中的部分属性</h1><h2 id="android-gravity"><a href="#android-gravity" class="headerlink" title="android:gravity"></a>android:gravity</h2><p>当开启平铺模式时，gravity 无效。</p>
+<p>当图片尺寸小于容器尺寸时，通过此属性对图片进行定位。</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>top</code></td>
+<td>将图片放在容器顶部，不改变图片大小</td>
+</tr>
+<tr>
+<td><code>bottom</code></td>
+<td>将图片放在容器底部，不改变图片大小</td>
+</tr>
+<tr>
+<td><code>left</code></td>
+<td>将图片放在容器左部，不改变图片大小</td>
+</tr>
+<tr>
+<td><code>right</code></td>
+<td>将图片放在容器右部，不改变图片大小</td>
+</tr>
+<tr>
+<td><code>center_vertical</code></td>
+<td>图片竖直居中，不改变图片大小</td>
+</tr>
+<tr>
+<td><code>fill_vertical</code></td>
+<td>图片竖直方向填充容器</td>
+</tr>
+<tr>
+<td><code>center_horizontal</code></td>
+<td>图片水平居中，不改变图片的大小</td>
+</tr>
+<tr>
+<td><code>fill_horizontal</code></td>
+<td>图片水平方向填充容器</td>
+</tr>
+<tr>
+<td><code>center</code></td>
+<td>图片在水平和竖直方向同时居中，不改变图片大小</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>图片在水平和竖直方向均填充容器，默认值</td>
+</tr>
+<tr>
+<td><code>clip_vertical</code></td>
+<td>附加选项，竖直方向裁剪</td>
+</tr>
+<tr>
+<td><code>clip_horizontal</code></td>
+<td>附加选项，水平方向裁剪</td>
+</tr>
+</tbody>
+</table>
+<h2 id="android-tileMode"><a href="#android-tileMode" class="headerlink" title="android:tileMode"></a>android:tileMode</h2><p>平铺模式，当开启平铺模式时，gravity 无效，有下面几个值：</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>disabled</td>
+<td>关闭平铺模式，默认值</td>
+</tr>
+<tr>
+<td>clamp</td>
+<td>图片四周像素扩展到周围区域</td>
+</tr>
+<tr>
+<td>repeat</td>
+<td>简单的水平和垂直方向平铺</td>
+</tr>
+<tr>
+<td>mirror</td>
+<td>水平和竖直方向上的镜面投影效果</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Drawable]]></title>
+      <url>/2017/10/25/android/drawable/Android-Drawable/</url>
+      <content type="html"><![CDATA[<p>Android 的 Drawable 表示的是可以在 Canvas 上进行绘制的抽象概念。</p>
+<h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><ol>
+<li>使用简单，比自定义 View 的成本低。</li>
+<li>非图片类型的 Drawable 占用空间小。</li>
+</ol>
+<h1 id="Drawable-的分类"><a href="#Drawable-的分类" class="headerlink" title="Drawable 的分类"></a>Drawable 的分类</h1><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BitmapDrawable</td>
+<td>bitmap、nine-path</td>
+<td>表示一张图片</td>
+</tr>
+<tr>
+<td>ShapeDrawable</td>
+<td>shape</td>
+<td>通过颜色构造的图形</td>
+</tr>
+<tr>
+<td>LayerDrawable</td>
+<td>layer-list</td>
+<td>层次化的 Drawable 合集</td>
+</tr>
+<tr>
+<td>StateListDrawable</td>
+<td>selector</td>
+<td>Drawable 合集，每个 Drawable 对应 View 的一种状态</td>
+</tr>
+<tr>
+<td>LevelListDrawable</td>
+<td>level-list</td>
+<td>Drawable 合集，每个 Drawable 都有等级，根据不同等级进行切换</td>
+</tr>
+<tr>
+<td>TransitionDrawable</td>
+<td>transition</td>
+<td>两个 Drawable 之间的淡入淡出效果</td>
+</tr>
+<tr>
+<td>InsetDrawable</td>
+<td>inset</td>
+<td>将其他 Drawable 内嵌到自己当中，并在四周留出一定的间距</td>
+</tr>
+<tr>
+<td>ScaleDrawable</td>
+<td>scale</td>
+<td>根据等级将指定的 Drawable 缩放到一定比例</td>
+</tr>
+<tr>
+<td>ClipDrawable</td>
+<td>clip</td>
+<td>根据自己当前的等级裁剪另一个 Drawable</td>
+</tr>
+</tbody>
+</table>
+<p>当然还可以自定义 Drawable。</p>
+<p>更多详细信息在以后的文章中分步讲解：</p>
+<ol>
+<li><a href="/2017/10/27/android/drawable/Android-Drawable-之-bitmap-及-nine-path/">bitmap 及 nine-path</a></li>
+</ol>
+<ul>
+<li><a href="/2017/10/27/android/drawable/Android-Drawable-之-shape/">shape</a></li>
+<li><a href="/2017/10/27/android/drawable/Android-Drawable-之-layer-list/">layer-list</a></li>
+<li><a href="/2017/10/28/android/drawable/Android-Drawable-之-selector/">selector</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Android Studio 源码提示 platform not found]]></title>
       <url>/2017/10/25/android%20studio/Android-Studio-%E6%BA%90%E7%A0%81%E6%8F%90%E7%A4%BA-platform-not-found/</url>
       <content type="html"><![CDATA[<p>当我们点击android sdk的某个类进去查看源码的时候，有时候会出现如下提示：</p>
@@ -751,36 +1168,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[View]]></title>
-      <url>/2016/03/16/android/View/</url>
-      <content type="html"><![CDATA[<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
-<ul>
-<li>遵从Android标准。</li>
-<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
-<li>Send accessibility events。</li>
-<li><p>兼容多个Android平台。</p>
-<p>Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
-</li>
-</ul>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/guide/topics/ui/how-android-draws.html" target="_blank" rel="external">How Android Draws Views</a><br> <a href="https://plus.google.com/+ArpitMathur/posts/cT1EuBbxEgN" target="_blank" rel="external">Arpit Mathur制作的View绘制流程图</a><br> <a href="https://groups.google.com/forum/#!topic/android-developers/fkvRZ7JOEBU" target="_blank" rel="external">Difference between invalidate and requestLayout for Viewgroup</a><br> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> android </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> android </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Custom View]]></title>
       <url>/2016/03/16/android/Custom%20View/</url>
       <content type="html"><![CDATA[<h2 id="Creating-a-View-Class"><a href="#Creating-a-View-Class" class="headerlink" title="Creating a View Class"></a>Creating a View Class</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
@@ -858,6 +1245,36 @@
         <tags>
             
             <tag> View </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[View]]></title>
+      <url>/2016/03/16/android/View/</url>
+      <content type="html"><![CDATA[<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
+<ul>
+<li>遵从Android标准。</li>
+<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
+<li>Send accessibility events。</li>
+<li><p>兼容多个Android平台。</p>
+<p>Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/guide/topics/ui/how-android-draws.html" target="_blank" rel="external">How Android Draws Views</a><br> <a href="https://plus.google.com/+ArpitMathur/posts/cT1EuBbxEgN" target="_blank" rel="external">Arpit Mathur制作的View绘制流程图</a><br> <a href="https://groups.google.com/forum/#!topic/android-developers/fkvRZ7JOEBU" target="_blank" rel="external">Difference between invalidate and requestLayout for Viewgroup</a><br> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
             
         </tags>
         
