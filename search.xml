@@ -3,6 +3,289 @@
   
     
     <entry>
+      <title><![CDATA[Android Drawable 之 clip]]></title>
+      <url>/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-clip/</url>
+      <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Clip" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Clip</a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;clip</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:drawable=&quot;@drawable/drawable_resource&quot;</div><div class="line">    android:clipOrientation=[&quot;horizontal&quot; | &quot;vertical&quot;]</div><div class="line">    android:gravity=[&quot;top&quot; | &quot;bottom&quot; | &quot;left&quot; | &quot;right&quot; | &quot;center_vertical&quot; |</div><div class="line"> &quot;fill_vertical&quot; | &quot;center_horizontal&quot; | &quot;fill_horizontal&quot; | &quot;center&quot; | &quot;fill&quot; | &quot;clip_vertical&quot; | &quot;clip_horizontal&quot;] /&gt;</div></pre></td></tr></table></figure>
+<h2 id="部分属性"><a href="#部分属性" class="headerlink" title="部分属性"></a>部分属性</h2><h3 id="android-clipOrientation"><a href="#android-clipOrientation" class="headerlink" title="android:clipOrientation"></a>android:clipOrientation</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>horizontal</td>
+<td>水平裁剪可绘制对象。</td>
+</tr>
+<tr>
+<td>vertical</td>
+<td>垂直裁剪可绘制对象。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="android-gravity"><a href="#android-gravity" class="headerlink" title="android:gravity"></a>android:gravity</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>top</td>
+<td>将 Drawable 放在容器顶部，不改变其大小。如果为竖直裁剪，裁剪底部</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>将 Drawable 放在容器底部，不改变其大小。如果为竖直裁剪，裁剪顶部</td>
+</tr>
+<tr>
+<td>left</td>
+<td>将 Drawable 放在容器的左边，不改变其大小。如果为水平裁剪，裁剪右边。默认值</td>
+</tr>
+<tr>
+<td>right</td>
+<td>将 Drawable 放在容器的右边，不改变其大小。如果为水平裁剪，裁剪左边</td>
+</tr>
+<tr>
+<td>center_vertical</td>
+<td>使 Drawable 在容器中竖直居中，不改变其大小。如果为竖直裁剪，裁剪顶部和底部</td>
+</tr>
+<tr>
+<td>fill_vertical</td>
+<td>使 Drawable 在竖直方向填充容器。如果为竖直裁剪，仅当 ClipDrawable 的等级为0（0表示 ClipDrawable 被完全裁剪，即不可见）时，才能有裁剪行为。</td>
+</tr>
+<tr>
+<td>center_horizontal</td>
+<td>使 Drawable 在容器中水平居中，不改变其大小。如果为水平裁剪，裁剪左右两边</td>
+</tr>
+<tr>
+<td>center</td>
+<td>使的 Drawable 在容器中水平和竖直方向都居中，不改变其大小。如果为竖直裁剪，裁剪上下两端。如果为水平裁剪，裁剪左右两边。</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>使 Drawable 在水平和竖直方向上填充容器。仅当 ClipDrawable 等级为0时，才有裁剪行为。</td>
+</tr>
+<tr>
+<td>clip_vertical</td>
+<td>附近选项，竖直方向裁剪，较少使用</td>
+</tr>
+<tr>
+<td>clip_horizontal</td>
+<td>附近选项，水平方向裁剪，较少使用</td>
+</tr>
+</tbody>
+</table>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1>]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Drawable 之 scale]]></title>
+      <url>/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-scale/</url>
+      <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Scale" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Scale</a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;scale</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:drawable=&quot;@drawable/drawable_resource&quot;</div><div class="line">    android:scaleGravity=[&quot;top&quot; | &quot;bottom&quot; | &quot;left&quot; | &quot;right&quot; | &quot;center_vertical&quot; | &quot;fill_vertical&quot; | &quot;center_horizontal&quot; | &quot;fill_horizontal&quot; |</div><div class="line"> &quot;center&quot; | &quot;fill&quot; | &quot;clip_vertical&quot; | &quot;clip_horizontal&quot;]</div><div class="line">    android:scaleHeight=&quot;percentage&quot;</div><div class="line">    android:scaleWidth=&quot;percentage&quot; /&gt;</div></pre></td></tr></table></figure>
+<h2 id="部分属性"><a href="#部分属性" class="headerlink" title="部分属性"></a>部分属性</h2><h3 id="android-scaleGravity"><a href="#android-scaleGravity" class="headerlink" title="android:scaleGravity"></a>android:scaleGravity</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>top</td>
+<td>将对象放在其容器顶部，不改变其大小。</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>将对象放在其容器底部，不改变其大小。</td>
+</tr>
+<tr>
+<td>left</td>
+<td>将对象放在其容器左边缘，不改变其大小。这是默认值。</td>
+</tr>
+<tr>
+<td>right</td>
+<td>将对象放在其容器右边缘，不改变其大小。</td>
+</tr>
+<tr>
+<td>center_vertical</td>
+<td>将对象放在其容器的垂直中心，不改变其大小。</td>
+</tr>
+<tr>
+<td>fill_vertical</td>
+<td>按需要扩展对象的垂直大小，使其完全适应其容器。</td>
+</tr>
+<tr>
+<td>center_horizontal</td>
+<td>将对象放在其容器的水平中心，不改变其大小。</td>
+</tr>
+<tr>
+<td>fill_horizontal</td>
+<td>按需要扩展对象的水平大小，使其完全适应其容器。</td>
+</tr>
+<tr>
+<td>center</td>
+<td>将对象放在其容器的水平和垂直轴中心，不改变其大小。</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>按需要扩展对象的垂直大小，使其完全适应其容器。</td>
+</tr>
+<tr>
+<td>clip_vertical</td>
+<td>可设置为让子元素的上边缘和/或下边缘裁剪至其容器边界的附加选项。裁剪基于垂直方向：顶部裁剪到上边缘，底部裁剪到下边缘，不会同时裁剪两边。</td>
+</tr>
+<tr>
+<td>clip_horizontal</td>
+<td>可设置为让子元素的左边和/或右边裁剪至其容器边界的附加选项。裁剪基于水平方向：左边裁剪到右边缘，右边裁剪到边缘，不会同时裁剪两边。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="android-scaleWidth、android-scaleHeight"><a href="#android-scaleWidth、android-scaleHeight" class="headerlink" title="android:scaleWidth、android:scaleHeight"></a>android:scaleWidth、android:scaleHeight</h3><p>可绘制对象的缩放百分比，以百分比的形式表示。值越大 Drawable 越小。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>Drawable 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;scale xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:drawable=&quot;@drawable/ic_android_blue_700_24dp&quot;</div><div class="line">    android:scaleGravity=&quot;center&quot;</div><div class="line">    &gt;</div><div class="line">&lt;/scale&gt;</div></pre></td></tr></table></figure></p>
+<p>使用 ImageView 进行显示，但是发现没有效果，这是为什么呢？下面慢慢来解答。</p>
+<h2 id="指定缩放级别以显示-Drawable"><a href="#指定缩放级别以显示-Drawable" class="headerlink" title="指定缩放级别以显示 Drawable"></a>指定缩放级别以显示 Drawable</h2><p>为什么跑出来的效果是一片空白？因为 ScaleDrawable  有一个级别的概念，范围为 [0,10000]，如果级别为0，则不显示；如果级别越大则 Drawable 越大。也就是说我们设置一下级别大于0就好了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ImageView imageView = (ImageView) findViewById(R.id.image_view);</div><div class="line">ScaleDrawable scaleDrawable = (ScaleDrawable) imageView.getDrawable();</div><div class="line">scaleDrawable.setLevel(1);</div></pre></td></tr></table></figure>
+<p>级别为1，未缩放：<br><img src="/images/android/drawable/pasted-10.png" alt="缩放级别显示"></p>
+<h2 id="缩放比例"><a href="#缩放比例" class="headerlink" title="缩放比例"></a>缩放比例</h2><p>使用 <code>android:scaleWidth</code>、<code>android:scaleHeight</code> 属性指定缩放比例，值越大 Drawable 越小。</p>
+<p>级别为1，缩放均为30%：<br><img src="/images/android/drawable/pasted-11.png" alt="级别为1，缩放均为30%"></p>
+<p>级别为1，缩放比例均为50%：<br><img src="/images/android/drawable/pasted-12.png" alt="级别为1，缩放比例均为50%"></p>
+<p>级别为1，缩放比例均为70%：<br><img src="/images/android/drawable/pasted-13.png" alt="级别为1，缩放比例均为70"></p>
+<h2 id="使用级别控制-Drawable-大小"><a href="#使用级别控制-Drawable-大小" class="headerlink" title="使用级别控制 Drawable 大小"></a>使用级别控制 Drawable 大小</h2><p>在相同缩放比例情况下，级别越大 Drawable 越大。下面的图片均在缩放比例为70%时进行的测试。</p>
+<p>级别为3000：<br><img src="/images/android/drawable/pasted-14.png" alt="级别为3000"></p>
+<p>级别为7000：<br><img src="/images/android/drawable/pasted-15.png" alt="级别为7000"></p>
+<p>级别为10000时相当于不缩放：<br><img src="/images/android/drawable/pasted-16.png" alt="级别为10000时相当于不缩放"></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Drawable 之 inset]]></title>
+      <url>/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-inset/</url>
+      <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Inset" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Inset</a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;inset</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:drawable=&quot;@drawable/drawable_resource&quot;</div><div class="line">    android:insetTop=&quot;dimension&quot;</div><div class="line">    android:insetRight=&quot;dimension&quot;</div><div class="line">    android:insetBottom=&quot;dimension&quot;</div><div class="line">    android:insetLeft=&quot;dimension&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>将其他 Drawable 内嵌到自己当中，并可在四周留出一定距离。<br>当 View 希望自己的背景比自己的实际区域小的时候，<code>&lt;inset&gt;</code> 很有用。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>下面的实例使用 <code>View</code> 来实现，其实它是充满整个屏幕的，只是在 Drawable 中指定了边距，所以我们所看见的 Drawable 区域并不是 View 的真实大小。</p>
+<h2 id="纯背景色案例"><a href="#纯背景色案例" class="headerlink" title="纯背景色案例"></a>纯背景色案例</h2><p><img src="/images/android/drawable/pasted-7.png" alt="纯背景色"><br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:inset=&quot;10dp&quot;</div><div class="line">    android:drawable=&quot;@color/colorPrimary&quot;</div><div class="line">    &gt;</div><div class="line">&lt;/inset&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="图片实例"><a href="#图片实例" class="headerlink" title="图片实例"></a>图片实例</h2><p><img src="/images/android/drawable/pasted-8.png" alt="图片实例"><br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:drawable=&quot;@drawable/ic_android_red_800_24dp&quot;</div><div class="line">    android:inset=&quot;10dp&quot;</div><div class="line">    &gt;</div><div class="line">&lt;/inset&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="在-lt-inset-gt-中绘制"><a href="#在-lt-inset-gt-中绘制" class="headerlink" title="在 &lt;inset&gt; 中绘制"></a>在 <code>&lt;inset&gt;</code> 中绘制</h2><p><img src="/images/android/drawable/pasted-9.png" alt="在 `&lt;inset&gt;` 中绘制"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:inset=&quot;20dp&quot;</div><div class="line">    &gt;</div><div class="line"></div><div class="line">  &lt;shape</div><div class="line">      android:shape=&quot;rectangle&quot;</div><div class="line">      &gt;</div><div class="line">    &lt;solid android:color=&quot;@color/colorAccent&quot;/&gt;</div><div class="line">  &lt;/shape&gt;</div><div class="line">&lt;/inset&gt;</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Drawable 之 transition]]></title>
+      <url>/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-transition/</url>
+      <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Transition" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Transition</a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;transition</div><div class="line">xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</div><div class="line">        android:id=&quot;@[+][package:]id/resource_name&quot;</div><div class="line">        android:top=&quot;dimension&quot;</div><div class="line">        android:right=&quot;dimension&quot;</div><div class="line">        android:bottom=&quot;dimension&quot;</div><div class="line">        android:left=&quot;dimension&quot; /&gt;</div><div class="line">&lt;/transition&gt;</div></pre></td></tr></table></figure>
+<p><code>&lt;transition&gt;</code> 用于实现两个 Drawable 之间的淡入淡出效果。其属性没有什么特别的，指定展示的资源，指定与 View 之间的边距。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p><img src="/images/android/drawable/QQ20171031-162348.gif" alt="transition 实例"></p>
+<p>这是一个 ImageVIew，为其指定了一个 transition 的资源作为图片，点击 ImageView，启动淡入淡出动画效果。</p>
+<p>动画资源文件代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;transition xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item android:drawable=&quot;@drawable/ic_android_red_800_24dp&quot;/&gt;</div><div class="line">  &lt;item android:drawable=&quot;@drawable/ic_android_green_600_24dp&quot;/&gt;</div><div class="line">  &lt;item android:drawable=&quot;@drawable/ic_android_blue_700_24dp&quot;/&gt;</div><div class="line">&lt;/transition&gt;</div></pre></td></tr></table></figure></p>
+<p>这里我指定了三个图片，但是最后一个蓝色图片是没有效果的，会不会是 <code>&lt;transition&gt;</code> 里只支持两个图片切换的效果？</p>
+<p>在 Java 代码中启动淡入淡出效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">final ImageView imageView = ((ImageView)findViewById(R.id.image_view));</div><div class="line">imageView.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">  @Override public void onClick(View v) &#123;</div><div class="line">    TransitionDrawable transitionDrawable = (TransitionDrawable) imageView.getDrawable();</div><div class="line">    transitionDrawable.startTransition(2000);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Drawable 之 level-list]]></title>
+      <url>/2017/10/28/android/drawable/Android-Drawable-%E4%B9%8B-level-list/</url>
+      <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#LevelList" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#LevelList</a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;level-list</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/drawable_resource&quot;</div><div class="line">        android:maxLevel=&quot;integer&quot;</div><div class="line">        android:minLevel=&quot;integer&quot; /&gt;</div><div class="line">&lt;/level-list&gt;</div></pre></td></tr></table></figure>
+<p>级别列表中每个 <code>&lt;item&gt;</code> 表示一个级别，作为 View 的背景色时可使用 Drawable 的 <code>setLevel</code> 来切换不同级别的 Drawable；作为 ImageView 的前景色时可使用 <code>setImageLevel</code> 来切换不同的 Drawable。</p>
+<p>级别是有限制的，范围为 [0, 10000]。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p><img src="/images/android/drawable/QQ20171031-153619.gif" alt="level-list 实例"></p>
+<p>这里通过两个拖动条（seekbar）来控制背景和前景的改变。</p>
+<p>背景 level-list 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;level-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item android:drawable=&quot;@color/colorAccent&quot; android:minLevel=&quot;0&quot; android:maxLevel=&quot;5&quot;/&gt;</div><div class="line">  &lt;item android:drawable=&quot;@color/colorPrimary&quot; android:minLevel=&quot;6&quot; android:maxLevel=&quot;10&quot;/&gt;</div><div class="line">  &lt;item android:drawable=&quot;@color/colorPrimaryDark&quot; android:minLevel=&quot;11&quot; android:maxLevel=&quot;15&quot;/&gt;</div><div class="line">&lt;/level-list&gt;</div></pre></td></tr></table></figure></p>
+<p>Java 里控制背景色改变方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">((SeekBar) findViewById(R.id.seekBar)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() &#123;</div><div class="line">  @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) &#123;</div><div class="line">    imageView.getBackground().setLevel(progress);</div><div class="line">    textView1.setText(&quot;切换背景色：&quot; + progress);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override public void onStartTrackingTouch(SeekBar seekBar) &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override public void onStopTrackingTouch(SeekBar seekBar) &#123;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>前景 level-list 的代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;level-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item android:maxLevel=&quot;1&quot; android:drawable=&quot;@drawable/ic_android_blue_700_24dp&quot;/&gt;</div><div class="line">  &lt;item android:maxLevel=&quot;3&quot; android:drawable=&quot;@drawable/ic_android_green_600_24dp&quot;/&gt;</div><div class="line">  &lt;item android:maxLevel=&quot;5&quot; android:drawable=&quot;@drawable/ic_android_red_800_24dp&quot;/&gt;</div><div class="line">&lt;/level-list&gt;</div></pre></td></tr></table></figure></p>
+<p>Java 里切换前景色代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">((SeekBar) findViewById(R.id.seekBar2)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() &#123;</div><div class="line">  @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) &#123;</div><div class="line">    imageView.setImageLevel(progress);</div><div class="line">    textView2.setText(&quot;切换前景色：&quot; + progress);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override public void onStartTrackingTouch(SeekBar seekBar) &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override public void onStopTrackingTouch(SeekBar seekBar) &#123;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Android Drawable 之 selector]]></title>
       <url>/2017/10/28/android/drawable/Android-Drawable-%E4%B9%8B-selector/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#StateList" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#StateList</a></p>
@@ -197,6 +480,194 @@
 <p>第三步，留出两边的折线<br><img src="/images/android/drawable/pasted-1.png" alt="输入框效果图"></p>
 <p>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item&gt;</div><div class="line">    &lt;shape android:shape=&quot;rectangle&quot;&gt;</div><div class="line">      &lt;solid android:color=&quot;#ac2400&quot;/&gt;</div><div class="line">    &lt;/shape&gt;</div><div class="line">  &lt;/item&gt;</div><div class="line">  &lt;item android:bottom=&quot;6dp&quot;&gt;</div><div class="line">    &lt;shape android:shape=&quot;rectangle&quot;&gt;</div><div class="line">      &lt;solid android:color=&quot;@android:color/white&quot;/&gt;</div><div class="line">    &lt;/shape&gt;</div><div class="line">  &lt;/item&gt;</div><div class="line">  &lt;item</div><div class="line">      android:bottom=&quot;1dp&quot;</div><div class="line">      android:left=&quot;1dp&quot;</div><div class="line">      android:right=&quot;1dp&quot;</div><div class="line">      &gt;</div><div class="line">    &lt;shape android:shape=&quot;rectangle&quot;&gt;</div><div class="line">      &lt;solid android:color=&quot;@android:color/white&quot;/&gt;</div><div class="line">    &lt;/shape&gt;</div><div class="line">  &lt;/item&gt;</div><div class="line">&lt;/layer-list&gt;</div></pre></td></tr></table></figure></p>
 <p>最后在 EditText 中使用 <code>android:background=&quot;@drawable/...&quot;</code> 进行显示。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> drawable </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> drawable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Drawable 之 shape]]></title>
+      <url>/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-shape/</url>
+      <content type="html"><![CDATA[<h1 id="ShapeDrawable-中的部分属性和标签"><a href="#ShapeDrawable-中的部分属性和标签" class="headerlink" title="ShapeDrawable 中的部分属性和标签"></a>ShapeDrawable 中的部分属性和标签</h1><h2 id="android-shape"><a href="#android-shape" class="headerlink" title="android:shape"></a>android:shape</h2><table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rectangle</td>
+<td>矩形</td>
+</tr>
+<tr>
+<td>oval</td>
+<td>椭圆</td>
+</tr>
+<tr>
+<td>line</td>
+<td>横线</td>
+</tr>
+<tr>
+<td>ring</td>
+<td>圆环</td>
+</tr>
+</tbody>
+</table>
+<p>针对 ring 属性值，有5个特殊属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android:innerRadius</td>
+<td>圆环内半径，和 android:innerRadiusRatio 同时存在时，以 android:innerRadius 为准</td>
+</tr>
+<tr>
+<td>android:thickness</td>
+<td>圆环的厚度，和 android:thicknessRatio 同时存在时，以 android:thickness 为准</td>
+</tr>
+<tr>
+<td>android:innerRadiusRatio</td>
+<td>内半径占整个 Drawable 宽度的比例，默认值9。如果为 n，内半径=宽度/n</td>
+</tr>
+<tr>
+<td>android:thicknessRatio</td>
+<td>厚度占整个 Drawable 宽度的比例，默认值为3。如果为 n，厚度=宽度/n</td>
+</tr>
+<tr>
+<td>android:useLevel</td>
+<td>一般都应该使用 false，否则有可能无法达到预期效果，除非当做 LevelListDrawable 来用</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lt-corners-gt-标签"><a href="#lt-corners-gt-标签" class="headerlink" title="&lt;corners&gt; 标签"></a><code>&lt;corners&gt;</code> 标签</h2><p>表示 shape 的四个角的角度。它只适用于矩形 shape，有如下几个属性值：</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android:radius</td>
+<td>为四个角同时设定相同的角度</td>
+</tr>
+<tr>
+<td>android:topLeftRadius</td>
+<td>设定左上角的角度</td>
+</tr>
+<tr>
+<td>android:topRightRadius</td>
+<td>设定右上角的角度</td>
+</tr>
+<tr>
+<td>android:bottomLeftRadius</td>
+<td>设定左下角的角度</td>
+</tr>
+<tr>
+<td>android:bottomRightRadius</td>
+<td>设定右下角的角度</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lt-gradient-gt-标签"><a href="#lt-gradient-gt-标签" class="headerlink" title="&lt;gradient&gt; 标签"></a><code>&lt;gradient&gt;</code> 标签</h2><p>表示渐变效果，有如下几个属性。</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android:angle</td>
+<td>渐变的角度，默认为0，其值必须为45的倍数，0表示从左到右，90表示从上到下，角度会影响渐变的方向</td>
+</tr>
+<tr>
+<td>android:centerX</td>
+<td>渐变的中心点的横坐标</td>
+</tr>
+<tr>
+<td>android:centerY</td>
+<td>渐变的中心点的众坐标</td>
+</tr>
+<tr>
+<td>android:startColor</td>
+<td>渐变的起始色</td>
+</tr>
+<tr>
+<td>android:centerColor</td>
+<td>渐变的中间色</td>
+</tr>
+<tr>
+<td>android:endColor</td>
+<td>渐变的结束色</td>
+</tr>
+<tr>
+<td>android:gradientRadius</td>
+<td>渐变的半径，仅当 android:type=”radial” 时有效</td>
+</tr>
+<tr>
+<td>android:useLevel</td>
+<td>一般为 false，当 Drawable 作为 StateListDrawable 使用时为 true</td>
+</tr>
+<tr>
+<td>android:type</td>
+<td>渐变的类别，linear(线性渐变，默认值)，radial(径向渐变)，sweep(扫描线渐变)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lt-solid-gt-标签"><a href="#lt-solid-gt-标签" class="headerlink" title="&lt;solid&gt; 标签"></a><code>&lt;solid&gt;</code> 标签</h2><p>纯色填充，<code>android:color</code> 指定 shape 中填充的颜色。</p>
+<h2 id="lt-stroke-gt-标签"><a href="#lt-stroke-gt-标签" class="headerlink" title="&lt;stroke&gt; 标签"></a><code>&lt;stroke&gt;</code> 标签</h2><p>shape 的描边，有如下几个属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android:width</td>
+<td>描边的宽度</td>
+</tr>
+<tr>
+<td>android:color</td>
+<td>描边颜色</td>
+</tr>
+<tr>
+<td>android:dashWidth</td>
+<td>组成虚线的线段的宽度</td>
+</tr>
+<tr>
+<td>android:dashGap</td>
+<td>组成虚线的线段之间的间隔</td>
+</tr>
+</tbody>
+</table>
+<p>想要虚线效果，<code>android:dashWidth</code> 和 <code>android:dashGap</code> 都不能为0。</p>
+<h2 id="lt-padding-gt-标签"><a href="#lt-padding-gt-标签" class="headerlink" title="&lt;padding&gt; 标签"></a><code>&lt;padding&gt;</code> 标签</h2><p>表示包含它的 View 的空白，注意不是 shape 自身的空白。有这样几个属性：<code>android:left</code>、<code>android:top</code>、<code>android:right</code>、<code>android:bottom</code>。</p>
+<h2 id="lt-size-gt-标签"><a href="#lt-size-gt-标签" class="headerlink" title="&lt;size&gt; 标签"></a><code>&lt;size&gt;</code> 标签</h2><p>shape 的大小，有两个属性：<code>android:width</code> 和 <code>android:height</code>，分别表示 shape 的宽和高。</p>
 ]]></content>
       
         <categories>
