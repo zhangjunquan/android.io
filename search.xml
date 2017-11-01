@@ -3,6 +3,233 @@
   
     
     <entry>
+      <title><![CDATA[Android Activity 的启动模式]]></title>
+      <url>/2017/11/01/android/activity/Android-Activity-%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/</url>
+      <content type="html"><![CDATA[<h1 id="Activity-的-LaunchMode"><a href="#Activity-的-LaunchMode" class="headerlink" title="Activity 的 LaunchMode"></a>Activity 的 LaunchMode</h1><p>可以使用 <code>adb shell dumpsys activity</code> 或者 <code>adb shell dumpsys activity activities</code> 命令查看运行状态（其中的 <code>Running activities (most recent first)</code> 部分）</p>
+<h2 id="standard-标准（默认）模式"><a href="#standard-标准（默认）模式" class="headerlink" title="standard 标准（默认）模式"></a>standard 标准（默认）模式</h2><p>Activity 启动时都会创建实例。也就是说会有新的界面生成，并且以前的同名 Activity 也还存在。</p>
+<p>一个任务栈中可以有多个实例，不同实例也可以属于不同的任务栈。Activity A 启动了 Activity B（标准模式），B 就属于 A 所在的任务栈。</p>
+<p>以 ApplicationContext 的 Context 来启动 Activity 会抛出异常，因为 ApplicationContext 并没有所谓的任务栈，会要求你为新启动的 Activity 加上 FLAG_ACTIVITY_NEW_TASK 标记位，这样启动的 Activity 相当于是以 singleTask 模式启动的。</p>
+<h2 id="singleTop-栈顶复用模式"><a href="#singleTop-栈顶复用模式" class="headerlink" title="singleTop 栈顶复用模式"></a>singleTop 栈顶复用模式</h2><p>如果栈顶的 Activity 与要启动的 Activity 同名，则不会创建新的实例，而是调用栈顶 Activity 的 onNewIntent() 方法。</p>
+<p>如果栈中已经存在要启动的 Activity，但不是在栈顶，会重新创建一个新的 Activity。</p>
+<p>也就是说指定为 singleTop 启动模式的 Activity 在栈顶不会存在两个（第一个和第二个不会同时都是它）。</p>
+<h2 id="singleTask-栈内复用模式"><a href="#singleTask-栈内复用模式" class="headerlink" title="singleTask 栈内复用模式"></a>singleTask 栈内复用模式</h2><p>整个任务栈中只存在一个实例，并且具有 clearTop 的特性。</p>
+<p>当没有任务栈存放需要启动的 Activity 时，系统会先创建一个任务栈，并将启动后的 Activity 放入栈中。</p>
+<p>当存在存放需要启动的 Activity 的栈时，要启动的 Activity 在栈中不存在，则直接创建一个放在栈顶；如果栈中存在，则会直接清除并释放该 Activity 上面的所有 Activity，需要启动的 Activity 则在栈顶了并且会调用 onNewIntent() 方法。</p>
+<h2 id="singleInstance-单实例模式"><a href="#singleInstance-单实例模式" class="headerlink" title="singleInstance 单实例模式"></a>singleInstance 单实例模式</h2><p>singleInstance 模式除了有 singleTask 的所有特性外， Activity 还只能单独的位于一个任务栈中。</p>
+<p>如果系统中没有该 Activity 实例，则会创建一个任务栈并将新创建的 Activity 放进去。</p>
+<p>整个系统中只存在唯一的一个实例。在 singleInstance 的 Activity 上启动的 Activity（假设为 N）不与 singleInstance Activity 在同一个栈，而是与之前启动 singleInstance Activity 的栈相同。当关闭 N 后，栈顶的 Activity 会变成与 N 同栈的栈顶元素，而不是 singleInstance Activity，一直返回，当 N 所在任务栈被清空时，才会显示 singleInstance Activity。</p>
+<h1 id="Activity-的-Flags"><a href="#Activity-的-Flags" class="headerlink" title="Activity 的 Flags"></a>Activity 的 Flags</h1><table>
+<thead>
+<tr>
+<th>flag</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FLAG_ACTIVITY_NEW_TASK</td>
+<td>指定 Activity 为 singleTask 模式</td>
+</tr>
+<tr>
+<td>FLAG_ACTIVITY_SINGLE_TOP</td>
+<td>指定 Activity 为 singleTop 模式</td>
+</tr>
+<tr>
+<td>FLAG_ACTIVITY_CLEAR_TOP</td>
+<td>清除 Activity 上的所有 Activity</td>
+</tr>
+<tr>
+<td>FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS</td>
+<td>Activity 不会出现在历史 Activity 列表中，等同于在 xml 中可指定 Activity 属性 android:excludeFromRecents=”true”</td>
+</tr>
+</tbody>
+</table>
+<h1 id="指定启动模式的两种方式"><a href="#指定启动模式的两种方式" class="headerlink" title="指定启动模式的两种方式"></a>指定启动模式的两种方式</h1><ol>
+<li>在清单文件中通过 android:launchMode 属性指定：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;activity</div><div class="line">	android:name=&quot;...&quot;</div><div class="line">    android:lable=&quot;@string/app_name&quot;</div><div class="line">    android:launchMode=&quot;singleTask&quot;</div><div class="line">    /&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>在 Java 代码中通过 Intent 设置标志位<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = new Intent(this, TargetActivity.class);</div><div class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面两种方式的区别：</p>
+<ol>
+<li>第二种优先级更高，当两者同时存在时，以第二种为准。</li>
+</ol>
+<ul>
+<li>第一种方式无法直接设置 FLAG_ACTIVITY_CLEAR_TOP 标识，第二种无法为 Activity 指定 singleInstance 模式。</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> activity </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> activity </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Activity]]></title>
+      <url>/2017/10/31/android/activity/Android-Activity/</url>
+      <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/components/activities.html" target="_blank" rel="external">https://developer.android.com/guide/components/activities.html</a></p>
+<h1 id="Activity的状态"><a href="#Activity的状态" class="headerlink" title="Activity的状态"></a>Activity的状态</h1><ul>
+<li>运行</li>
+<li>暂停</li>
+<li>停止</li>
+<li>销毁</li>
+</ul>
+<h1 id="Activity的生命周期和优先级"><a href="#Activity的生命周期和优先级" class="headerlink" title="Activity的生命周期和优先级"></a>Activity的生命周期和优先级</h1><p><img src="/images/android/activity/pasted-0.png" alt="activity_lifecycle"></p>
+<ol>
+<li>onCreate()：表示 Activity 正在被创建，生命周期的第一个方法。在该方法中做初始化工作，比如加载界面布局，初始化所需要的数据。</li>
+</ol>
+<ul>
+<li>onRestart()：Activity 正在重新启动。当当前 Activity 从不可见变为可见时，调用该方法。比如用户按 home 键切换到桌面或者打开了一个新的 Activity，这时当前 Activity 会暂停，接着又回到该 Activity，就会调用该方法。</li>
+<li>onStart()：Activity 正在被启动，这时 Activity 已经可见了，但是还没有出现在前台，还无法和用户交互。可以理解为已经显示了，但是我们还看不见。</li>
+<li>onResume()：Activity 已经可见，出现在前台并开始活动。onStart()的时候 Activity 还在后台，onResume()的时候 Activity 才显示到前台。</li>
+<li>onPause()：Activity 正在停止，正常情况下，紧接着会调用 onStop() 方法。<strong> 最好是在 <code>onPause()</code> 方法存储数据、停止动画等不耗时的操作，原因如下：因为系统在紧急情况下必须恢复内存，则可能不会调用 <code>onStop()</code> 和 <code>onDestroy()</code>。 如果启动的新的界面是一个对话框，<code>onPause()</code> 方法会执行，而<code>onStop()</code> 方法不会执行。</strong>注意该方法不能太耗时，因为 onPause 执行完，新 Activity 的 onResume 方法才会执行。</li>
+<li>onStop()：Activity 即将停止，可以做一些稍微重量级的回收工作，一样不能太耗时。</li>
+<li>onDestroy()：Activity 即将被销毁，Activity 生命周期的最后一个回调方法，可以做一些回收工作和最后的资源释放。</li>
+</ul>
+<h2 id="Activity-的优先级"><a href="#Activity-的优先级" class="headerlink" title="Activity 的优先级"></a>Activity 的优先级</h2><ol>
+<li>前台 Activity：正在和用户交互的 Activity，优先级最高。</li>
+</ol>
+<ul>
+<li>可见但非前台 Activity：比如 Activity 中弹了一个对话框，导致 Activity 可见但位于后台无法和用户交互。</li>
+<li>后台 Activity：已经被暂停的 Activity，比如执行了 onStop 方法，优先级最低。</li>
+</ul>
+<h2 id="Activity-生命周期情况列举"><a href="#Activity-生命周期情况列举" class="headerlink" title="Activity 生命周期情况列举"></a>Activity 生命周期情况列举</h2><ol>
+<li>针对一个特定的 Activity，第一次启动，回调如下：onCreate -&gt; onStart -&gt; onResume。</li>
+</ol>
+<ul>
+<li>当用户打开新的 Activity 或切换到桌面，回调如下：onPause -&gt; onStop。有种特殊情况，如果新 Activity 是透明主题，当前 Activity 不会回调 onStop。</li>
+<li>用户再次回到该 Activity，回调如下：onRestart -&gt; onStart -&gt; onResume。</li>
+<li>当用户按 back 键回退时，回调如下：onPause -&gt; onStop -&gt; onDestroy。</li>
+<li>当 Activity 被系统回收后重新打开，生命周期和1中一样：onCreate -&gt; onStart -&gt; onResume。这里只是生命周期一样，过程不完全一样。</li>
+<li>从整个生命周期来讲，onCreate 和 onDestroy 是匹配的，分别为创建和销毁，并且都只调用一次。从 Activity 是否可见来讲，onStart 和 onStop 是匹配的，这两个方法可能被调用多次。从 Activity 是否在前台来讲，onResume 和 onPause 是匹配的，这两个方法也可能被调用多次。</li>
+</ul>
+<h2 id="Activity-生命周期的疑问"><a href="#Activity-生命周期的疑问" class="headerlink" title="Activity 生命周期的疑问"></a>Activity 生命周期的疑问</h2><h3 id="onStart-和-onResume、onPause-和-onStop-的区别"><a href="#onStart-和-onResume、onPause-和-onStop-的区别" class="headerlink" title="onStart 和 onResume、onPause 和 onStop 的区别"></a>onStart 和 onResume、onPause 和 onStop 的区别</h3><p>在实际使用的过程中，onStart 和 onResume、onPause 和 onStop 确实差不多，许多情况下我们只保留其中一对就能实现功能，要么是 onStart 和 onStop，要么是 onResume 和 onPause。要说他们之间到底有什么区别，那就是 onStart 和 onStop 是从 Activity 是否可见来回调的；onResume 和 onPause 是从 Activity 是否在前台来回调的。</p>
+<h3 id="在-Activity-A-中启动-Activity-B，是先停止-A，还是先启动-B"><a href="#在-Activity-A-中启动-Activity-B，是先停止-A，还是先启动-B" class="headerlink" title="在 Activity A 中启动 Activity B，是先停止 A，还是先启动 B"></a>在 Activity A 中启动 Activity B，是先停止 A，还是先启动 B</h3><p>这个问题可以写个 demo 测试一下，在 A 中启动 B，并分别在 A 和 B 的每个生命周期方法中输出日志，根据日志先后顺序可得出结论。</p>
+<p>A onPause -&gt; B onCreate -&gt; B onStart -&gt; B onResume -&gt; A onStop</p>
+<h2 id="异常情况下-Activity-生命周期分析"><a href="#异常情况下-Activity-生命周期分析" class="headerlink" title="异常情况下 Activity 生命周期分析"></a>异常情况下 Activity 生命周期分析</h2><h3 id="资源相关的系统配置发生改变导致-Activity-销毁并重建"><a href="#资源相关的系统配置发生改变导致-Activity-销毁并重建" class="headerlink" title="资源相关的系统配置发生改变导致 Activity 销毁并重建"></a>资源相关的系统配置发生改变导致 Activity 销毁并重建</h3><p>比如旋转屏幕时，Activity 会被销毁并重新创建。</p>
+<p><img src="/images/android/activity/pasted-2.png" alt="异常终止"><br>Activity 在异常终止情况下，会在 onStop 之前调用 onSaveInstanceState 方法，注意是异常终止时才调用 onSaveInstanceState。onSaveInstanceState 和 onPause 之间没有固定的时序关系。</p>
+<p>Activity 被重建后，会调用 onRestoreInstanceState 方法，并且会将 Activity 销毁时保存的 Bundle 对象传递给新 Activity 的 onCreate 和 onRestoreInstanceState 方法。</p>
+<p>当 Activity 在异常情况下进行重建时，系统自动调用 onSaveInstanceState 和 onRestoreInstanceState 为我们保存当前 Activity 的结构 View 的 数据，并在重启后恢复数据。比如用户输入的数据、ListView 的滚动位置等。每个 View 都有 onSaveInstanceState 和 onRestoreInstanceState 两个方法，其中的具体实现就是系统自动为我们保存并恢复的数据。</p>
+<p>保存和恢复 View 层次结构的工作流程：首先 Activity 被意外终止，Activity 调用 onSaveInstanceState 方法，然后 Activity 会委托 Window 去保存数据，接着 Window 会委托它的顶级容器去保存数据，顶级容器是 ViewGroup，通常很可能是 DecorView。最后顶层容器通知它的子元素保存数据。</p>
+<p>onCreate 和 onRestoreInstanceState 两个方法都可以恢复数据，其区别是，正常创建 Activity 时 onCreate 也会调用，但其中的 Bundle 为空，所以使用 onCreate 恢复数据需要进行非空判断；而只要调用了 onRestoreInstanceState 方法，其中的 Bundle 一定是有值的。官方推荐使用 onRestoreInstanceState 方法恢复数据。</p>
+<h4 id="配置发生改变不重建-Activity"><a href="#配置发生改变不重建-Activity" class="headerlink" title="配置发生改变不重建 Activity"></a>配置发生改变不重建 Activity</h4><p>当旋转屏幕时就一定要重建 Activity 吗？是否可以不重建？有一种办法是在清单文件的 <code>&lt;activity&gt;</code> 标签中指定 android:orientation 属性为横屏或竖屏，这样 Activity 就不会受到旋转屏幕的影响，就不会重建。当然，这只是针对 Activity 不受屏幕旋转有效。</p>
+<p>还有一种更加通用的方法，在清单文件中的 <code>&lt;activity&gt;</code> 标签中配置 <code>android:configChanges</code> 属性以标明我们想自己处理某些变动，属性值可以是多个，以“|”分隔。该属性的意思是我们自己处理状态的改变，不需要系统帮助我们处理。比如旋转屏幕，以前系统是调用 onSaveInstanceState 和 onRestoreInstanceState 方法存储和恢复数据，帮助我们重建 Activity；现在增加了 <code>android:configChanges=&quot;orientation&quot;</code> 之后，旋转屏幕回调的是 Activity 的 onConfigurationChanged 方法，可在 Activity 中重写该方法，这样系统就不会自动帮我们重建 Activity。configChanges 的属性值如下：</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mcc</td>
+<td>SIM 卡唯一标识 IMSI（国际移动用户识别码） 中的国家代码，由两位数字组成，中国为460</td>
+</tr>
+<tr>
+<td>mnc</td>
+<td>SIM 卡唯一标识 IMSI（国际移动用户识别码）中的运营商代码，由两位数字组成，中国移动 TD 系统为 00，中国联通为 01，中国电信为03</td>
+</tr>
+<tr>
+<td>local</td>
+<td>设备的本地位置发生了变化，一般指切换了系统语言</td>
+</tr>
+<tr>
+<td>touchscreen</td>
+<td>触摸屏发生了改变</td>
+</tr>
+<tr>
+<td>keyboard</td>
+<td>键盘类型发生了改变，比如用户使用了外插键盘</td>
+</tr>
+<tr>
+<td>keyboardHidden</td>
+<td>键盘的可访问性发生了改变，比如用户调出了键盘</td>
+</tr>
+<tr>
+<td>navigation</td>
+<td>系统导航方式发生了改变，比如采用了轨迹球导航</td>
+</tr>
+<tr>
+<td>screenLayout</td>
+<td>屏幕布局发生了改变</td>
+</tr>
+<tr>
+<td>fontScale</td>
+<td>系统字体缩放比例发生了改变，用户选择了新字号</td>
+</tr>
+<tr>
+<td>uiMode</td>
+<td>用户界面模式发生了改变，比如是否开启夜间模式</td>
+</tr>
+<tr>
+<td>orientation 屏幕方向发生了改变，比如旋转屏幕</td>
+</tr>
+<tr>
+<td>screenSize</td>
+<td>屏幕尺寸信息发生改变，当旋转设备时，屏幕尺寸信息会发生改变。如果 minSDKVersion 和 targetSDKVersion 都小于13，此选项不会导致 Activity 重启，否则会重启 Activity</td>
+</tr>
+<tr>
+<td>smallestScreenSize</td>
+<td>设备物理屏幕发生改变，和屏幕方向没有关系，仅仅在实际的物理屏幕的尺寸改变时发生，比如用户切换到外部的显示设备。如果 minSDKVersion 和 targetSdkVersion 都小于13，此选项不会导致 Activity 重启，否则会重启 Activity</td>
+</tr>
+<tr>
+<td>layoutDirection</td>
+<td>布局方向发生变化，用得较少，正常情况下无须修改布局的 layoutDirection 属性</td>
+</tr>
+</tbody>
+</table>
+<p>从上面的说明可知，如果 minSDKVersion 和 targetSDKVersion 有一个大于了13，想要旋转屏幕时不重建 Activity，需要这样写：<code>android:configChanges=&quot;orientation|screenSize&quot;</code>。</p>
+<h3 id="内存不足导致低优先级的-Activity-被杀死"><a href="#内存不足导致低优先级的-Activity-被杀死" class="headerlink" title="内存不足导致低优先级的 Activity 被杀死"></a>内存不足导致低优先级的 Activity 被杀死</h3><p>当系统内存不足时，系统会按照优先级去杀死 Activity 所在进程，优先级低的先被杀死，并通过 onSaveInstanceState 和 onRestoreInstanceState 方法来存储和恢复数据。所以它的存储和恢复方式与上面 Activity 重建的方式是一样的。</p>
+<h2 id="Activity与Fragment的生命周期关系"><a href="#Activity与Fragment的生命周期关系" class="headerlink" title="Activity与Fragment的生命周期关系"></a>Activity与Fragment的生命周期关系</h2><p>Activity与Fragment之间的生命周期很不好把握，有大神已经总结出来了：<a href="https://github.com/xxv/android-lifecycle" target="_blank" rel="external">https://github.com/xxv/android-lifecycle</a><br>这里将图直接展示，方便自己查看。<br><img src="https://raw.githubusercontent.com/xxv/android-lifecycle/master/complete_android_fragment_lifecycle.png" alt="https://raw.githubusercontent.com/xxv/android-lifecycle/master/complete_android_fragment_lifecycle.png"></p>
+<h1 id="Activity状态的保存"><a href="#Activity状态的保存" class="headerlink" title="Activity状态的保存"></a>Activity状态的保存</h1><p>之前在配置发生改变时讲了 Activity 如何保存状态，这里再次重复并补充一下。<br><img src="/images/android/activity/pasted-1.png" alt="Activity 状态保存生命周期"></p>
+<p>在销毁Activity之前会先调用 <code>onSaveInstanceState()</code> 方法，可以利用其中的 <code>Bundle</code> 参数保存状态。当系统返回并重建该Activity，并将 <code>Bundle</code> 同时传递给 <code>onCreate()</code> 和 <code>onRestoreInstanceState()</code>。</p>
+<p>任选一个方法从 <code>Bundle</code> 中进行状态恢复。如果没有状态信息需要恢复，则 <code>Bundle</code> 为空。</p>
+<p><strong><br>注：不能保证Activity销毁前一定会调用 <code>onSaveInstanceState()</code> 方法，因为当用户主动点击系统返回键时不会调用。如果系统调用 <code>onSaveInstanceState()</code> 方法，它会在调用 <code>onStop()</code> 之前，并且可能会在调用 <code>onPause()</code> 之前进行调用。
+</strong></p>
+<p>系统默认会为布局中的 <code>View</code> 调用相应的 <code>onSaveInstanceState()</code> 方法，只需要通过 <code>android:id</code> 为其提供一个唯一的id就行。<code>EditText</code> 可保存用户输入的任何文本，<code>CheckBox</code> 可保存复选框的选中或未选中状态。</p>
+<p>还可以通过将 <code>android:saveEnabled</code> 属性设置为”false”或通过调用 <code>setSaveEnabled()</code> 方法显式阻止布局内的视图保存其状态。</p>
+<p><strong><br>注：由于无法保证系统会调用 <code>onSaveInstanceState()</code> 因此您只应利用它来记录 Activity 的瞬态（UI 的状态）—切勿使用它来存储持久性数据，而应使用 <code>onPause()</code> 在用户离开 Activity 后存储持久性数据（例如应保存到数据库的数据）。
+</strong></p>
+<h1 id="Activity的启动方式"><a href="#Activity的启动方式" class="headerlink" title="Activity的启动方式"></a>Activity的启动方式</h1><p>1、 显示启动名为 SignInActivity 的方式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, SignInActivity.class);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure></p>
+<p>2、隐式启动Activity<br>想要调用其他app的某个界面，如发送Email<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SEND);</div><div class="line">intent.putExtra(Intent.EXTRA_EMAIL, recipientArray);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure></p>
+<p>更多隐式启动Activity的总结。<a href="http://www.jianshu.com/p/90ddf2735f3a" target="_blank" rel="external">http://www.jianshu.com/p/90ddf2735f3a</a></p>
+<p>3、启动Activity，并且为了获得结果<br>使用 <code>startActivityForResult()</code> 来启动Activity，并且在Activity中重写 <code>[onActivityResult()</code> 方法来获取新界面返回的信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pickContact</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// Create an intent to "pick" a contact, as defined by the content provider URI</span></div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_PICK, Contacts.CONTENT_URI); </div><div class="line">    startActivityForResult(intent, PICK_CONTACT_REQUEST);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Overrideprotected</span> <span class="function"><span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">    <span class="comment">// If the request went well (OK) and the request was PICK_CONTACT_REQUEST</span></div><div class="line">    <span class="keyword">if</span> (resultCode == Activity.RESULT_OK &amp;&amp; requestCode == PICK_CONTACT_REQUEST) &#123;</div><div class="line">        <span class="comment">// Perform a query to the contact's content provider for the contact's name</span></div><div class="line">        Cursor cursor = getContentResolver().query(data.getData(),</div><div class="line">        <span class="keyword">new</span> String[] &#123;Contacts.DISPLAY_NAME&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>); </div><div class="line">       <span class="keyword">if</span> (cursor.moveToFirst()) &#123; <span class="comment">// True if the cursor is not empty</span></div><div class="line">            <span class="keyword">int</span> columnIndex = cursor.getColumnIndex(Contacts.DISPLAY_NAME); </div><div class="line">           String name = cursor.getString(columnIndex); </div><div class="line">           <span class="comment">// Do something with the selected contact's name...</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+            <category> activity </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> activity </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Android Drawable 之 clip]]></title>
       <url>/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-clip/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Clip" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Clip</a></p>
