@@ -7,7 +7,37 @@
       <url>/2017/11/02/db/sqlite/Sqlite/</url>
       <content type="html"><![CDATA[<p>关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。</p>
 <p>每条 sql 语句都要以 <code>;</code> 结尾。</p>
-<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>sqlite 中的数据类型只有5种：<br>| 数据类型 | 说明 |<br>| - | - |<br>| Null | 空 |<br>| INTEGER | 整型 |<br>| REAL | 浮点型 |<br>| TEXT | 字符串，使用数据库编码（UTF-8、UTF-16BE、UTF-16LE）存放 |<br>| BLOB | 只是一个数据块，完全按照输入存放 |</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>sqlite 中的数据类型只有5种：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Null</td>
+<td>空</td>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td>浮点型</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>字符串，使用数据库编码（UTF-8、UTF-16BE、UTF-16LE）存放</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>只是一个数据块，完全按照输入存放</td>
+</tr>
+</tbody>
+</table>
 <h1 id="常用约束条件"><a href="#常用约束条件" class="headerlink" title="常用约束条件"></a>常用约束条件</h1><table>
 <thead>
 <tr>
@@ -2205,6 +2235,36 @@
     </entry>
     
     <entry>
+      <title><![CDATA[View]]></title>
+      <url>/2016/03/16/android/View/</url>
+      <content type="html"><![CDATA[<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
+<ul>
+<li>遵从Android标准。</li>
+<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
+<li>Send accessibility events。</li>
+<li><p>兼容多个Android平台。</p>
+<p>Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/guide/topics/ui/how-android-draws.html" target="_blank" rel="external">How Android Draws Views</a><br> <a href="https://plus.google.com/+ArpitMathur/posts/cT1EuBbxEgN" target="_blank" rel="external">Arpit Mathur制作的View绘制流程图</a><br> <a href="https://groups.google.com/forum/#!topic/android-developers/fkvRZ7JOEBU" target="_blank" rel="external">Difference between invalidate and requestLayout for Viewgroup</a><br> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Custom View]]></title>
       <url>/2016/03/16/android/Custom%20View/</url>
       <content type="html"><![CDATA[<h2 id="Creating-a-View-Class"><a href="#Creating-a-View-Class" class="headerlink" title="Creating a View Class"></a>Creating a View Class</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
@@ -2282,36 +2342,6 @@
         <tags>
             
             <tag> View </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[View]]></title>
-      <url>/2016/03/16/android/View/</url>
-      <content type="html"><![CDATA[<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
-<ul>
-<li>遵从Android标准。</li>
-<li>提供自定义的styleable属性以便于在Android Xml中配置视图时使用。</li>
-<li>Send accessibility events。</li>
-<li><p>兼容多个Android平台。</p>
-<p>Android平台提供了许多基础类和xml标签来帮助我们创建满足这些要求的view。接下来讨论如何自定义拥有核心功能的view。</p>
-</li>
-</ul>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p> <a href="http://developer.android.com/guide/topics/ui/how-android-draws.html" target="_blank" rel="external">How Android Draws Views</a><br> <a href="https://plus.google.com/+ArpitMathur/posts/cT1EuBbxEgN" target="_blank" rel="external">Arpit Mathur制作的View绘制流程图</a><br> <a href="https://groups.google.com/forum/#!topic/android-developers/fkvRZ7JOEBU" target="_blank" rel="external">Difference between invalidate and requestLayout for Viewgroup</a><br> <a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> android </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> android </tag>
             
         </tags>
         

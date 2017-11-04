@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：| 数据类型 | 说明 || - | - || Null | 空 || INTEGER | 整型 || REAL | 浮点型 || TE">
+<meta name="description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：    数据类型 说明     Null 空   INTEGER 整型   REAL 浮点型   TEXT 字符串，使用数据库编码（UT">
 <meta name="keywords" content="sqlite">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sqlite">
 <meta property="og:url" content="http://www.张钧泉.top/2017/11/02/db/sqlite/Sqlite/index.html">
 <meta property="og:site_name" content="张钧泉的博客">
-<meta property="og:description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：| 数据类型 | 说明 || - | - || Null | 空 || INTEGER | 整型 || REAL | 浮点型 || TE">
+<meta property="og:description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：    数据类型 说明     Null 空   INTEGER 整型   REAL 浮点型   TEXT 字符串，使用数据库编码（UT">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/db/sqlite/pasted-0.png">
 <meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/db/sqlite/pasted.gif">
 <meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/db/sqlite/pasted-1.png">
-<meta property="og:updated_time" content="2017-11-04T14:28:16.000Z">
+<meta property="og:updated_time" content="2017-11-04T14:31:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sqlite">
-<meta name="twitter:description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：| 数据类型 | 说明 || - | - || Null | 空 || INTEGER | 整型 || REAL | 浮点型 || TE">
+<meta name="twitter:description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：    数据类型 说明     Null 空   INTEGER 整型   REAL 浮点型   TEXT 字符串，使用数据库编码（UT">
 <meta name="twitter:image" content="http://www.xn--e1tz71a184a.top/images/db/sqlite/pasted-0.png">
 
 
@@ -346,7 +346,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-11-04T22:28:16+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-04T22:31:28+08:00">
                 2017-11-04
               </time>
             
@@ -456,7 +456,37 @@
       
         <p>关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。</p>
 <p>每条 sql 语句都要以 <code>;</code> 结尾。</p>
-<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>sqlite 中的数据类型只有5种：<br>| 数据类型 | 说明 |<br>| - | - |<br>| Null | 空 |<br>| INTEGER | 整型 |<br>| REAL | 浮点型 |<br>| TEXT | 字符串，使用数据库编码（UTF-8、UTF-16BE、UTF-16LE）存放 |<br>| BLOB | 只是一个数据块，完全按照输入存放 |</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>sqlite 中的数据类型只有5种：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Null</td>
+<td>空</td>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td>浮点型</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>字符串，使用数据库编码（UTF-8、UTF-16BE、UTF-16LE）存放</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>只是一个数据块，完全按照输入存放</td>
+</tr>
+</tbody>
+</table>
 <h1 id="常用约束条件"><a href="#常用约束条件" class="headerlink" title="常用约束条件"></a>常用约束条件</h1><table>
 <thead>
 <tr>
