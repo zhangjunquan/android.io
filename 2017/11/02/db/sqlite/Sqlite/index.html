@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="sqlite," />
 
 
 
@@ -79,31 +79,22 @@
 
 
 
-<meta name="description" content="制作边框在使用 Google 浏览器测试的过程中，我发现制作一个简单的边框，只需要指定边框样式 border-style 即可。浏览器会自动设置边框宽度及边框颜色。  边框宽度 border-width分别设置四个边框的宽度，如下：1234border-top-width: 1px;border-right-width: 2px;border-bottom-width: 3px;border-le">
+<meta name="description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：| 数据类型 | 说明 || - | - || Null | 空 || INTEGER | 整型 || REAL | 浮点型 || TE">
+<meta name="keywords" content="sqlite">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css 边框">
-<meta property="og:url" content="http://www.张钧泉.top/2017/09/25/css/css-边框/index.html">
+<meta property="og:title" content="Sqlite">
+<meta property="og:url" content="http://www.张钧泉.top/2017/11/02/db/sqlite/Sqlite/index.html">
 <meta property="og:site_name" content="张钧泉的博客">
-<meta property="og:description" content="制作边框在使用 Google 浏览器测试的过程中，我发现制作一个简单的边框，只需要指定边框样式 border-style 即可。浏览器会自动设置边框宽度及边框颜色。  边框宽度 border-width分别设置四个边框的宽度，如下：1234border-top-width: 1px;border-right-width: 2px;border-bottom-width: 3px;border-le">
+<meta property="og:description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：| 数据类型 | 说明 || - | - || Null | 空 || INTEGER | 整型 || REAL | 浮点型 || TE">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-31.png">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-32.png">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-33.png">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-34.png">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-35.png">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-37.png">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-38.png">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-36.png">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-39.gif">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-40.gif">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-41.gif">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-42.gif">
-<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-43.gif">
-<meta property="og:updated_time" content="2017-09-26T13:35:52.000Z">
+<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/db/sqlite/pasted-0.png">
+<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/db/sqlite/pasted.gif">
+<meta property="og:image" content="http://www.xn--e1tz71a184a.top/images/db/sqlite/pasted-1.png">
+<meta property="og:updated_time" content="2017-11-04T14:28:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css 边框">
-<meta name="twitter:description" content="制作边框在使用 Google 浏览器测试的过程中，我发现制作一个简单的边框，只需要指定边框样式 border-style 即可。浏览器会自动设置边框宽度及边框颜色。  边框宽度 border-width分别设置四个边框的宽度，如下：1234border-top-width: 1px;border-right-width: 2px;border-bottom-width: 3px;border-le">
-<meta name="twitter:image" content="http://www.xn--e1tz71a184a.top/images/web/css/pasted-31.png">
+<meta name="twitter:title" content="Sqlite">
+<meta name="twitter:description" content="关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。 每条 sql 语句都要以 ; 结尾。 数据类型sqlite 中的数据类型只有5种：| 数据类型 | 说明 || - | - || Null | 空 || INTEGER | 整型 || REAL | 浮点型 || TE">
+<meta name="twitter:image" content="http://www.xn--e1tz71a184a.top/images/db/sqlite/pasted-0.png">
 
 
 
@@ -133,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://www.张钧泉.top/2017/09/25/css/css-边框/"/>
+  <link rel="canonical" href="http://www.张钧泉.top/2017/11/02/db/sqlite/Sqlite/"/>
 
 
 
 
 
-  <title>css 边框 | 张钧泉的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Sqlite | 张钧泉的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -310,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.张钧泉.top/2017/09/25/css/css-边框/">
+    <link itemprop="mainEntityOfPage" href="http://www.张钧泉.top/2017/11/02/db/sqlite/Sqlite/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张钧泉【君子乐道】">
@@ -327,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">css 边框</h1>
+          <h1 class="post-title" itemprop="name headline">Sqlite</h1>
         
 
         <div class="post-meta">
@@ -339,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T15:23:00+08:00">
-                2017-09-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T21:16:00+08:00">
+                2017-11-02
               </time>
             
 
@@ -355,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-26T21:35:52+08:00">
-                2017-09-26
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-04T22:28:16+08:00">
+                2017-11-04
               </time>
             
           </span>
@@ -374,8 +365,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/css/" itemprop="url" rel="index">
-                    <span itemprop="name">css</span>
+                  <a href="/categories/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/sqlite/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlite</span>
                   </a>
                 </span>
 
@@ -392,8 +394,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/25/css/css-边框/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/25/css/css-边框/" itemprop="commentCount"></span>
+                <a href="/2017/11/02/db/sqlite/Sqlite/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/02/db/sqlite/Sqlite/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -452,53 +454,241 @@
       
 
       
-        <h1 id="制作边框"><a href="#制作边框" class="headerlink" title="制作边框"></a>制作边框</h1><p>在使用 Google 浏览器测试的过程中，我发现制作一个简单的边框，只需要指定边框样式 <code>border-style</code> 即可。浏览器会自动设置边框宽度及边框颜色。</p>
-<p><img src="/images/web/css/pasted-31.png" alt="最简单的边框"></p>
-<h1 id="边框宽度-border-width"><a href="#边框宽度-border-width" class="headerlink" title="边框宽度 border-width"></a>边框宽度 border-width</h1><p>分别设置四个边框的宽度，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">border-top-width: 1px;</div><div class="line">border-right-width: 2px;</div><div class="line">border-bottom-width: 3px;</div><div class="line">border-left-width: 4px;</div></pre></td></tr></table></figure></p>
-<p><img src="/images/web/css/pasted-32.png" alt="边框宽度"></p>
-<p>可使用 <code>border-width: 1px 2px 3px 4px;</code> 同时设置四个边框的宽度。</p>
-<p>border-width 值的个数：</p>
+        <p>关于 sqlite 数据库的基本概念就不写了，下面的操作是在 mac 电脑上完成的（mac 自带有 sqlite3 命令），如果是其他系统，需要先安装 sqlite 才能使用命令。</p>
+<p>每条 sql 语句都要以 <code>;</code> 结尾。</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>sqlite 中的数据类型只有5种：<br>| 数据类型 | 说明 |<br>| - | - |<br>| Null | 空 |<br>| INTEGER | 整型 |<br>| REAL | 浮点型 |<br>| TEXT | 字符串，使用数据库编码（UTF-8、UTF-16BE、UTF-16LE）存放 |<br>| BLOB | 只是一个数据块，完全按照输入存放 |</p>
+<h1 id="常用约束条件"><a href="#常用约束条件" class="headerlink" title="常用约束条件"></a>常用约束条件</h1><table>
+<thead>
+<tr>
+<th>约束条件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NOT NULL</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>UNIQUE</td>
+<td>唯一</td>
+</tr>
+<tr>
+<td>PRIMARY KEY</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>FOREIGN KEY</td>
+<td>外键</td>
+</tr>
+<tr>
+<td>CHECK</td>
+<td>条件检查</td>
+</tr>
+<tr>
+<td>DEFAULT</td>
+<td>字段的默认值</td>
+</tr>
+</tbody>
+</table>
+<h1 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h1><p>创建一个名为 school.db 的数据库：<code>sqlite3 school.db</code>。</p>
+<p>执行成功之后提示信息如下：<br><img src="/images/db/sqlite/pasted-0.png" alt="创建数据库成功"></p>
+<p>这个时候终端已经连接到了我们刚刚创建的 school.db 数据库，进入了会话状态，所以可以直接对其进行操作。</p>
+<p>创建数据库已经成功，按照想法，这时候应该也会有对应的数据库文件生成。假设先在终端里 cd ~/Workspace/sqlite 切换到这个具体目录，然后才创建数据库的，那么数据库文件的路径就应该是 ~/Workspace/sqlite/school.db。但是进入对应的目录去看时，发现是一片空白，没有任何文件生成，这是因为没有对数据库进行操作。</p>
+<p>这时候我们随便输入一条指令，哪怕是就一个分号，就会看见数据库文件生成了。<br><img src="/images/db/sqlite/pasted.gif" alt="生成数据库文件"></p>
+<h1 id="退出-sqlite-终端"><a href="#退出-sqlite-终端" class="headerlink" title="退出 sqlite 终端"></a>退出 sqlite 终端</h1><p>如果不想操作数据库，mac 电脑可以按 <code>control + D</code> 组合键退出 sqlite 会话状态。</p>
+<h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><p>退出了会话状态，下次进来想要操作以前的数据库该怎么办呢？</p>
+<p>首先，终端进入 sqlite 数据库文件所在的目录，然后在终端里执行 <code>sqlite3</code>，会看到下面的提示信息<br><img src="/images/db/sqlite/pasted-1.png" alt="sqlite3提示信息"><br>告诉我们可使用 <code>.open FILENAME</code> 命令打开持久化数据库。这就简单了，再执行 <code>.open school.db</code> 就进入了 school.db 数据库了，现在可以操作该数据库了。</p>
+<h1 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h1><h2 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h2><p>在 sqlite 中，一个表必须有一个主键。sqlite 默认为我们创建了一个 64 位的自增主键 rowid。我们可以自己设置自增主键字段，如后面的 <code>id integer primary key autoincrement</code>。</p>
+<h2 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h2><p>外键能够确保表中的关键值必须从另一个表中引用，且该数据必须在另一个表中存在，否则会操作失败或引发其他的不良反应。</p>
+<p>外键引用的表称为父表，如后面的 classes 表；含义外键字段的表称为子表。</p>
+<p>sqlite 中的外键功能默认是没有开启的，需要执行 <code>pragma foreign_keys=on</code> 命令进行开启。</p>
+<p>定义外键的格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foreign key(字表中的列) references 父表(父表中的字段)</div><div class="line">[on &#123;delete|update&#125; action</div><div class="line">[not] deferrable initially &#123;deferred|immediate&#125;]</div></pre></td></tr></table></figure></p>
+<p>第一行是必须，后面两行可选。第二行表示父表的记录删除或更新时子表中对应的操作，默认为 no action；第三行表示父表的记录被删除或更新时子表的执行时机，是立即执行还是事务结束后执行，默认为立即执行。</p>
+<p>action 对应的行为如下表：<br>| 行为 | 作用 |<br>| no action | 默认值，父键被删除或改变时没有特别的行为发生 |<br>| restrict | 存在一个或者多个子键引用父键时，禁止直接删除父键 |<br>| set null | 父键被删除或修改时将字段置为 null |<br>| set default | 父键被删除或修改时将字段置为默认值 |<br>| cascade | 父键被修改或删除时将传播给子键，即子键将被修改或删除 |</p>
+<h2 id="建表语法"><a href="#建表语法" class="headerlink" title="建表语法"></a>建表语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create [temp|temporary] table 表名 (字段1 数据类型约束,...,字段n 数据类型约束)</div></pre></td></tr></table></figure>
+<p>temp|temporary 表示临时表，临时表会在会话结束时销毁。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>下面是创建班级表的示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create table &apos;classes&apos; (&apos;id&apos; integer primary key autoincrement,&apos;major&apos; text not null,&apos;year&apos; integer not null);</div></pre></td></tr></table></figure></p>
+<p>id 为自增主键，major 是专业，year 是年龄。</p>
+<p>创建学生表示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create table students (id integer primary key autoincrement,name text check(length(name)&gt;1),tel_no text not null unique,cls_id integer not null,foreign key(cls_id) references classes(id));</div></pre></td></tr></table></figure></p>
+<p>id 为自增主键，name 为名字且要求至少2个字，tel_no 在表中是唯一的，cls_id 为关联 classes表中 id 字段的外键。</p>
+<p>学生表中 name 和 cls_no 组合唯一性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create table students (id integer primary key autoincrement,name text check(length(name)&gt;1),tel_no text not null,cls_id integer not null, unique(name, tel_no),foreign key(cls_id) references classes(id));</div></pre></td></tr></table></figure></p>
+<p>classes 表中的字段发生改变，students 表中对应的子键将改变：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create table students (id integer primary key autoincrement,name text check(length(name)&gt;1),tel_no text not null,cls_id integer not null, unique(name, tel_no),foreign key(cls_id) references classes(id) on delete cascade on update cascade);</div></pre></td></tr></table></figure></p>
+<h1 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h1><h2 id="单条插入"><a href="#单条插入" class="headerlink" title="单条插入"></a>单条插入</h2><p><code>insert into 表名 (字段列表) values(与字段列表对应的字段值列表);</code></p>
+<p>如：<br><code>insert into classes(major,year) values(&#39;计算机工程&#39;,10);</code></p>
+<p>如果字段值列表包含了表中的所有字段并且顺序完全相同就可以省略字段列表：<br><code>insert into classes values(2,&#39;机械&#39;,20);</code></p>
+<h2 id="从一个表导数据到另一个表"><a href="#从一个表导数据到另一个表" class="headerlink" title="从一个表导数据到另一个表"></a>从一个表导数据到另一个表</h2><h3 id="字段完全相同"><a href="#字段完全相同" class="headerlink" title="字段完全相同"></a>字段完全相同</h3><p><code>insert into 表名数据集;</code></p>
+<p>新建一个与 students 一模一样的 stu 表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create table stu (id integer primary key autoincrement,name text check(length(name)&gt;1),tel_no text not null,cls_id integer not null, unique(name, tel_no),foreign key(cls_id) references classes(id) on delete cascade on update cascade);</div></pre></td></tr></table></figure></p>
+<p>从 students 中导数据到 stu 中：<br><code>insert into stu select * from students;</code></p>
+<h3 id="字段不完全相同"><a href="#字段不完全相同" class="headerlink" title="字段不完全相同"></a>字段不完全相同</h3><p>如果两个表的字段不同，我们可以选择导入的字段列表：<br><code>insert into stu(name,tel_no,cls_id) select name,tel_no,cls_id from students;</code></p>
+<h3 id="创建表时直接导入数据"><a href="#创建表时直接导入数据" class="headerlink" title="创建表时直接导入数据"></a>创建表时直接导入数据</h3><p><code>create table stu as select * from students;</code></p>
+<p>这样就能将 students 表中的所有数据直接导入到 stu 中。但是这种形式创建的 stu 表是没有 students 表的约束关系的，也就是 stu 表只适合于存放临时数据。</p>
+<p>通常用于升级表：</p>
+<ol>
+<li>先这样创建一个临时表</li>
+</ol>
 <ul>
-<li>一个值：设置四个边框的宽度。</li>
-<li>两个值：分别设置上下、左右边框的宽度。</li>
-<li>三个值：分别设置上边框、右边框和左边框、下边框的宽度。</li>
-<li>四个值：分别设置上、右、下、左边框的宽度。</li>
+<li>删除原始表，创建一个新表</li>
+<li>将数据从临时表导入到新表中</li>
 </ul>
-<p>border-width 还内置了几个值：</p>
-<ul>
-<li>thin：细边框。</li>
-<li>medium：中边框。</li>
-<li>thick：粗边框。</li>
-</ul>
-<h1 id="边框颜色-border-color"><a href="#边框颜色-border-color" class="headerlink" title="边框颜色 border-color"></a>边框颜色 border-color</h1><p>分别指定四个边的颜色：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">border-top-color: #f46208;</div><div class="line">border-right-color: #7c7c7c;</div><div class="line">border-bottom-color: aqua;</div><div class="line">border-left-color: blue;</div></pre></td></tr></table></figure></p>
-<p><img src="/images/web/css/pasted-33.png" alt="边框颜色"></p>
-<p>可使用 <code>border-color: #f46208 #7c7c7c aqua blue;</code> 同时指定四个边的颜色，其规则与 <code>border-width</code> 相同。</p>
-<h1 id="边框样式-border-style"><a href="#边框样式-border-style" class="headerlink" title="边框样式 border-style"></a>边框样式 border-style</h1><p>分别指定四个边框的样式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">border-top-style: solid;</div><div class="line">border-right-style: dashed;</div><div class="line">border-bottom-style: groove;</div><div class="line">border-left-style: double;</div></pre></td></tr></table></figure></p>
-<p>可使用 <code>border-style=solid dashed groove double</code> 同时指定四个边框的样式，其规则与 <code>border-width</code> 相同。</p>
-<p>下面表格是 <a href="http://www.w3school.com.cn/cssref/pr_border-style.asp" target="_blank" rel="external">border-style 可能的值</a>：<br><img src="/images/web/css/pasted-34.png" alt="border-style 可能的值"></p>
-<h1 id="同时指定某条边框的样式"><a href="#同时指定某条边框的样式" class="headerlink" title="同时指定某条边框的样式"></a>同时指定某条边框的样式</h1><p>根据上面的描述，想要单独控制上边框的样式，可以像下面这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">border-top-width: 4px;</div><div class="line">border-top-color: blue;</div><div class="line">border-top-style: double;</div></pre></td></tr></table></figure></p>
-<p>也可以像下面这样写，感觉更加简单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-top: 4px double blue;</div></pre></td></tr></table></figure></p>
-<p>同理，<code>border-right</code>、<code>border-bottom</code>、<code>border-left</code> 分别设置右、下、左边框样式。</p>
-<h1 id="图片边框-border-image"><a href="#图片边框-border-image" class="headerlink" title="图片边框 border-image"></a>图片边框 border-image</h1><h2 id="border-image-source"><a href="#border-image-source" class="headerlink" title="border-image-source"></a>border-image-source</h2><p>有这样一个<a href="http://www.w3school.com.cn/i/border.png" target="_blank" rel="external">图片</a>：<br><img src="/images/web/css/pasted-35.png" alt="border"><br>将其设置为矩形边框。<br>初始代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  width: 100px;</div><div class="line">  height: 100px;</div><div class="line">  border-style: solid;</div><div class="line">  border-image-source: url(&quot;http://www.w3school.com.cn/i/border.png&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>效果：<br><img src="/images/web/css/pasted-37.png" alt="border-image-source"><br>上图中只要四个角落有小点，那就是设置的图片，当然目前还看不清楚，因为没有设置边框图片的宽度。</p>
-<h2 id="border-image-width"><a href="#border-image-width" class="headerlink" title="border-image-width"></a>border-image-width</h2><p>设置边框图片的大小：<code>border-image-width: 26px;</code>，结果如下：<br><img src="/images/web/css/pasted-38.png" alt="border-image-width"><br>这里为什么要设置为26px？是有原因的。</p>
-<p>浏览器会将其分为九宫格，如下：<br><img src="/images/web/css/pasted-36.png" alt="border-nine"></p>
-<ul>
-<li>区域1、3、7、9分别放置在矩形的四个角落并且不会被拉伸，是固定不变的。</li>
-<li>区域2、4、6、8分别放置在矩形的四个边上，可拉伸的。</li>
-<li>区域5放置在矩形的中间位置。</li>
-</ul>
-<p>也就是宽和高都被分为了三份，而图片的大小为78 × 78，所以每份是26，所以上面设置的边框图片的大小是26px。</p>
-<p>问题又来了，为什么上面的例子是把整个图片都放在了四个角落？</p>
-<h2 id="border-image-slice"><a href="#border-image-slice" class="headerlink" title="border-image-slice"></a>border-image-slice</h2><p>因为还没有对其进行偏移，偏移方法如下，没有单位，因为单位只有像素，可以不写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-image-slice: 26;</div></pre></td></tr></table></figure></p>
-<p>该属性指定图片边框向内偏移多少像素。偏移之后剩下的图像会被拉伸为边框宽度。<br>这样还是不明白？在开发者工具里来调试一下就明白了。<br><img src="/images/web/css/pasted-39.gif" alt="border-slice"><br>首先将其调整为78，是因为原图是78，向内偏移78，就相当于没有偏移。然后慢慢减少向边框内的偏移量，边框内能看见的内容就会越来越少，最后停留在了26像素位置。</p>
-<h2 id="border-image-repeat"><a href="#border-image-repeat" class="headerlink" title="border-image-repeat"></a>border-image-repeat</h2><p>下面来设置边框图片的摆放模式，分为平铺、铺满、拉伸。</p>
-<p>平铺<code>border-image-repeat: repeat;</code>如下：<br><img src="/images/web/css/pasted-40.gif" alt="border-image-repeat:repeat"><br>铺满<code>border-image-repeat: round;</code>如下：<br><img src="/images/web/css/pasted-41.gif" alt="border-image-repeat:round"><br>拉伸<code>border-image-repeat: stretch;</code>如下：<br><img src="/images/web/css/pasted-42.gif" alt="border-image-repeat:stretch"></p>
-<h2 id="border-image-outset"><a href="#border-image-outset" class="headerlink" title="border-image-outset"></a>border-image-outset</h2><p>设置边框图像区域超出边框图像 <code>border-image-outset: 3;</code>，也就是边框图像比边框大：<br><img src="/images/web/css/pasted-43.gif" alt="border-image-outset"><br>由上图可知，变大 outset 的值，边框图像区域变得比 div 更大。</p>
-<h2 id="border-image-复合属性"><a href="#border-image-复合属性" class="headerlink" title="border-image 复合属性"></a>border-image 复合属性</h2><p><code>border-image</code>是上面所有属性的复合属性，其格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-image: border-image-source border-image-slice border-image-width border-image-outset border-image-repeat;</div></pre></td></tr></table></figure></p>
-<p>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  width: 100px;</div><div class="line">  height: 100px;</div><div class="line">  border:26px solid;</div><div class="line">  border-image:url(&quot;http://www.w3school.com.cn/i/border.png&quot;) 26 26 round;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这里要注意指定 boder 的宽度才行，否则看起来 border 很细。</p>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><p>select 语句的组成：</p>
+<table><tr><td>类型</td><td>功能</td></tr><tr><td rowspan="6">基本操作</td><td>Restrciction（限制）</td></tr><tr><td>Projection（投影）</td></tr><tr><td>Cartesian Product（笛卡尔积）</td></tr><tr><td>Union（联合）</td></tr><tr><td>Difference（差）</td></tr><tr><td>Rename（重命名）</td></tr><tr><td rowspan="3">附加操作</td><td>Intersection（交叉）</td></tr><tr><td>Natural Join（自然连接）</td></tr><tr><td>Assign（赋值）</td></tr><tr><td rowspan="4">扩展操作</td><td>Generalized Project（广义投影）</td></tr><tr><td>Left Outer Join（左外连接）</td></tr><tr><td>Right Outer Join（右外连接）</td></tr><tr><td>Full Outer Join（全外连接）</td></tr></table>
 
+<p>sqlite 的 select 不支持右外连接、全外连接。</p>
+<p>select 语句的通用格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select [distinct] (columns) from (tables) where (predictate) group by (columns) having (predictate) order by (columns) limit count, offset;</div></pre></td></tr></table></figure></p>
+<p>()部分是查询的字段、表名、条件，是需要用户自己设定的。</p>
+<h2 id="字段与表的别名"><a href="#字段与表的别名" class="headerlink" title="字段与表的别名"></a>字段与表的别名</h2><p>假设有这样一个语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select classes.major,students.name from classes,students where classes.id=1 and classes.year &gt; 2017;</div></pre></td></tr></table></figure></p>
+<p>这个语句看起来很臃肿，可以利用 as 关键字为表或字段设置别名，简化 sql：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select c.major as mj,students.name from classes as c,students where c.id=1 and c.year &gt; 2017;</div></pre></td></tr></table></figure></p>
+<p>这里将 classes 重命名为 c，将 major 重命名为了 mj。可能最后语句的长度差不多，但如果遇到更加复杂的语句效果就更加明显了。</p>
+<h2 id="where-条件过滤"><a href="#where-条件过滤" class="headerlink" title="where 条件过滤"></a>where 条件过滤</h2><p>使用 where 语句设定查询条件。where 语句的常用操作符如下：</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>相加</td>
+</tr>
+<tr>
+<td>-</td>
+<td>相减</td>
+</tr>
+<tr>
+<td>*</td>
+<td>相乘</td>
+</tr>
+<tr>
+<td>/</td>
+<td>相除</td>
+</tr>
+<tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>大于等于</td>
+</tr>
+</tbody>
+</table>
+<p>常用的逻辑操作符如下：</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>and</td>
+<td>与</td>
+</tr>
+<tr>
+<td>or</td>
+<td>或</td>
+</tr>
+<tr>
+<td>not</td>
+<td>非</td>
+</tr>
+<tr>
+<td>like</td>
+<td>模糊匹配</td>
+</tr>
+</tbody>
+</table>
+<p>找到 students 表中名字以 t 开头的所有学生：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from students where name like &quot;t%&quot;;</div></pre></td></tr></table></figure></p>
+<h2 id="Group-by-分组"><a href="#Group-by-分组" class="headerlink" title="Group by 分组"></a>Group by 分组</h2><p>分组是将得到的结果集按照一定的规划划分为多个组。</p>
+<p>将 students 中的数据按照 cls_id 进行分组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select count(*), cls_id from students group by cls_id;</div></pre></td></tr></table></figure></p>
+<p>这样查询出的数据是每个 cls_id 对应了多少条数据。也就是 classes 表的数据在 students 表中有关联，查询出这些有关联的数据在 students 表中分别有多少条数据。</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>使用 order by 进行排序，默认是升序，其后可跟多个字段，以英文逗号隔开。</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>asc</td>
+<td>升序</td>
+</tr>
+<tr>
+<td>desc</td>
+<td>降序</td>
+</tr>
+</tbody>
+</table>
+<p>students 表按照 cls_id 降序及 name 升序排列：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from students order by cls_id desc, name asc;</div></pre></td></tr></table></figure></p>
+<h2 id="数量限定"><a href="#数量限定" class="headerlink" title="数量限定"></a>数量限定</h2><p>使用 limit 关键字进行数量的限定。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">limit 返回的数量 offset 偏移量</div></pre></td></tr></table></figure></p>
+<p>limit 后跟返回的条数，offset 设定 id 为多少后（不包括）开始查询。</p>
+<p>例如，从 id 为3开始查询，只查询一条数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from students limit 1 offset 2;</div></pre></td></tr></table></figure></p>
+<p>可对上面的语句进行简写，就是去掉 offset，并交换两个数字的位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from students limit 2,1;</div></pre></td></tr></table></figure></p>
+<h2 id="distinct-去重"><a href="#distinct-去重" class="headerlink" title="distinct 去重"></a>distinct 去重</h2><p>检索出的数据中有可能有重复的，可使用 distinct 进行去重处理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select distinct cls_id from students;</div></pre></td></tr></table></figure></p>
+<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><p>聚合函数可以理解为是功能函数，有如下聚合函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Count()</td>
+<td>统计数量</td>
+</tr>
+<tr>
+<td>Avg()</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>Min()</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>Max()</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>Length()</td>
+<td>长度</td>
+</tr>
+<tr>
+<td>Upper()</td>
+<td>转为大写</td>
+</tr>
+<tr>
+<td>Lower()</td>
+<td>转为小写</td>
+</tr>
+<tr>
+<td>Abs()</td>
+<td>绝对值</td>
+</tr>
+</tbody>
+</table>
+<p>如查询学生数量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select count(*) from students;</div></pre></td></tr></table></figure></p>
+<p>students 表中用户名的平均长度：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select avg(length(name)) from students;</div></pre></td></tr></table></figure></p>
+<h2 id="多表连接"><a href="#多表连接" class="headerlink" title="多表连接"></a>多表连接</h2><p>使用多个表中的字段之间的关系将多表连接起来一起查询，比如外键。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from students,classes where students.cls_id = classes.id;</div></pre></td></tr></table></figure>
+<h2 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h2><p>下面的语句与上面的多表连接查询效果是相同的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from students inner join classes on students.cls_id = classes.id;</div></pre></td></tr></table></figure></p>
+<h2 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h2><p>左外连接与内连接差不多，只是如果条件不匹配，结果集中会返回左表的数据，右表中的数据将由空值代替。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from students left outer join classes on students.cls_id = classes.id;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -547,7 +737,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.张钧泉.top/2017/09/25/css/css-边框/" title="css 边框">http://www.张钧泉.top/2017/09/25/css/css-边框/</a>
+    <a href="http://www.张钧泉.top/2017/11/02/db/sqlite/Sqlite/" title="Sqlite">http://www.张钧泉.top/2017/11/02/db/sqlite/Sqlite/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -560,6 +750,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/sqlite/" rel="tag"># sqlite</a>
+          
+        </div>
+      
 
       
       
@@ -569,8 +765,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/30/css/css-圆角/" rel="next" title="css 圆角">
-                <i class="fa fa-chevron-left"></i> css 圆角
+              <a href="/2017/11/02/android/activity/Android-Activity-的隐式启动/" rel="next" title="Android Activity 的隐式启动">
+                <i class="fa fa-chevron-left"></i> Android Activity 的隐式启动
               </a>
             
           </div>
@@ -578,10 +774,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/11/android/ndk/Android-ndk-开发/" rel="prev" title="Android ndk 开发">
-                Android ndk 开发 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -650,8 +842,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2017/09/25/css/css-边框/"
-           data-title="css 边框" data-url="http://www.张钧泉.top/2017/09/25/css/css-边框/">
+      <div class="ds-thread" data-thread-key="2017/11/02/db/sqlite/Sqlite/"
+           data-title="Sqlite" data-url="http://www.张钧泉.top/2017/11/02/db/sqlite/Sqlite/">
       </div>
     </div>
 
@@ -764,7 +956,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#制作边框"><span class="nav-number">1.</span> <span class="nav-text">制作边框</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#边框宽度-border-width"><span class="nav-number">2.</span> <span class="nav-text">边框宽度 border-width</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#边框颜色-border-color"><span class="nav-number">3.</span> <span class="nav-text">边框颜色 border-color</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#边框样式-border-style"><span class="nav-number">4.</span> <span class="nav-text">边框样式 border-style</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同时指定某条边框的样式"><span class="nav-number">5.</span> <span class="nav-text">同时指定某条边框的样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片边框-border-image"><span class="nav-number">6.</span> <span class="nav-text">图片边框 border-image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#border-image-source"><span class="nav-number">6.1.</span> <span class="nav-text">border-image-source</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-image-width"><span class="nav-number">6.2.</span> <span class="nav-text">border-image-width</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-image-slice"><span class="nav-number">6.3.</span> <span class="nav-text">border-image-slice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-image-repeat"><span class="nav-number">6.4.</span> <span class="nav-text">border-image-repeat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-image-outset"><span class="nav-number">6.5.</span> <span class="nav-text">border-image-outset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-image-复合属性"><span class="nav-number">6.6.</span> <span class="nav-text">border-image 复合属性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用约束条件"><span class="nav-number">2.</span> <span class="nav-text">常用约束条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建数据库"><span class="nav-number">3.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退出-sqlite-终端"><span class="nav-number">4.</span> <span class="nav-text">退出 sqlite 终端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接数据库"><span class="nav-number">5.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建表"><span class="nav-number">6.</span> <span class="nav-text">创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主键约束"><span class="nav-number">6.1.</span> <span class="nav-text">主键约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外键约束"><span class="nav-number">6.2.</span> <span class="nav-text">外键约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建表语法"><span class="nav-number">6.3.</span> <span class="nav-text">建表语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">6.4.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插入数据"><span class="nav-number">7.</span> <span class="nav-text">插入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单条插入"><span class="nav-number">7.1.</span> <span class="nav-text">单条插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从一个表导数据到另一个表"><span class="nav-number">7.2.</span> <span class="nav-text">从一个表导数据到另一个表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字段完全相同"><span class="nav-number">7.2.1.</span> <span class="nav-text">字段完全相同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段不完全相同"><span class="nav-number">7.2.2.</span> <span class="nav-text">字段不完全相同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表时直接导入数据"><span class="nav-number">7.2.3.</span> <span class="nav-text">创建表时直接导入数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询"><span class="nav-number">8.</span> <span class="nav-text">查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字段与表的别名"><span class="nav-number">8.1.</span> <span class="nav-text">字段与表的别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#where-条件过滤"><span class="nav-number">8.2.</span> <span class="nav-text">where 条件过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Group-by-分组"><span class="nav-number">8.3.</span> <span class="nav-text">Group by 分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">8.4.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数量限定"><span class="nav-number">8.5.</span> <span class="nav-text">数量限定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#distinct-去重"><span class="nav-number">8.6.</span> <span class="nav-text">distinct 去重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合函数"><span class="nav-number">8.7.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多表连接"><span class="nav-number">8.8.</span> <span class="nav-text">多表连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内连接"><span class="nav-number">8.9.</span> <span class="nav-text">内连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#左外连接"><span class="nav-number">8.10.</span> <span class="nav-text">左外连接</span></a></li></ol></li></ol></div>
             
 
           </div>
