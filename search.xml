@@ -4,7 +4,7 @@
     
     <entry>
       <title><![CDATA[Sqlite]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/11/02/db/sqlite/Sqlite/</url>
+      <url>/android.io/2017/11/02/db/sqlite/Sqlite/</url>
       <content type="html"><![CDATA[<p>每条 sql 语句都要以 <code>;</code> 结尾。</p>
 <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>sqlite 中的数据类型只有5种：</p>
 <table>
@@ -323,7 +323,7 @@
     
     <entry>
       <title><![CDATA[Android Activity 的隐式启动]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/11/02/android/activity/Android-Activity-%E7%9A%84%E9%9A%90%E5%BC%8F%E5%90%AF%E5%8A%A8/</url>
+      <url>/android.io/2017/11/02/android/activity/Android-Activity-%E7%9A%84%E9%9A%90%E5%BC%8F%E5%90%AF%E5%8A%A8/</url>
       <content type="html"><![CDATA[<h1 id="IntentFilter-的匹配规则"><a href="#IntentFilter-的匹配规则" class="headerlink" title="IntentFilter 的匹配规则"></a>IntentFilter 的匹配规则</h1><p>隐式启动 Activity，需要 Intent 能够匹配目标组件的 IntentFilter 中设置的过滤信息，过滤信息包括 action、category、data。</p>
 <p>一个简单的示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;activity android:name=&quot;...&quot;&gt;</div><div class="line">	&lt;intent-filter&gt;</div><div class="line">    	&lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;</div><div class="line">        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;</div><div class="line">        &lt;data android:mimeType=&quot;text/plain&quot;/&gt;</div><div class="line">    &lt;/intent-filter&gt;</div><div class="line">    </div><div class="line">    &lt;intent-filter&gt;</div><div class="line">    	&lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;</div><div class="line">    	&lt;action android:name=&quot;android.intent.action.SEND_MULTIPLE&quot;/&gt;</div><div class="line">        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;</div><div class="line">        &lt;data android:mimeType=&quot;application/vnd.google.panorama360+jpg&quot;/&gt;</div><div class="line">        &lt;data android:mimeType=&quot;image/*&quot;/&gt;</div><div class="line">        &lt;data android:mimeType=&quot;video/*&quot;/&gt;</div><div class="line">    &lt;/intent-filter&gt;</div><div class="line">&lt;/activity&gt;</div></pre></td></tr></table></figure></p>
 <ol>
@@ -406,7 +406,7 @@
     
     <entry>
       <title><![CDATA[Android Activity 的启动模式]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/11/01/android/activity/Android-Activity-%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/</url>
+      <url>/android.io/2017/11/01/android/activity/Android-Activity-%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/</url>
       <content type="html"><![CDATA[<h1 id="Activity-的-LaunchMode"><a href="#Activity-的-LaunchMode" class="headerlink" title="Activity 的 LaunchMode"></a>Activity 的 LaunchMode</h1><p>可以使用 <code>adb shell dumpsys activity</code> 或者 <code>adb shell dumpsys activity activities</code> 命令查看运行状态（其中的 <code>Running activities (most recent first)</code> 部分）</p>
 <h2 id="standard-标准（默认）模式"><a href="#standard-标准（默认）模式" class="headerlink" title="standard 标准（默认）模式"></a>standard 标准（默认）模式</h2><p>Activity 启动时都会创建实例。也就是说会有新的界面生成，并且以前的同名 Activity 也还存在。</p>
 <p>一个任务栈中可以有多个实例，不同实例也可以属于不同的任务栈。Activity A 启动了 Activity B（标准模式），B 就属于 A 所在的任务栈。</p>
@@ -482,7 +482,7 @@
     
     <entry>
       <title><![CDATA[Android Activity]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/31/android/activity/Android-Activity/</url>
+      <url>/android.io/2017/10/31/android/activity/Android-Activity/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/components/activities.html" target="_blank" rel="external">https://developer.android.com/guide/components/activities.html</a></p>
 <h1 id="Activity的状态"><a href="#Activity的状态" class="headerlink" title="Activity的状态"></a>Activity的状态</h1><ul>
 <li>运行</li>
@@ -633,7 +633,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 clip]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-clip/</url>
+      <url>/android.io/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-clip/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Clip" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Clip</a></p>
 <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;clip</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:drawable=&quot;@drawable/drawable_resource&quot;</div><div class="line">    android:clipOrientation=[&quot;horizontal&quot; | &quot;vertical&quot;]</div><div class="line">    android:gravity=[&quot;top&quot; | &quot;bottom&quot; | &quot;left&quot; | &quot;right&quot; | &quot;center_vertical&quot; |</div><div class="line"> &quot;fill_vertical&quot; | &quot;center_horizontal&quot; | &quot;fill_horizontal&quot; | &quot;center&quot; | &quot;fill&quot; | &quot;clip_vertical&quot; | &quot;clip_horizontal&quot;] /&gt;</div></pre></td></tr></table></figure>
 <h2 id="部分属性"><a href="#部分属性" class="headerlink" title="部分属性"></a>部分属性</h2><h3 id="android-clipOrientation"><a href="#android-clipOrientation" class="headerlink" title="android:clipOrientation"></a>android:clipOrientation</h3><table>
@@ -729,7 +729,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 scale]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-scale/</url>
+      <url>/android.io/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-scale/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Scale" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Scale</a></p>
 <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;scale</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:drawable=&quot;@drawable/drawable_resource&quot;</div><div class="line">    android:scaleGravity=[&quot;top&quot; | &quot;bottom&quot; | &quot;left&quot; | &quot;right&quot; | &quot;center_vertical&quot; | &quot;fill_vertical&quot; | &quot;center_horizontal&quot; | &quot;fill_horizontal&quot; |</div><div class="line"> &quot;center&quot; | &quot;fill&quot; | &quot;clip_vertical&quot; | &quot;clip_horizontal&quot;]</div><div class="line">    android:scaleHeight=&quot;percentage&quot;</div><div class="line">    android:scaleWidth=&quot;percentage&quot; /&gt;</div></pre></td></tr></table></figure>
 <h2 id="部分属性"><a href="#部分属性" class="headerlink" title="部分属性"></a>部分属性</h2><h3 id="android-scaleGravity"><a href="#android-scaleGravity" class="headerlink" title="android:scaleGravity"></a>android:scaleGravity</h3><table>
@@ -825,7 +825,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 inset]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-inset/</url>
+      <url>/android.io/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-inset/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Inset" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Inset</a></p>
 <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;inset</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:drawable=&quot;@drawable/drawable_resource&quot;</div><div class="line">    android:insetTop=&quot;dimension&quot;</div><div class="line">    android:insetRight=&quot;dimension&quot;</div><div class="line">    android:insetBottom=&quot;dimension&quot;</div><div class="line">    android:insetLeft=&quot;dimension&quot; /&gt;</div></pre></td></tr></table></figure>
 <p>将其他 Drawable 内嵌到自己当中，并可在四周留出一定距离。<br>当 View 希望自己的背景比自己的实际区域小的时候，<code>&lt;inset&gt;</code> 很有用。</p>
@@ -854,7 +854,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 transition]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-transition/</url>
+      <url>/android.io/2017/10/31/android/drawable/Android-Drawable-%E4%B9%8B-transition/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#Transition" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#Transition</a></p>
 <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;transition</div><div class="line">xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</div><div class="line">        android:id=&quot;@[+][package:]id/resource_name&quot;</div><div class="line">        android:top=&quot;dimension&quot;</div><div class="line">        android:right=&quot;dimension&quot;</div><div class="line">        android:bottom=&quot;dimension&quot;</div><div class="line">        android:left=&quot;dimension&quot; /&gt;</div><div class="line">&lt;/transition&gt;</div></pre></td></tr></table></figure>
 <p><code>&lt;transition&gt;</code> 用于实现两个 Drawable 之间的淡入淡出效果。其属性没有什么特别的，指定展示的资源，指定与 View 之间的边距。</p>
@@ -884,7 +884,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 level-list]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/28/android/drawable/Android-Drawable-%E4%B9%8B-level-list/</url>
+      <url>/android.io/2017/10/28/android/drawable/Android-Drawable-%E4%B9%8B-level-list/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#LevelList" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#LevelList</a></p>
 <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;level-list</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/drawable_resource&quot;</div><div class="line">        android:maxLevel=&quot;integer&quot;</div><div class="line">        android:minLevel=&quot;integer&quot; /&gt;</div><div class="line">&lt;/level-list&gt;</div></pre></td></tr></table></figure>
 <p>级别列表中每个 <code>&lt;item&gt;</code> 表示一个级别，作为 View 的背景色时可使用 Drawable 的 <code>setLevel</code> 来切换不同级别的 Drawable；作为 ImageView 的前景色时可使用 <code>setImageLevel</code> 来切换不同的 Drawable。</p>
@@ -916,7 +916,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 selector]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/28/android/drawable/Android-Drawable-%E4%B9%8B-selector/</url>
+      <url>/android.io/2017/10/28/android/drawable/Android-Drawable-%E4%B9%8B-selector/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#StateList" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#StateList</a></p>
 <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:constantSize=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">    android:dither=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">    android:variablePadding=[&quot;true&quot; | &quot;false&quot;] &gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</div><div class="line">        android:state_pressed=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_focused=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_hovered=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_selected=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_checkable=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_checked=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_enabled=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_activated=[&quot;true&quot; | &quot;false&quot;]</div><div class="line">        android:state_window_focused=[&quot;true&quot; | &quot;false&quot;] /&gt;</div><div class="line">&lt;/selector&gt;</div></pre></td></tr></table></figure>
 <table>
@@ -1007,7 +1007,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 layer-list]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-layer-list/</url>
+      <url>/android.io/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-layer-list/</url>
       <content type="html"><![CDATA[<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.android.com/guide/topics/resources/drawable-resource.html#LayerList" target="_blank" rel="external">https://developer.android.com/guide/topics/resources/drawable-resource.html#LayerList</a></p>
 <h1 id="layer-list-语法"><a href="#layer-list-语法" class="headerlink" title="layer-list 语法"></a>layer-list 语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;layer-list</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</div><div class="line">        android:id=&quot;@[+][package:]id/resource_name&quot;</div><div class="line">        android:top=&quot;dimension&quot;</div><div class="line">        android:right=&quot;dimension&quot;</div><div class="line">        android:bottom=&quot;dimension&quot;</div><div class="line">        android:left=&quot;dimension&quot; /&gt;</div><div class="line">&lt;/layer-list&gt;</div></pre></td></tr></table></figure>
 <p><code>&lt;layer-list&gt;</code> 中可以有多个 <code>&lt;item&gt;</code>，每个 <code>&lt;item&gt;</code> 表示一层，后面的层会覆盖在前面的层上。</p>
@@ -1051,7 +1051,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 shape]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-shape/</url>
+      <url>/android.io/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-shape/</url>
       <content type="html"><![CDATA[<h1 id="ShapeDrawable-中的部分属性和标签"><a href="#ShapeDrawable-中的部分属性和标签" class="headerlink" title="ShapeDrawable 中的部分属性和标签"></a>ShapeDrawable 中的部分属性和标签</h1><h2 id="android-shape"><a href="#android-shape" class="headerlink" title="android:shape"></a>android:shape</h2><table>
 <thead>
 <tr>
@@ -1239,7 +1239,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable 之 bitmap 及 nine-path]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-bitmap-%E5%8F%8A-nine-path/</url>
+      <url>/android.io/2017/10/27/android/drawable/Android-Drawable-%E4%B9%8B-bitmap-%E5%8F%8A-nine-path/</url>
       <content type="html"><![CDATA[<p>本节讲解的是 bitmap 及 nine-path。</p>
 <h1 id="BitmapDrawable-中的部分属性"><a href="#BitmapDrawable-中的部分属性" class="headerlink" title="BitmapDrawable 中的部分属性"></a>BitmapDrawable 中的部分属性</h1><h2 id="android-gravity"><a href="#android-gravity" class="headerlink" title="android:gravity"></a>android:gravity</h2><p>当开启平铺模式时，gravity 无效。</p>
 <p>当图片尺寸小于容器尺寸时，通过此属性对图片进行定位。</p>
@@ -1349,7 +1349,7 @@
     
     <entry>
       <title><![CDATA[Android Drawable]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/25/android/drawable/Android-Drawable/</url>
+      <url>/android.io/2017/10/25/android/drawable/Android-Drawable/</url>
       <content type="html"><![CDATA[<p>Android 的 Drawable 表示的是可以在 Canvas 上进行绘制的抽象概念。</p>
 <h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><ol>
 <li>使用简单，比自定义 View 的成本低。</li>
@@ -1442,7 +1442,7 @@
     
     <entry>
       <title><![CDATA[Android Studio 源码提示 platform not found]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/25/android%20studio/Android-Studio-%E6%BA%90%E7%A0%81%E6%8F%90%E7%A4%BA-platform-not-found/</url>
+      <url>/android.io/2017/10/25/android%20studio/Android-Studio-%E6%BA%90%E7%A0%81%E6%8F%90%E7%A4%BA-platform-not-found/</url>
       <content type="html"><![CDATA[<p>当我们点击android sdk的某个类进去查看源码的时候，有时候会出现如下提示：</p>
 <p><code>Sources for &#39;Android API 24 Platform&#39; not found.</code><br><img src="/images/android studio/pasted-0.png" alt="platform not found"></p>
 <p>简单的修复方式是打开sdk manager下载需要的sources。<br><img src="/images/android studio/pasted-1.png" alt="sdk manager"></p>
@@ -1477,7 +1477,7 @@
     
     <entry>
       <title><![CDATA[Android 传感器——指南针]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/23/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8%E2%80%94%E2%80%94%E6%8C%87%E5%8D%97%E9%92%88/</url>
+      <url>/android.io/2017/10/23/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8%E2%80%94%E2%80%94%E6%8C%87%E5%8D%97%E9%92%88/</url>
       <content type="html"><![CDATA[<p>本篇文章记录的是简易指南针的实现。</p>
 <p>Android 废弃了方向传感器 <code>Sensor.TYPE_ORIENTATION</code> 的使用，获取手机旋转的角度推荐的方式是通过加速度传感器和地磁传感器共同计算得出。</p>
 <h1 id="获取相关传感器及传感器管理对象"><a href="#获取相关传感器及传感器管理对象" class="headerlink" title="获取相关传感器及传感器管理对象"></a>获取相关传感器及传感器管理对象</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">private SensorManager mSensorManager;</div><div class="line">/**</div><div class="line"> * 磁力传感器</div><div class="line"> */</div><div class="line">private Sensor mMagneticSensor;</div><div class="line">/**</div><div class="line"> * 加速度传感器</div><div class="line"> */</div><div class="line">private Sensor mAccelerometerSensor;</div><div class="line"></div><div class="line">@Override protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">  super.onCreate(savedInstanceState);</div><div class="line">  setContentView(R.layout.activity_compass);</div><div class="line"></div><div class="line">  mCompassPanView = (ImageView) findViewById(R.id.compass_pan_view);</div><div class="line"></div><div class="line">  mSensorManager = SensorUtil.getSensorManager(this);</div><div class="line"></div><div class="line">  mMagneticSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);</div><div class="line">  mAccelerometerSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -1503,7 +1503,7 @@
     
     <entry>
       <title><![CDATA[Android Data Binding 绑定数据]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/16/android/data%20binding/Android-Data-Binding/</url>
+      <url>/android.io/2017/10/16/android/data%20binding/Android-Data-Binding/</url>
       <content type="html"><![CDATA[<h1 id="使用-Data-Binding-的环境"><a href="#使用-Data-Binding-的环境" class="headerlink" title="使用 Data Binding 的环境"></a>使用 Data Binding 的环境</h1><p>这是一个可以兼容 Android 2.1（api level 7+）的开发包。</p>
 <p>要使用该开发包，需要 Gradle 1.5.0-alpha1 及以上版本。</p>
 <h1 id="集成-Data-Binding"><a href="#集成-Data-Binding" class="headerlink" title="集成 Data Binding"></a>集成 Data Binding</h1><p>在 app 所在 module 的 <code>build.gradle</code> 的 <code>android{}</code> 里加上如下代码：</p>
@@ -1560,7 +1560,7 @@
     
     <entry>
       <title><![CDATA[Android 传感器——摇一摇]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/12/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8%E2%80%94%E2%80%94%E6%91%87%E4%B8%80%E6%91%87/</url>
+      <url>/android.io/2017/10/12/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8%E2%80%94%E2%80%94%E6%91%87%E4%B8%80%E6%91%87/</url>
       <content type="html"><![CDATA[<p>本篇文章记录摇一摇功能的实现。</p>
 <h1 id="获取-SensorManager-及-Sensor"><a href="#获取-SensorManager-及-Sensor" class="headerlink" title="获取 SensorManager 及 Sensor"></a>获取 <code>SensorManager</code> 及 <code>Sensor</code></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">private SensorManager mSensorManager;</div><div class="line">private Sensor mSensor;</div><div class="line"></div><div class="line">@Override protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">  super.onCreate(savedInstanceState);</div><div class="line">  setContentView(...);</div><div class="line">  </div><div class="line">  mSensorManager = SensorUtil.getSensorManager(this);</div><div class="line">  mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>获取 <code>SensorManager</code> 我封装到了一个工具类里，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 获取传感器管理对象</div><div class="line"> */</div><div class="line">public static SensorManager getSensorManager(Context context) &#123;</div><div class="line">  return (SensorManager) context.getSystemService(SENSOR_SERVICE);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -1587,7 +1587,7 @@
     
     <entry>
       <title><![CDATA[Android 传感器]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/12/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8/</url>
+      <url>/android.io/2017/10/12/android/%E4%BC%A0%E6%84%9F%E5%99%A8/Android-%E4%BC%A0%E6%84%9F%E5%99%A8/</url>
       <content type="html"><![CDATA[<h1 id="硬件传感器和软件传感器"><a href="#硬件传感器和软件传感器" class="headerlink" title="硬件传感器和软件传感器"></a>硬件传感器和软件传感器</h1><p>有些传感器是基于硬件的，有些是基于软件的。</p>
 <p>基于硬件的传感器就是直接以芯片形式嵌入到 Android 设备中，直接从外部环境获取数据。</p>
 <p>基于软件的传感器并不是实际的硬件芯片，其传回的数据本质上也来自于硬件的传感器，只是这些数据通常会经过二次加工。基于软件的传感器也称为虚拟（virtual）传感器或合成（synthetic）传感器。</p>
@@ -1672,7 +1672,7 @@
     
     <entry>
       <title><![CDATA[Android ndk 开发]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/10/11/android/ndk/Android-ndk-%E5%BC%80%E5%8F%91/</url>
+      <url>/android.io/2017/10/11/android/ndk/Android-ndk-%E5%BC%80%E5%8F%91/</url>
       <content type="html"><![CDATA[<h1 id="jni"><a href="#jni" class="headerlink" title="jni"></a>jni</h1><p>jni，Java Native Interface（Java 本地接口），若干的API实现了Java和其他语言的通信（主要是C&amp;C++）。</p>
 <h1 id="ndk"><a href="#ndk" class="headerlink" title="ndk"></a>ndk</h1><p>NDK，Native Development Kit，通过 ndk 可以在 Android 中更加方便的通过 jni 来访问本地代码。</p>
 <h2 id="为何要用到NDK"><a href="#为何要用到NDK" class="headerlink" title="为何要用到NDK?"></a>为何要用到NDK?</h2><ol>
@@ -1750,7 +1750,7 @@
     
     <entry>
       <title><![CDATA[css 边框]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/09/25/css/css-%E8%BE%B9%E6%A1%86/</url>
+      <url>/android.io/2017/09/25/css/css-%E8%BE%B9%E6%A1%86/</url>
       <content type="html"><![CDATA[<h1 id="制作边框"><a href="#制作边框" class="headerlink" title="制作边框"></a>制作边框</h1><p>在使用 Google 浏览器测试的过程中，我发现制作一个简单的边框，只需要指定边框样式 <code>border-style</code> 即可。浏览器会自动设置边框宽度及边框颜色。</p>
 <p><img src="/images/web/css/pasted-31.png" alt="最简单的边框"></p>
 <h1 id="边框宽度-border-width"><a href="#边框宽度-border-width" class="headerlink" title="边框宽度 border-width"></a>边框宽度 border-width</h1><p>分别设置四个边框的宽度，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">border-top-width: 1px;</div><div class="line">border-right-width: 2px;</div><div class="line">border-bottom-width: 3px;</div><div class="line">border-left-width: 4px;</div></pre></td></tr></table></figure></p>
@@ -1810,7 +1810,7 @@
     
     <entry>
       <title><![CDATA[css 圆角]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/08/30/css/css-%E5%9C%86%E8%A7%92/</url>
+      <url>/android.io/2017/08/30/css/css-%E5%9C%86%E8%A7%92/</url>
       <content type="html"><![CDATA[<h1 id="border-radius-圆角"><a href="#border-radius-圆角" class="headerlink" title="border-radius 圆角"></a>border-radius 圆角</h1><p>兼容性：IE9+、Firefox 4+、Chrome、Safari 5+、Opera</p>
 <p>例子（为 div 设置圆角）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  background-color: #f46208;</div><div class="line">  width: 300px;</div><div class="line">  height: 300px;</div><div class="line">  border-radius: 20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>结果：</p>
@@ -1840,7 +1840,7 @@
     
     <entry>
       <title><![CDATA[css 选择器]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/08/25/css/css-%E9%80%89%E6%8B%A9%E5%99%A8/</url>
+      <url>/android.io/2017/08/25/css/css-%E9%80%89%E6%8B%A9%E5%99%A8/</url>
       <content type="html"><![CDATA[<h1 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h1><h2 id="基本选择器-1"><a href="#基本选择器-1" class="headerlink" title="基本选择器"></a>基本选择器</h2><h3 id="通配符选择器"><a href="#通配符选择器" class="headerlink" title="通配符选择器"></a>通配符选择器</h3><p>就是使用 <code>*</code> 号来匹配所有元素，主要用于去除浏览器自带样式的边距。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">* &#123;</div><div class="line">	margin: 0;</div><div class="line">	padding: 0;</div><div class="line">	border: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="元素选择器"><a href="#元素选择器" class="headerlink" title="元素选择器"></a>元素选择器</h3><p>将元素的名字作为选择器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">	background: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a>类选择器</h3><p>利用属性 <code>class</code> 中的类名作为选择器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.title &#123;</div><div class="line">	font-size: xx-large;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -2109,7 +2109,7 @@
     
     <entry>
       <title><![CDATA[搭建hexo博客]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/08/24/hexo/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
+      <url>/android.io/2017/08/24/hexo/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
       <content type="html"><![CDATA[<p>看见许多大牛的博客都是使用hexo搭建的，我也尝试着搭建了自己的这个博客。<br>参考以下资料：<br>官方站点：<a href="http://hexo.io/zh-cn/" target="_blank" rel="external">http://hexo.io/zh-cn/</a><br>hexo主题：<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">https://github.com/hexojs/hexo/wiki/Themes</a><br>博客：<a href="http://ijiaober.github.io/categories/hexo/" target="_blank" rel="external">http://ijiaober.github.io/categories/hexo/</a><br>hexo常见问题解决方案：<a href="http://xuanwo.org/2014/08/14/hexo-usual-problem/" target="_blank" rel="external">http://xuanwo.org/2014/08/14/hexo-usual-problem/</a></p>
 <p>如果没有类别显示，则需要在对应主题下的_config.yml的widgets:栏目加上- category，在文章的开头需要定义categories: hexo，hexo就是文章的类别，当然可以随便改的。我总结的经验是根据默认配置了的标签来配置。如果是复数（tags），则配置为categories，如果是单数（tag），则配置为category。</p>
 <h2 id="添加多说评论问题"><a href="#添加多说评论问题" class="headerlink" title="添加多说评论问题"></a>添加多说评论问题</h2><p>添加多说评论建议参考这篇<a href="http://blog.csdn.net/itmyhome1990/article/details/43536171" target="_blank" rel="external">文章</a>，对于其中的第一步的通用代码，可以在多说网上注册并设置站点进行获取。<br>感觉多说网很不好用，反正我是看见很多人在问配置里的short_name在哪里获取。我也找了好久才发现其中的奥秘。进入<a href="http://duoshuo.com/" target="_blank" rel="external">多说官网</a>，登录后顶部会有后台管理按钮。进去后点击左侧的工具，就可以获得代码了。如果没有发现后台管理按钮的话，就点击开发者工具里的团队博客，在右侧插件下载里有个创建站点获取通用代码，设置好后就可以获取代码了。</p>
@@ -2138,7 +2138,7 @@
     
     <entry>
       <title><![CDATA[Android 性能优化]]></title>
-      <url>/android.zhangjunquan.gitee.io/2017/08/14/android/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+      <url>/android.io/2017/08/14/android/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
       <content type="html"><![CDATA[<p>这里收集了一些关于如何优化Android代码的文章，感谢前辈们写出的好文章，让我们获取知识如此的轻松愉悦。</p>
 <p><a href="http://www.infoq.com/cn/news/2015/01/google-android-performance" target="_blank" rel="external">Google的Android性能模式</a></p>
 <h1 id="胡凯的Android性能优化专题"><a href="#胡凯的Android性能优化专题" class="headerlink" title="胡凯的Android性能优化专题"></a>胡凯的Android性能优化专题</h1><ul>
@@ -2190,7 +2190,7 @@
     
     <entry>
       <title><![CDATA[Custom View]]></title>
-      <url>/android.zhangjunquan.gitee.io/2016/03/16/android/Custom%20View/</url>
+      <url>/android.io/2016/03/16/android/Custom%20View/</url>
       <content type="html"><![CDATA[<h2 id="Creating-a-View-Class"><a href="#Creating-a-View-Class" class="headerlink" title="Creating a View Class"></a>Creating a View Class</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
 <ul>
 <li>遵从Android标准。</li>
@@ -2273,7 +2273,7 @@
     
     <entry>
       <title><![CDATA[View]]></title>
-      <url>/android.zhangjunquan.gitee.io/2016/03/16/android/View/</url>
+      <url>/android.io/2016/03/16/android/View/</url>
       <content type="html"><![CDATA[<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><p> 本处参考Android官方文档<a href="http://developer.android.com/training/custom-views/index.html" target="_blank" rel="external">Creating Custom Views</a>。为了能够设计出良好的自定义视图，需要遵守以下规则：</p>
 <ul>
 <li>遵从Android标准。</li>
@@ -2303,7 +2303,7 @@
     
     <entry>
       <title><![CDATA[ssh配置]]></title>
-      <url>/android.zhangjunquan.gitee.io/2016/03/15/git/ssh/</url>
+      <url>/android.io/2016/03/15/git/ssh/</url>
       <content type="html"><![CDATA[<h2 id="以oschina为例，描述如何生成ssh-key"><a href="#以oschina为例，描述如何生成ssh-key" class="headerlink" title="以oschina为例，描述如何生成ssh key"></a>以oschina为例，描述如何生成ssh key</h2><p> 以下命令均在终端执行，系统环境为mac os。</p>
 <h3 id="1、利用命令生成id-rsa和id-rsa-pub文件。id-rsa是私钥文件，id-rsa-pub是公钥文件。"><a href="#1、利用命令生成id-rsa和id-rsa-pub文件。id-rsa是私钥文件，id-rsa-pub是公钥文件。" class="headerlink" title="1、利用命令生成id_rsa和id_rsa.pub文件。id_rsa是私钥文件，id_rsa.pub是公钥文件。"></a>1、利用命令生成id_rsa和id_rsa.pub文件。id_rsa是私钥文件，id_rsa.pub是公钥文件。</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa</div></pre></td></tr></table></figure>
 <p> 可以加上-C命令进行注释：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;user1&quot;</div></pre></td></tr></table></figure></p>
@@ -2344,7 +2344,7 @@
     
     <entry>
       <title><![CDATA[推荐资源]]></title>
-      <url>/android.zhangjunquan.gitee.io/2016/03/14/android/%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90/</url>
+      <url>/android.io/2016/03/14/android/%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90/</url>
       <content type="html"><![CDATA[<ul>
 <li><a href="http://www.importnew.com/3988.html" target="_blank" rel="external">Android开发者必知的开发资源</a></li>
 <li><a href="http://blog.csdn.net/lxcay9/article/details/40541459" target="_blank" rel="external">android 国外比较火的网站</a></li>
@@ -2371,7 +2371,7 @@
     
     <entry>
       <title><![CDATA[资料网站]]></title>
-      <url>/android.zhangjunquan.gitee.io/2016/03/14/android/%E8%B5%84%E6%96%99%E7%BD%91%E7%AB%99/</url>
+      <url>/android.io/2016/03/14/android/%E8%B5%84%E6%96%99%E7%BD%91%E7%AB%99/</url>
       <content type="html"><![CDATA[<ul>
 <li><a href="http://developer.android.com/index.html" target="_blank" rel="external">android developer</a></li>
 <li><a href="http://android.jobbole.com/" target="_blank" rel="external">安卓 - 伯乐在线</a></li>
@@ -2411,7 +2411,7 @@
     
     <entry>
       <title><![CDATA[大神博客]]></title>
-      <url>/android.zhangjunquan.gitee.io/2016/03/14/android/%E5%A4%A7%E7%A5%9E%E5%8D%9A%E5%AE%A2/</url>
+      <url>/android.io/2016/03/14/android/%E5%A4%A7%E7%A5%9E%E5%8D%9A%E5%AE%A2/</url>
       <content type="html"><![CDATA[<ul>
 <li><a href="http://blog.csdn.net/lmj623565791" target="_blank" rel="external">Hongyang</a></li>
 <li><a href="http://blog.csdn.net/singwhatiwanna/article/list/6" target="_blank" rel="external">任玉刚的csdn博客</a></li>
@@ -2445,7 +2445,7 @@
     
     <entry>
       <title><![CDATA[ios基础]]></title>
-      <url>/android.zhangjunquan.gitee.io/2015/05/06/ios/swift/ios%E5%9F%BA%E7%A1%80/</url>
+      <url>/android.io/2015/05/06/ios/swift/ios%E5%9F%BA%E7%A1%80/</url>
       <content type="html"><![CDATA[<p>Swift是开发IOS和OS X应用的新语言。与C和Objective-C有许多相似的地方。</p>
 <p>Swift提供了C和Objective-C的所拥有的基本功能，像Int作为整形，Double和Float作为浮点数，Bool作为布尔类型，String为字符串。也提供十分重要的两种类型，Array和Dictionary。</p>
 <p>Swift使用变量存储值，也使用大量值不可变的变量。这被称为常量，但是比C中的常量更加强大。Swift中大量使用常量以提高代码安全性和更加清楚哪些变量的值是不可变的。</p>
@@ -2459,7 +2459,7 @@
     
     <entry>
       <title><![CDATA[Adapter]]></title>
-      <url>/android.zhangjunquan.gitee.io/2015/05/03/android/Adapter/</url>
+      <url>/android.io/2015/05/03/android/Adapter/</url>
       <content type="html"><![CDATA[<p>Adapter</p>
 <p><img src="/images/android/Adapter.png" alt="Adapter"></p>
 <p><a href="http://developer.android.com/reference/android/widget/Adapter.html" target="_blank" rel="external">Adapter</a>：Adapter是<a href="http://developer.android.com/reference/android/widget/AdapterView.html" target="_blank" rel="external">AdapterView</a>和数据之间的桥梁。Adapter提供访问每一条数据，也负责为每一条数据创建<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a>。</p>
@@ -2500,7 +2500,7 @@
     
     <entry>
       <title><![CDATA[service]]></title>
-      <url>/android.zhangjunquan.gitee.io/2015/04/13/android/service/</url>
+      <url>/android.io/2015/04/13/android/service/</url>
       <content type="html"><![CDATA[<p>Service是android的组件之一，能执行耗时的操作，不会提供操作界面。其他的组件都能启动service，且即使用户切换到其他的应用后，service也能在后台继续运行。另外，组件也可以绑定到一个service，已便于与该service进行交互，哪怕是进程间的通信（IPC）也是可以的。例如，service可以在后台处理网络有关的事件，播放音乐，执行文件操作，与content provider进行交互。</p>
 <p>服务的两种启动形式：</p>
 <h4 id="Started"><a href="#Started" class="headerlink" title="Started"></a>Started</h4><p>利用组件（如activity）调用<a href="http://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)" target="_blank" rel="external">startService()</a>方法启动。只要启动之后就会一直运行在后台，即使启动他的组件已经被销毁了。通常，started service执行单一的操作且不会反回结果给启动者。如，started service通过网络下载或者上传文件。当操作完之后，service应当自己停止。</p>
@@ -2543,7 +2543,7 @@
     
     <entry>
       <title><![CDATA[函数与极限]]></title>
-      <url>/android.zhangjunquan.gitee.io/2015/04/11/%E6%95%B0%E5%AD%A6/%E5%87%BD%E6%95%B0%E4%B8%8E%E6%9E%81%E9%99%90/</url>
+      <url>/android.io/2015/04/11/%E6%95%B0%E5%AD%A6/%E5%87%BD%E6%95%B0%E4%B8%8E%E6%9E%81%E9%99%90/</url>
       <content type="html"><![CDATA[<p>微积分系列主要主要参考的是<a href="http://product.dangdang.com/1900289792.html" target="_blank" rel="external">这本书</a>。请购买原书阅读。</p>
 <h2 id="第一章-函数与极限"><a href="#第一章-函数与极限" class="headerlink" title="第一章 函数与极限"></a>第一章 函数与极限</h2><h3 id="1-1-函数"><a href="#1-1-函数" class="headerlink" title="1.1 函数"></a>1.1 函数</h3><h4 id="一、实数"><a href="#一、实数" class="headerlink" title="一、实数"></a>一、实数</h4><h5 id="1-数轴"><a href="#1-数轴" class="headerlink" title="1.数轴"></a>1.数轴</h5><p>数轴是定义了原点、放向、单位长度的直线。其上的每个点表示一个确定的实数，每个实数可看成数轴上一个确定的点。</p>
 <h5 id="2-区间"><a href="#2-区间" class="headerlink" title="2.区间"></a>2.区间</h5><p>若 R 表示实数集，当$a,b \in R$，且a &lt; b，可定义如下区间范围：<br>有限区间：<br>    $[a, b] = \lbrace x|a \leq  x \leq b, x \in R\rbrace$<br>    $(a, b) = \lbrace x|a&lt; x &lt; b, x \in R\rbrace$<br>    $[a, b) = \lbrace x|a \leq x &lt; b, x \in R\rbrace$<br>    $(a, b] = \lbrace x|a &lt; x \leq b, x \in R\rbrace$</p>
@@ -2560,7 +2560,7 @@
     
     <entry>
       <title><![CDATA[SwitchButton]]></title>
-      <url>/android.zhangjunquan.gitee.io/2015/04/06/android/switchbutton/</url>
+      <url>/android.io/2015/04/06/android/switchbutton/</url>
       <content type="html"><![CDATA[<h2 id="Class-Overview"><a href="#Class-Overview" class="headerlink" title="Class Overview"></a>Class Overview</h2><blockquote>
 <p>A Switch is a two-state toggle switch widget that can select between two options. The user may drag the “thumb” back and forth to choose the selected option, or simply tap to toggle as if it were a checkbox. The text property controls the text displayed in the label for the switch, whereas the off and on text controls the text on the thumb. Similarly, the textAppearance and the related setTypeface() methods control the typeface and style of label text, whereas the switchTextAppearance and the related seSwitchTypeface() methods control that of the thumb.</p>
 </blockquote>
@@ -2594,7 +2594,7 @@
     
     <entry>
       <title><![CDATA[android]]></title>
-      <url>/android.zhangjunquan.gitee.io/2015/03/17/android/android/</url>
+      <url>/android.io/2015/03/17/android/android/</url>
       <content type="html"><![CDATA[<h3 id="需要整理的文章"><a href="#需要整理的文章" class="headerlink" title="需要整理的文章"></a>需要整理的文章</h3><ul>
 <li><a href="http://cyrilmottier.com/2014/11/17/grid-spacing-on-android/" target="_blank" rel="external">Grid Spacing on Android</a></li>
 <li><a href="https://publicobject.com/2015/01/03/fancy-flow-control-did-i-succeed/" target="_blank" rel="external">Fancy Flow Control: Did it throw?</a></li>
